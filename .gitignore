@@ -1,0 +1,27 @@
+# Google Drive files
+*.gdrive
+*.gsheet
+
+# Large binary files
+*.pbix
+*.xlsx
+*.pdf
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Temporary files
+*.tmp
+*~
+
+# Secrets and credentials
+studio-*.json
+*.key
+credentials.json
+secrets.json
+.env.local
+.env.production.local
+
+# AI/MCP data directories
+aef9b808-*
