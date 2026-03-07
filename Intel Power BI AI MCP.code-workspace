@@ -2,6 +2,16 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "./powerbi-modeling-mcp"
 		}
-	]
+	],
+	"extensions": {
+		"recommendations": [
+			"pablodelucca.pixel-agents",
+			"analysis-services.powerbi-modeling-mcp",
+			"github.copilot-chat"
+		]
+	}
 }
