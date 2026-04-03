@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(unzip -p \"Intel NL Field Covered stores 2025.xlsx\" xl/worksheets/sheet4.xml)",
+      "Bash(unzip -l \"Intel 2025 BI.pbix\")"
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+ACTUAL EXCEL WORKBOOK STRUCTURE
+Excel File: Intel NL Field Covered stores 2025.xlsx
+
+SHEET LISTING (16 sheets total)
+================================
+
+1. MSH NL Store Mailer Data (id: 45) - Active
+2. REM covered stores NL (id: 34) - Active
+3. Report REM TOOL Training (id: 30) - Active
+4. MSH PROD_DIM (id: 40) - Active [PRODUCT DATA]
+5. MSH Xplace Analytics Q1 2026 (id: 39) - Active
+6. IRE covered Stores (id: 14) - Active
+7. Mailing (id: 33) - Active
+8. Intel Table 20242025 Stock (id: 35) - Active [STOCK DATA]
+9. StoreCount (id: 36) - Active
+10. Store_DIM (id: 38) - Active [STORE DATA]
+11. Adam Centrum Notes (id: 41) - Active
+12. IRE Targets (id: 3) - Hidden
+13. POS KPI &reporting (id: 21) - Hidden
+14. Date_DIM (id: 42) - Active
+15. _Xplace_Helper (id: 46) - Hidden
+16. PC_Audit_Data (id: 48) - Hidden
+
+CRITICAL SHEETS FOR DATA MODEL
+================================
+
+Sheet 4: MSH PROD_DIM
+  Dimensions: A1:L116 (116 rows, 12 columns)
+  Row 1 Sample: B2B | GRAPHICS | GeForce RTX 5070 Ti | MODEL | Resolutie | 
+                MODEL | PROCESSOR | STORAGE | AMD Ryzen... | Fabrician | ...
+  Issue: Headers mixed with data in Row 1
+
+Sheet 8: Intel Table 20242025 Stock
+  Dimensions: A1:W11 (11 rows, 23 columns)
+  Row 1: 2560 x 1440 | Bernds | URL | Scherm | Inch | Resolutie | CPU | RAM | ...
+  Row 2: Storage | Graphics | 15 | Acer Nitro... | 15.6" | 1920x1080 | Intel Core... | 16GB | ...
+  Issue: Headers split across Rows 1-2
+
+Sheet 10: Store_DIM
+  Dimensions: A1:I56 (56 rows, 9 columns)
+  Row 1: Uffen | Country | Retailer | Store Visit? | Start Date | Store Code | 
+         Retailer Id | City | Store Id
+  Issue: First column is "Uffen" not "Name"
+
+NAMED TABLE ANALYSIS
+=====================
+Result: NO NAMED TABLES FOUND
+  - Table_4 does not exist
+  - Tabel6 does not exist
+  - Table10 does not exist
+  
+Only sheet names exist. PQ scripts must reference sheets, not named tables.

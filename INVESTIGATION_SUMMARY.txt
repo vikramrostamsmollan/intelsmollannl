@@ -1,0 +1,61 @@
+POWER BI PROJECT INVESTIGATION SUMMARY
+Smollan Intel NL - Intel Product Stock Tracking
+
+INVESTIGATION DATE: March 27, 2026
+SEVERITY: CRITICAL
+
+FINDING:
+The Power BI project is completely non-functional due to mismatches between
+Power Query scripts and the Excel workbook structure.
+
+ROOT CAUSES:
+1. Scripts reference non-existent table names
+2. Excel sheet structure does not match script expectations  
+3. Data headers are corrupted or misaligned
+4. Critical columns are missing
+
+CRITICAL ISSUES FOUND:
+
+ISSUE 1: Non-existent Table Names
+  IntelProductsConnection.pq Line 6: Looking for "Table_4" (DOES NOT EXIST)
+    Fix: Use sheet "MSH PROD_DIM"
+  
+  IntelStockFactConnection.pq Line 6: Looking for "Tabel6" (DOES NOT EXIST)
+    Fix: Use sheet "Intel Table 20242025 Stock"
+  
+  StoreDimensionConnection.pq Line 6: Looking for "Table10" (DOES NOT EXIST)
+    Fix: Use sheet "Store_DIM"
+
+ISSUE 2: Product Dimension Corruption (MSH PROD_DIM)
+  Expected: PROD_ID, MODEL, PROCESSOR TYPE, RAM, STORAGE, GRAPHICS
+  Actual: B2B, GRAPHICS, MODEL, PROCESSOR, STORAGE (mixed with data)
+  Problems: Headers+data mixed, missing PROCESSOR TYPE/RAM, wrong order
+
+ISSUE 3: Stock Matrix Breakdown (Intel Table 20242025 Stock)
+  Expected: chassis, Scherm, Inch, Resolutie, CPU, RAM, Storage, Graphics
+  Actual: chassis MISSING, headers split across Row 1+2, only 11 rows
+  Problems: Cannot unpivot correctly, data starts in Row 2
+
+ISSUE 4: Store Dimension Incomplete (Store_DIM)
+  Expected: Name, Country, Retailer, Retailer Id, Store Id, Store Code, Location, City, State
+  Actual: Uffen (not "Name"), missing Location/State, wrong column order
+  Problems: StoreKey construction fails, missing key columns
+
+IMPACT:
+  Data Loading: 0% - all queries fail
+  SpecKey Values: NULL (missing CPU/RAM/Storage columns)
+  StoreKey Values: NULL (missing "Name" column)
+  Reports: All empty/broken
+
+IMMEDIATE FIX:
+Change table references in all 3 PQ scripts from named tables to sheet names:
+  "Table_4" -> "MSH PROD_DIM" (with Kind="Sheet")
+  "Tabel6" -> "Intel Table 20242025 Stock" (with Kind="Sheet")
+  "Table10" -> "Store_DIM" (with Kind="Sheet")
+
+DETAILED ANALYSIS DOCUMENTS:
+  1. MISMATCH_REPORT.md - Complete analysis with all details
+  2. COLUMN_MAPPING_REFERENCE.md - Side-by-side column comparison
+  3. ACTUAL_FILE_STRUCTURE.txt - Workbook structure inventory
+
+All findings verified by direct file extraction (100% accurate).
