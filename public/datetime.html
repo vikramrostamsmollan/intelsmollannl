@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="nl"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Intel Booking - Select Date &amp; Time</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-fixed-dim": "#d2bbff",
+                        "on-tertiary": "#3f008e",
+                        "tertiary-container": "#8545f6",
+                        "primary-fixed": "#d3e4ff",
+                        "on-tertiary-fixed-variant": "#5a00c6",
+                        "surface-dim": "#131318",
+                        "on-primary-fixed-variant": "#004881",
+                        "on-secondary-container": "#9fbae6",
+                        "on-surface": "#e4e1e9",
+                        "secondary-fixed": "#d5e3ff",
+                        "on-background": "#e4e1e9",
+                        "background": "#131318",
+                        "surface-container": "#1f1f25",
+                        "outline": "#8b919d",
+                        "tertiary-fixed": "#eaddff",
+                        "primary": "#a2c9ff",
+                        "on-surface-variant": "#c0c7d3",
+                        "surface-bright": "#39383e",
+                        "surface-container-low": "#1b1b20",
+                        "on-secondary-fixed-variant": "#2d486d",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-high": "#2a292f",
+                        "error-container": "#93000a",
+                        "surface-container-highest": "#35343a",
+                        "secondary-fixed-dim": "#adc8f5",
+                        "on-tertiary-fixed": "#25005a",
+                        "on-error": "#690005",
+                        "tertiary": "#d2bbff",
+                        "surface-variant": "#35343a",
+                        "on-tertiary-container": "#f9f1ff",
+                        "inverse-surface": "#e4e1e9",
+                        "outline-variant": "#414752",
+                        "error": "#ffb4ab",
+                        "on-primary": "#00315b",
+                        "on-primary-container": "#eef3ff",
+                        "surface-container-lowest": "#0e0e13",
+                        "on-secondary": "#133155",
+                        "inverse-primary": "#0060a9",
+                        "secondary": "#adc8f5",
+                        "inverse-on-surface": "#303036",
+                        "surface": "#131318",
+                        "secondary-container": "#2f4a70",
+                        "on-primary-fixed": "#001c38",
+                        "primary-fixed-dim": "#a2c9ff",
+                        "surface-tint": "#a2c9ff",
+                        "on-secondary-fixed": "#001c3b",
+                        "primary-container": "#0071c5"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["DM Sans"],
+                        "label": ["Space Grotesk"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { background-color: #0A0A0F; color: #F8F8FF; font-family: 'DM Sans', sans-serif; }
+        .dot-grid {
+            background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+            background-size: 32px 32px;
+            opacity: 0.35;
+        }
+        .radial-glow-blue {
+            background: radial-gradient(circle at left top, rgba(0,113,197,0.15), transparent 45%);
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.84);
+            border: 1px solid rgba(255,255,255,0.07);
+            backdrop-filter: blur(12px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .step-completed {
+            background: #0071C5;
+            box-shadow: 0 16px 30px rgba(37,99,235,0.28);
+        }
+    </style>
+</head>
+<body class="min-h-screen relative overflow-x-hidden pb-32">
+<!-- Background Elements -->
+<div class="fixed inset-0 pointer-events-none z-0">
+<div class="absolute inset-0 dot-grid"></div>
+<div class="absolute inset-0 radial-glow-blue"></div>
+</div>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#0A0A0F]/85 backdrop-blur-xl border-b border-white/10">
+<div class="flex items-center gap-2">
+<span class="text-xl font-bold text-[#F8F8FF] font-['Space_Grotesk'] tracking-tight">Intel Booking</span>
+</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-[#94A3B8] hover:text-[#3B8FD4] transition-colors font-['Space_Grotesk'] font-bold text-sm" href="#">Mijn trainingen</a>
+<button class="bg-[#0071C5] text-white px-5 py-2 rounded-xl font-bold font-['Space_Grotesk'] active:scale-95 duration-200 transition-all shadow-[0_18px_32px_rgba(0,113,197,0.22)]">
+                Inloggen
+            </button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="relative z-10 pt-24 max-w-6xl mx-auto px-6">
+<!-- Progress Bar -->
+<div class="flex items-center justify-between mb-16 relative">
+<!-- Connecting Line Background -->
+<div class="absolute top-1/2 left-0 w-full h-[2px] bg-white/5 -translate-y-1/2 z-0"></div>
+<!-- Step 1: Training (Completed) -->
+<div class="flex flex-col items-center gap-3 relative z-10 group">
+<div class="w-12 h-12 rounded-full step-completed flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'wght' 700;">check</span>
+</div>
+<span class="font-label text-[11px] uppercase tracking-widest text-[#0071C5] font-bold" style="color: #F0A500;">TRAINING</span>
+</div>
+<!-- Step 2: Datum (Active) -->
+<div class="flex flex-col items-center gap-3 relative z-10">
+<div class="w-12 h-12 rounded-full bg-[#0071C5] flex items-center justify-center text-white ring-4 ring-[#0071C5]/20 ring-offset-4 ring-offset-[#0A0A0F]">
+<span class="font-headline font-bold text-lg">2</span>
+</div>
+<span class="font-label text-[11px] uppercase tracking-widest text-[#F8F8FF] font-bold" style="color: #F0A500;">Datum</span>
+</div>
+<!-- Step 3: Details -->
+<div class="flex flex-col items-center gap-3 relative z-10 opacity-40">
+<div class="w-12 h-12 rounded-full border-2 border-white/20 bg-[#0A0A0F] flex items-center justify-center text-[#94A3B8]">
+<span class="font-headline font-bold text-lg text-[#94A3B8]">3</span>
+</div>
+<span class="font-label text-[11px] uppercase tracking-widest font-bold text-[#F0A500]">Details</span>
+</div>
+<!-- Step 4: Bevestiging -->
+<div class="flex flex-col items-center gap-3 relative z-10 opacity-40">
+<div class="w-12 h-12 rounded-full border-2 border-white/20 bg-[#0A0A0F] flex items-center justify-center text-[#94A3B8]">
+<span class="font-headline font-bold text-lg text-[#94A3B8]">4</span>
+</div>
+<span class="font-label text-[11px] uppercase tracking-widest font-bold text-[#F0A500]">Bevestiging</span>
+</div>
+<!-- Step 5: Klaar -->
+<div class="flex flex-col items-center gap-3 relative z-10 opacity-40">
+<div class="w-12 h-12 rounded-full border-2 border-white/20 bg-[#0A0A0F] flex items-center justify-center text-[#94A3B8]">
+<span class="font-headline font-bold text-lg text-[#94A3B8]">5</span>
+</div>
+<span class="font-label text-[11px] uppercase tracking-widest font-bold text-[#F0A500]">Klaar</span>
+</div>
+</div>
+<!-- Selected Training Summary -->
+<div class="glass-card rounded-2xl p-5 mb-10 flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-5">
+<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center border border-primary/20">
+<span class="material-symbols-outlined text-primary" data-icon="developer_board">developer_board</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-lg text-[#F8F8FF]">Intel Core Ultra Architecture Deep Dive</h3>
+<div class="flex gap-2 mt-1">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary border border-primary/20">Core Ultra</span>
+<span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-tertiary/10 text-tertiary border border-tertiary/20">8 uur</span>
+</div>
+</div>
+</div>
+<a class="text-primary text-sm font-bold flex items-center gap-2 hover:text-[#3B8FD4] transition-colors group" href="#">
+                Geselecteerde training wijzigen
+                <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform" data-icon="edit">edit</span>
+</a>
+</div>
+<!-- Header Section -->
+<div class="mb-10 text-center md:text-left">
+<h1 class="font-headline font-bold text-[clamp(28px,4.5vw,42px)] tracking-tight leading-tight mb-2">Kies een datum &amp; tijd</h1>
+<p class="text-[#94A3B8] flex items-center justify-center md:justify-start gap-2">
+<span class="material-symbols-outlined text-base" data-icon="schedule">schedule</span>
+                Alle tijden zijn in jouw lokale tijdzone (CET).
+            </p>
+</div>
+<!-- Two-Column Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Calendar -->
+<div class="lg:col-span-7">
+<div class="glass-card rounded-[22px] p-8">
+<div class="flex items-center justify-between mb-8">
+<h2 class="font-headline font-bold text-xl">Maart 2026</h2>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-white/5">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-white/5">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-7 gap-y-6 text-center mb-8">
+<!-- Day Labels -->
+<div class="text-[#64748B] font-bold text-xs uppercase tracking-widest">Ma</div>
+<div class="text-[#64748B] font-bold text-xs uppercase tracking-widest">Di</div>
+<div class="text-[#64748B] font-bold text-xs uppercase tracking-widest">Wo</div>
+<div class="text-[#64748B] font-bold text-xs uppercase tracking-widest">Do</div>
+<div class="text-[#64748B] font-bold text-xs uppercase tracking-widest">Vr</div>
+<div class="text-[#64748B] font-bold text-xs uppercase tracking-widest">Za</div>
+<div class="text-[#64748B] font-bold text-xs uppercase tracking-widest">Zo</div>
+<!-- Calendar Days -->
+<div class="text-tertiary-text/30 font-headline font-medium py-3 opacity-20">23</div>
+<div class="text-tertiary-text/30 font-headline font-medium py-3 opacity-20">24</div>
+<div class="text-tertiary-text/30 font-headline font-medium py-3 opacity-20">25</div>
+<div class="text-tertiary-text/30 font-headline font-medium py-3 opacity-20">26</div>
+<div class="text-tertiary-text/30 font-headline font-medium py-3 opacity-20">27</div>
+<div class="text-tertiary-text/30 font-headline font-medium py-3 opacity-20 text-error/30 line-through">28</div>
+<div class="text-[#F8F8FF] font-headline font-medium py-3">1</div>
+<div class="text-[#F8F8FF] font-headline font-medium py-3">2</div>
+<div class="text-[#F8F8FF] font-headline font-medium py-3">3</div>
+<div class="text-[#F8F8FF] font-headline font-medium py-3">4</div>
+<div class="text-[#F8F8FF] font-headline font-medium py-3">5</div>
+<div class="text-[#F8F8FF] font-headline font-medium py-3">6</div>
+<div class="text-[#F8F8FF] font-headline font-medium py-3">7</div>
+<div class="text-[#F8F8FF] font-headline font-medium py-3">8</div>
+<div class="text-[#F8F8FF] font-headline font-medium py-3">9</div>
+<div class="text-[#F8F8FF] font-headline font-medium py-3">10</div>
+<div class="text-[#F8F8FF] font-headline font-medium py-3">11</div>
+<div class="text-[#F8F8FF] font-headline font-medium py-3">12</div>
+<div class="text-[#F8F8FF] font-headline font-medium py-3">13</div>
+<div class="text-[#F8F8FF] font-headline font-medium py-3 text-error/50 line-through">14</div>
+<div class="text-[#F8F8FF] font-headline font-medium py-3">15</div>
+<div class="text-[#F8F8FF] font-headline font-medium py-3">16</div>
+<div class="text-[#F8F8FF] font-headline font-medium py-3">17</div>
+<div class="relative flex items-center justify-center">
+<div class="w-10 h-10 bg-[#0071C5] rounded-full flex items-center justify-center text-white font-headline font-bold shadow-[0_0_20px_rgba(0,113,197,0.4)]">18</div>
+</div>
+<div class="text-[#F8F8FF] font-headline font-medium py-3">19</div>
+<div class="text-[#F8F8FF] font-headline font-medium py-3">20</div>
+<div class="text-[#F8F8FF] font-headline font-medium py-3">21</div>
+<div class="text-[#F8F8FF] font-headline font-medium py-3">22</div>
+</div>
+<!-- Legend -->
+<div class="flex flex-wrap gap-6 pt-6 border-t border-white/5">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-white"></div>
+<span class="text-xs font-bold font-label uppercase tracking-widest text-[#94A3B8]">Beschikbaar</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-white/10 border border-error/50"></div>
+<span class="text-xs font-bold font-label uppercase tracking-widest text-[#94A3B8]">Vol</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-[#0071C5]"></div>
+<span class="text-xs font-bold font-label uppercase tracking-widest text-[#94A3B8]">Geselecteerd</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Slots & Info -->
+<div class="lg:col-span-5 space-y-6">
+<div>
+<h2 class="font-headline font-bold text-xl mb-4" style="color: #F0A500;">Beschikbare tijden — Wo 18 Mrt</h2>
+<div class="space-y-3">
+<!-- Time Slot 1 (Selected) -->
+<div class="glass-card rounded-xl p-4 border-[#0071C5] bg-[#0071C5]/10 flex items-center justify-between cursor-pointer group hover:bg-[#0071C5]/20 transition-all">
+<div class="flex items-center gap-4">
+<span class="font-headline font-bold text-xl">09:00</span>
+<span class="text-sm text-[#94A3B8]">Start training</span>
+</div>
+<div class="text-right">
+<div class="text-[#86EFAC] text-[11px] font-bold uppercase tracking-widest">12 plekken vrij</div>
+<div class="w-5 h-5 rounded-full border-2 border-[#0071C5] bg-[#0071C5] flex items-center justify-center mt-1 ml-auto">
+<span class="material-symbols-outlined text-[14px] text-white" style="font-variation-settings: 'wght' 700;">check</span>
+</div>
+</div>
+</div>
+<!-- Time Slot 2 -->
+<div class="glass-card rounded-xl p-4 flex items-center justify-between cursor-pointer group hover:bg-white/5 transition-all">
+<div class="flex items-center gap-4">
+<span class="font-headline font-bold text-xl text-[#F8F8FF]">11:00</span>
+<span class="text-sm text-[#94A3B8]">Start training</span>
+</div>
+<div class="text-right">
+<div class="text-[#86EFAC] text-[11px] font-bold uppercase tracking-widest">8 plekken vrij</div>
+<div class="w-5 h-5 rounded-full border-2 border-white/20 mt-1 ml-auto group-hover:border-primary transition-colors"></div>
+</div>
+</div>
+<!-- Time Slot 3 -->
+<div class="glass-card rounded-xl p-4 flex items-center justify-between cursor-pointer group hover:bg-white/5 transition-all">
+<div class="flex items-center gap-4">
+<span class="font-headline font-bold text-xl text-[#F8F8FF]">13:30</span>
+<span class="text-sm text-[#94A3B8]">Start training</span>
+</div>
+<div class="text-right">
+<div class="text-[#F59E0B] text-[11px] font-bold uppercase tracking-widest">Laatste 2 plekken</div>
+<div class="w-5 h-5 rounded-full border-2 border-white/20 mt-1 ml-auto group-hover:border-primary transition-colors"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Location Info -->
+<div class="glass-card rounded-[22px] overflow-hidden">
+<div class="p-5 flex items-start gap-4">
+<div class="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary" data-icon="location_on">location_on</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-white">Intel Innovation Hub Amsterdam</h4>
+<p class="text-sm text-[#94A3B8] mt-1">Science Park 402, 1098 XH Amsterdam</p>
+</div>
+</div>
+<div class="h-40 w-full relative">
+<img class="w-full h-full object-cover opacity-60" data-alt="Modern dark schematic map with glowing neon blue lines showing city streets and hub location pin" data-location="Amsterdam" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXnA_l8CYWOJ2PGZOH1TUZfjhjGnr62q7l4FAurtrX4vnsVRpjuIhJMS08y4QIx5UvM41hiLz01UX_9k-i40VG5HsQYvaxhCftkCSgHkJWkRLDazbyIn0eIcig8N4AGYzk8jwEf7lNVoiwoxN9H9oooP2F93xgJ1lIcNQn0M4YkfJicI4QiWgX43IcwKhIosEk99mwngoAJ_VWkZF3AfmrdKCtW5Rf0MXGgm8424OAIQ24Zpoo7KToeHPfof0nFjfhBkn9nYKFkDSw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#0F172A] to-transparent"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-10 h-10 bg-[#0071C5] rounded-full animate-pulse flex items-center justify-center">
+<div class="w-3 h-3 bg-white rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Sticky CTA Bar / BottomNavBar -->
+<div class="fixed bottom-0 left-0 w-full z-50">
+<div class="max-w-6xl mx-auto px-6 mb-8">
+<div class="bg-[#0A0A0F]/85 backdrop-blur-xl border border-white/10 rounded-2xl px-8 py-5 flex flex-col md:flex-row justify-between items-center shadow-2xl gap-4">
+<div class="flex items-center gap-6">
+<div class="hidden sm:flex flex-col">
+<span class="text-[#94A3B8] text-[10px] uppercase font-bold tracking-widest font-label">Jouw Selectie</span>
+<span class="font-headline font-bold text-lg text-white">Wo 18 Mrt • 09:00 — 8 uur</span>
+</div>
+</div>
+<div class="flex items-center gap-4 w-full md:w-auto">
+<button onclick="window.location.href='training.html'" class="flex-1 md:flex-none px-8 py-4 rounded-xl font-headline font-bold text-white bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-sm uppercase tracking-widest active:scale-95">
+                        Vorige
+                    </button>
+<button onclick="window.location.href='details.html'" class="flex-1 md:flex-none px-8 py-4 rounded-xl font-headline font-bold text-white bg-[#0071C5] hover:bg-[#3B8FD4] transition-all shadow-[0_18px_32px_rgba(0,113,197,0.22)] text-sm uppercase tracking-widest flex items-center justify-center gap-2 active:scale-95">
+                        Volgende stap
+                        <span class="material-symbols-outlined text-lg" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+
+
+</body></html>

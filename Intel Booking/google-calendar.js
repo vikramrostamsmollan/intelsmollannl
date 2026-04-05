@@ -19,11 +19,12 @@ import { google } from 'googleapis';
 // ─── Configuration ────────────────────────────────────────────────────────────
 
 const ACCOUNT_MANAGER_EMAIL = process.env.ACCOUNT_MANAGER_EMAIL;
-const GOOGLE_CLIENT_ID      = process.env.GOOGLE_CLIENT_ID;
-const GOOGLE_CLIENT_SECRET  = process.env.GOOGLE_CLIENT_SECRET;
-const GOOGLE_REFRESH_TOKEN  = process.env.GOOGLE_REFRESH_TOKEN;
-const REDIRECT_URI          = process.env.GOOGLE_REDIRECT_URI || 'http://localhost:3000/auth/google/callback';
-const BOOKING_BASE_URL      = process.env.BOOKING_BASE_URL    || 'https://intel-booking.web.app';
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+const GOOGLE_REFRESH_TOKEN = process.env.GOOGLE_REFRESH_TOKEN;
+const REDIRECT_URI = process.env.GOOGLE_REDIRECT_URI || 'http://localhost:3000/auth/google/callback';
+const BOOKING_BASE_URL = process.env.BOOKING_BASE_URL || 'https://intel-booking.web.app';
+const TRAINING_CALENDAR_ID = process.env.TRAINING_CALENDAR_ID || 'primary'; // set after createCalendar() is run once
 
 // ─── Auth ─────────────────────────────────────────────────────────────────────
 
@@ -53,7 +54,7 @@ function createOAuthClient() {
  * @returns {Promise<{eventId: string, eventLink: string}>}
  */
 export async function createBookingCalendarEvent(booking) {
-  const auth     = createOAuthClient();
+  const auth = createOAuthClient();
   const calendar = google.calendar({ version: 'v3', auth });
 
   const event = {
@@ -95,23 +96,23 @@ export async function createBookingCalendarEvent(booking) {
     // Custom metadata for programmatic lookup
     extendedProperties: {
       private: {
-        intelBookingRef:   booking.bookingReference,
+        intelBookingRef: booking.bookingReference,
         intelCustomerName: booking.customerName,
-        intelCompany:      booking.companyName,
-        source:            'intel-booking-platform',
+        intelCompany: booking.companyName,
+        source: 'intel-booking-platform',
       },
     },
   };
 
   const response = await calendar.events.insert({
-    calendarId:          'primary',
-    resource:            event,
-    sendUpdates:         'all',        // sends invite emails to attendees
+    calendarId: TRAINING_CALENDAR_ID,
+    resource: event,
+    sendUpdates: 'all',        // sends invite emails to attendees
     conferenceDataVersion: 0,
   });
 
   return {
-    eventId:   response.data.id,
+    eventId: response.data.id,
     eventLink: response.data.htmlLink,
   };
 }
@@ -123,22 +124,22 @@ export async function createBookingCalendarEvent(booking) {
  * @param {Object} updates     - Partial booking fields to update (same shape as createBookingCalendarEvent)
  */
 export async function updateBookingCalendarEvent(eventId, updates) {
-  const auth     = createOAuthClient();
+  const auth = createOAuthClient();
   const calendar = google.calendar({ version: 'v3', auth });
 
   const patch = {};
 
   if (updates.startDateTime) patch.start = { dateTime: updates.startDateTime, timeZone: 'Europe/Amsterdam' };
-  if (updates.endDateTime)   patch.end   = { dateTime: updates.endDateTime,   timeZone: 'Europe/Amsterdam' };
-  if (updates.location)      patch.location = updates.location;
+  if (updates.endDateTime) patch.end = { dateTime: updates.endDateTime, timeZone: 'Europe/Amsterdam' };
+  if (updates.location) patch.location = updates.location;
   if (updates.trainingTitle || updates.companyName) {
     patch.summary = `📋 ${updates.trainingTitle} — ${updates.companyName}`;
   }
 
   const response = await calendar.events.patch({
-    calendarId:  'primary',
+    calendarId: TRAINING_CALENDAR_ID,
     eventId,
-    resource:    patch,
+    resource: patch,
     sendUpdates: 'all',
   });
 
@@ -151,11 +152,11 @@ export async function updateBookingCalendarEvent(eventId, updates) {
  * @param {string} eventId - The Google Calendar event ID to delete
  */
 export async function cancelBookingCalendarEvent(eventId) {
-  const auth     = createOAuthClient();
+  const auth = createOAuthClient();
   const calendar = google.calendar({ version: 'v3', auth });
 
   await calendar.events.delete({
-    calendarId:  'primary',
+    calendarId: TRAINING_CALENDAR_ID,
     eventId,
     sendUpdates: 'all',
   });
@@ -169,31 +170,54 @@ export async function cancelBookingCalendarEvent(eventId) {
  * @returns {Promise<Array>}
  */
 export async function listUpcomingBookings(maxResults = 10) {
-  const auth     = createOAuthClient();
+  const auth = createOAuthClient();
   const calendar = google.calendar({ version: 'v3', auth });
 
   const response = await calendar.events.list({
-    calendarId:   'primary',
-    timeMin:      new Date().toISOString(),
+    calendarId: TRAINING_CALENDAR_ID,
+    timeMin: new Date().toISOString(),
     maxResults,
     singleEvents: true,
-    orderBy:      'startTime',
+    orderBy: 'startTime',
     // Filter to only Intel booking events
     privateExtendedProperty: 'source=intel-booking-platform',
   });
 
   return (response.data.items || []).map(event => ({
-    eventId:        event.id,
-    eventLink:      event.htmlLink,
-    title:          event.summary,
-    start:          event.start?.dateTime || event.start?.date,
-    end:            event.end?.dateTime   || event.end?.date,
-    location:       event.location,
-    bookingRef:     event.extendedProperties?.private?.intelBookingRef,
-    customerName:   event.extendedProperties?.private?.intelCustomerName,
-    company:        event.extendedProperties?.private?.intelCompany,
-    status:         event.status,
+    eventId: event.id,
+    eventLink: event.htmlLink,
+    title: event.summary,
+    start: event.start?.dateTime || event.start?.date,
+    end: event.end?.dateTime || event.end?.date,
+    location: event.location,
+    bookingRef: event.extendedProperties?.private?.intelBookingRef,
+    customerName: event.extendedProperties?.private?.intelCustomerName,
+    company: event.extendedProperties?.private?.intelCompany,
+    status: event.status,
   }));
+}
+
+// ─── Create dedicated calendar (run once during setup) ────────────────────────
+
+/**
+ * Creates a new Google Calendar and returns its ID.
+ * Run once during Milestone 1 setup, then store the returned ID as TRAINING_CALENDAR_ID.
+ * @param {string} [name='Intel Training NL']
+ * @returns {Promise<{id: string, summary: string}>}
+ */
+export async function createCalendar(name = 'Intel Training NL') {
+  const auth = createOAuthClient();
+  const calendar = google.calendar({ version: 'v3', auth });
+
+  const response = await calendar.calendars.insert({
+    resource: {
+      summary: name,
+      timeZone: 'Europe/Amsterdam',
+    },
+  });
+
+  console.log('Calendar created. Store this as TRAINING_CALENDAR_ID:', response.data.id);
+  return { id: response.data.id, summary: response.data.summary };
 }
 
 // ─── OAuth setup (run once to get refresh token) ──────────────────────────────
@@ -206,8 +230,8 @@ export function getAuthUrl() {
   const client = new google.auth.OAuth2(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, REDIRECT_URI);
   return client.generateAuthUrl({
     access_type: 'offline',
-    scope:       ['https://www.googleapis.com/auth/calendar.events'],
-    prompt:      'consent',
+    scope: ['https://www.googleapis.com/auth/calendar.events'],
+    prompt: 'consent',
   });
 }
 

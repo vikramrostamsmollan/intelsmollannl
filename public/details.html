@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="nl"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&amp;family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #0A0A0F;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.84);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .intel-gradient-text {
+            background: linear-gradient(135deg, #F8F8FF 0%, #94A3B8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .purple-glow {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 40vw;
+            height: 40vw;
+            background: radial-gradient(circle at right top, rgba(124,58,237,0.08), transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0071C5",
+                        "primary-bright": "#3B8FD4",
+                        "surface": "#0A0A0F",
+                        "card-bg": "rgba(15, 23, 42, 0.84)",
+                        "on-surface": "#F8F8FF",
+                        "secondary-text": "#94A3B8",
+                        "tertiary-text": "#64748B",
+                        "accent-purple": "#7C3AED"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk", "sans-serif"],
+                        "body": ["DM Sans", "sans-serif"],
+                        "label": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "22px",
+                        "xl": "3rem"
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-body text-on-surface antialiased min-h-screen pb-32">
+<div class="purple-glow"></div>
+<!-- Navigation (TopNavBar from JSON) -->
+<header class="fixed top-0 w-full z-50 bg-[#0A0A0F]/85 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-black/50">
+<div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+<div class="text-xl font-bold tracking-tighter text-[#F8F8FF] font-headline">
+                Intel Training
+            </div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-[#94A3B8] font-headline font-bold text-sm tracking-tight hover:text-[#3B8FD4] transition-colors" href="#">Bookings</a>
+<a class="text-[#94A3B8] font-headline font-bold text-sm tracking-tight hover:text-[#3B8FD4] transition-colors" href="#">Schedule</a>
+<a class="text-[#94A3B8] font-headline font-bold text-sm tracking-tight hover:text-[#3B8FD4] transition-colors" href="#">Resources</a>
+</nav>
+<button class="bg-primary text-white font-headline font-bold text-sm tracking-tight px-6 py-2 rounded-lg active:scale-95 transition-transform hover:bg-primary-bright">
+                Inloggen
+            </button>
+</div>
+</header>
+<main class="relative pt-24 px-6 max-w-7xl mx-auto z-10">
+<!-- Progress Bar -->
+<div class="mb-12">
+<div class="flex items-center justify-between max-w-4xl mx-auto relative">
+<!-- Progress Line Background -->
+<div class="absolute top-1/2 left-0 w-full h-0.5 bg-white/5 -translate-y-1/2 z-0"></div>
+<!-- Step 1 (Completed) -->
+<div class="relative z-10 flex flex-col items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white ring-8 ring-[#0A0A0F]">
+<span class="material-symbols-outlined text-xl">check</span>
+</div>
+<span class="text-[11px] font-bold uppercase tracking-widest text-primary font-headline">Training</span>
+</div>
+<!-- Step 2 (Completed) -->
+<div class="relative z-10 flex flex-col items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white ring-8 ring-[#0A0A0F]">
+<span class="material-symbols-outlined text-xl">check</span>
+</div>
+<span class="text-[11px] font-bold uppercase tracking-widest text-primary font-headline">Datum</span>
+</div>
+<!-- Step 3 (Active) -->
+<div class="relative z-10 flex flex-col items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-headline font-bold text-lg ring-8 ring-[#0A0A0F]">3</div>
+<span class="text-[11px] font-bold uppercase tracking-widest text-on-surface font-headline">Details</span>
+</div>
+<!-- Step 4 (Muted) -->
+<div class="relative z-10 flex flex-col items-center gap-3">
+<div class="w-10 h-10 rounded-full border-2 border-white/10 bg-[#0A0A0F] flex items-center justify-center text-tertiary-text font-headline font-bold text-lg ring-8 ring-[#0A0A0F]">4</div>
+<span class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text font-headline">Bevestiging</span>
+</div>
+<!-- Step 5 (Muted) -->
+<div class="relative z-10 flex flex-col items-center gap-3">
+<div class="w-10 h-10 rounded-full border-2 border-white/10 bg-[#0A0A0F] flex items-center justify-center text-tertiary-text font-headline font-bold text-lg ring-8 ring-[#0A0A0F]">5</div>
+<span class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text font-headline">Klaar</span>
+</div>
+</div>
+</div>
+<!-- Booking Summary Card -->
+<div class="glass-card rounded-lg p-6 mb-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+<div class="flex-1">
+<h3 class="font-headline font-bold text-xl text-white mb-2 tracking-tight">Intel Core Ultra Architecture Deep Dive</h3>
+<div class="flex flex-wrap gap-4 text-secondary-text text-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-lg opacity-70">calendar_today</span>
+                        Wo 18 Mrt 2026 • 09:00–17:00
+                    </div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-lg opacity-70">location_on</span>
+                        Intel Experience Center Amsterdam
+                    </div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="bg-primary/10 text-primary border border-primary/20 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider">Core Ultra</span>
+<span class="bg-white/5 text-secondary-text border border-white/10 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider">8 uur</span>
+<button class="text-secondary-text hover:text-white text-sm font-bold ml-4 underline underline-offset-4 decoration-white/20">Wijzigen</button>
+</div>
+</div>
+<!-- Page Header -->
+<div class="mb-10">
+<h1 class="font-headline font-bold text-[42px] leading-none tracking-tighter mb-3 intel-gradient-text">Jouw gegevens</h1>
+<p class="text-secondary-text text-lg">Vul je contactgegevens in om de boeking te voltooien.</p>
+</div>
+<!-- Two-Column Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Form -->
+<div class="lg:col-span-8 glass-card rounded-lg p-8">
+<form class="space-y-10">
+<!-- Section 1: Persoonlijke gegevens -->
+<div>
+<div class="flex items-center gap-3 mb-8">
+<span class="w-2 h-2 rounded-full bg-primary" style="background-color: #F0A500;"></span>
+<h2 class="text-[12px] font-bold uppercase tracking-[0.15em] text-secondary-text font-headline">Persoonlijke gegevens</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="space-y-2">
+<label class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text ml-1" style="color: #F0A500;">Voornaam</label>
+<input class="w-full bg-surface-container-low border border-white/10 rounded-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all text-on-surface" placeholder="Bijv. Mark" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text ml-1" style="color: #F0A500;">Voornaam</label>
+<input class="w-full bg-surface-container-low border border-white/10 rounded-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all text-on-surface" placeholder="Bijv. Jansen" type="text"/>
+</div>
+</div>
+<div class="space-y-2 mb-6">
+<label class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text ml-1" style="color: #F0A500;">Voornaam</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-tertiary-text">mail</span>
+<input class="w-full bg-surface-container-low border border-white/10 rounded-lg pl-12 pr-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all text-on-surface" placeholder="naam@bedrijf.nl" type="email"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text ml-1" style="color: #F0A500;">Voornaam</label>
+<div class="flex">
+<div class="flex items-center gap-2 bg-white/5 border border-white/10 border-r-0 rounded-l-lg px-4 py-3">
+<img alt="Netherlands Flag" class="w-5 h-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdxnmvefTuygOfAxQuc07EzlflTIwLz9a12SvCuU5PqVKcKdKqKozBvWlRu40h9rW87TY4p-BtAA83D_E1DGRJYua0UnQDZZOAoBcKkmTLaX5zTDPduJAPoS7mrgqdZCfJMeMviUQDAj9yyBNwzH8GM_j4iQ41gThH1eUNXINV8hymHJecp6nZnPVPq_rtVORdAFdl5P_b3Hl1Lvw-DCzoZmYqRtuKMw4koy1WIHfzty7kYzUx-nHBCRoaICu0186i8LGtkt377azc"/>
+<span class="text-sm text-secondary-text">+31</span>
+</div>
+<input class="w-full bg-surface-container-low border border-white/10 rounded-r-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all text-on-surface" placeholder="6 12345678" type="tel"/>
+</div>
+</div>
+</div>
+<!-- Section 2: Bedrijfsgegevens -->
+<div>
+<div class="flex items-center gap-3 mb-8">
+<span class="w-2 h-2 rounded-full bg-primary opacity-50" style="background-color: #F0A500;"></span>
+<h2 class="text-[12px] font-bold uppercase tracking-[0.15em] text-[#F0A500] font-headline">Bedrijfsgegevens</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="space-y-2">
+<label class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text ml-1" style="color: #F0A500;">Voornaam</label>
+<input class="w-full bg-surface-container-low border border-white/10 rounded-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none text-on-surface" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text ml-1" style="color: #F0A500;">Voornaam</label>
+<input class="w-full bg-surface-container-low border border-white/10 rounded-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none text-on-surface" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text ml-1" style="color: #F0A500;">Voornaam</label>
+<input class="w-full bg-surface-container-low border border-white/10 rounded-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none text-on-surface" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text ml-1" style="color: #F0A500;">Voornaam</label>
+<input class="w-full bg-surface-container-low border border-white/10 rounded-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none text-on-surface" placeholder="linkedin.com/in/gebruiker" type="url"/>
+</div>
+</div>
+</div>
+<!-- Section 3: Dieetwensen -->
+<div>
+<div class="flex items-center gap-3 mb-8">
+<span class="w-2 h-2 rounded-full bg-primary opacity-50" style="background-color: #F0A500;"></span>
+<h2 class="text-[12px] font-bold uppercase tracking-[0.15em] text-[#F0A500] font-headline">Dieetwensen &amp; bijzonderheden</h2>
+</div>
+<div class="space-y-2">
+<textarea class="w-full bg-surface-container-low border border-white/10 rounded-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none text-on-surface resize-none" placeholder="Zijn er specifieke dieetwensen of andere zaken waar we rekening mee moeten houden?" rows="3"></textarea>
+</div>
+</div>
+<!-- Checkboxes -->
+<div class="space-y-4 pt-4 border-t border-white/5">
+<label class="flex items-start gap-3 cursor-pointer group">
+<input class="mt-1 w-5 h-5 bg-surface-container-low border-white/10 rounded text-primary focus:ring-offset-[#0A0A0F] focus:ring-primary" required="" type="checkbox"/>
+<span class="text-sm text-secondary-text group-hover:text-on-surface transition-colors">
+                                Ik ga akkoord met de <a class="text-primary hover:underline" href="#">Algemene Voorwaarden</a> en het <a class="text-primary hover:underline" href="#">Privacybeleid</a> van Intel Training.
+                            </span>
+</label>
+<label class="flex items-start gap-3 cursor-pointer group">
+<input class="mt-1 w-5 h-5 bg-surface-container-low border-white/10 rounded text-primary focus:ring-offset-[#0A0A0F] focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-secondary-text group-hover:text-on-surface transition-colors">
+                                Houd me op de hoogte van nieuwe Intel trainingen en architectuur updates via e-mail.
+                            </span>
+</label>
+</div>
+</form>
+</div>
+<!-- Right Column: Order Summary (Sticky) -->
+<div class="lg:col-span-4 sticky top-28">
+<div class="glass-card rounded-lg overflow-hidden">
+<div class="p-6 border-b border-white/5">
+<h2 class="font-headline font-bold text-xl text-white">Overzicht</h2>
+</div>
+<div class="p-6 space-y-6">
+<div class="flex gap-4">
+<div class="w-12 h-12 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary">school</span>
+</div>
+<div>
+<p class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text mb-1" style="color: #F0A500;">Training</p>
+<p class="text-sm font-bold text-on-surface">Intel Core Ultra Deep Dive</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-12 h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-secondary-text">event</span>
+</div>
+<div>
+<p class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text mb-1" style="color: #F0A500;">Wanneer</p>
+<p class="text-sm font-bold text-on-surface">18 Maart 2026, 09:00</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-12 h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-secondary-text">location_on</span>
+</div>
+<div>
+<p class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text mb-1" style="color: #F0A500;">Locatie</p>
+<p class="text-sm font-bold text-on-surface">Intel Experience Center</p>
+</div>
+</div>
+<div class="pt-6 border-t border-white/5 space-y-3">
+<div class="flex justify-between text-sm">
+<span class="text-secondary-text">Subtotaal</span>
+<span class="text-on-surface">€ 0,00</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-secondary-text">BTW (21%)</span>
+<span class="text-on-surface">€ 0,00</span>
+</div>
+<div class="flex justify-between items-center pt-3 border-t border-white/10">
+<span class="font-headline font-bold text-lg text-white">Totaal</span>
+<span class="font-headline font-bold text-xl text-primary">€ 0,00 (gratis)</span>
+</div>
+</div>
+<div class="bg-primary/5 border border-primary/10 rounded-lg p-4 flex gap-3">
+<span class="material-symbols-outlined text-primary text-xl">info</span>
+<p class="text-xs text-primary-bright leading-relaxed">
+                                Gefactureerd via jouw Intel-partnercontract. Er worden geen extra kosten in rekening gebracht voor deze sessie.
+                            </p>
+</div>
+</div>
+</div>
+<!-- Preview Image -->
+<div class="mt-6 glass-card rounded-lg overflow-hidden h-48 relative">
+<img alt="Training Center" class="w-full h-full object-cover opacity-50" data-alt="interior of a modern tech training center with dark furniture, blue led accents, and high-end workstation setups in a sleek architectural style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp7u-6LzDAYmB1rDLgNAgsn065AqbxwHQ47FfYI-KsmAgQ1I_Wyq4fA8bF2wemZxTE-zGS27P4D11BuaTp8nrpP5Ak1S6SNzEL9AHTv1BgeB6YCgw114dd6Fo3rLS_TsDvaaA4skTxuAJfO2B0JW8DH5yLVp2bTet6hkb0LxJwo4zS00yogOkPJvXg-kKxVAWGsIqAaYnpc5vHdIpsOS8IceXlaCe3VQhVVV0-qp9Plj1PiuRHHdsK154a_yONYV7S0Z5nqYVs2J7s"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0F] to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<p class="text-[10px] font-bold uppercase tracking-widest text-white/60 mb-1" style="color: #F0A500;">Host Locatie</p>
+<p class="text-sm font-bold text-white">Amsterdam Experience Center</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Sticky Bottom CTA Bar -->
+<div class="fixed bottom-0 left-0 w-full z-40 bg-[#0A0A0F]/90 backdrop-blur-xl border-t border-white/10">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="text-secondary-text text-sm font-headline font-bold">Stap 3 van 5</span>
+<div class="hidden md:flex h-1.5 w-32 bg-white/5 rounded-full overflow-hidden">
+<div class="h-full w-3/5 bg-primary rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button onclick="window.location.href='datetime.html'" class="px-6 py-3 rounded-lg text-on-surface font-headline font-bold text-sm hover:bg-white/5 transition-colors border border-transparent active:scale-95 duration-200">
+                    Vorige
+                </button>
+<button onclick="window.location.href='review.html'" class="px-8 py-3 rounded-lg bg-primary text-white font-headline font-bold text-sm shadow-[0_18px_32px_rgba(0,113,197,0.22)] hover:bg-primary-bright active:scale-95 transition-all flex items-center gap-2">
+                    Bevestiging bekijken
+                    <span class="material-symbols-outlined text-base">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Mobile Bottom Navigation (BottomNavBar from JSON) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-[22px] bg-[#0A0A0F]/90 backdrop-blur-lg border-t border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+<div class="flex justify-around items-center h-20 px-4 pb-safe">
+<div class="flex flex-col items-center justify-center text-[#64748B] hover:bg-white/5 duration-200 active:scale-90">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['DM_Sans'] text-[11px] font-bold uppercase tracking-widest">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#F8F8FF] bg-[#0071C5]/20 rounded-xl px-4 py-1 active:scale-90 duration-200">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-['DM_Sans'] text-[11px] font-bold uppercase tracking-widest">Bookings</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#64748B] hover:bg-white/5 duration-200 active:scale-90">
+<span class="material-symbols-outlined">history</span>
+<span class="font-['DM_Sans'] text-[11px] font-bold uppercase tracking-widest">History</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#64748B] hover:bg-white/5 duration-200 active:scale-90">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['DM_Sans'] text-[11px] font-bold uppercase tracking-widest">Profile</span>
+</div>
+</div>
+</nav>
+
+
+</body></html>

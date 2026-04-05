@@ -28,3 +28,5 @@ secrets.json
 
 # AI/MCP data directories
 aef9b808-*
+
+functions/.env

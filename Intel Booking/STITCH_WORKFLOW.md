@@ -40,7 +40,7 @@
 | Enter Details | Stap 3 | `8e4c76b568084a1193e0fc0a2985860e` |
 | Bevestiging / Review | Stap 4 | `903e6bccffee48bbba04cddc4a9b7435` |
 | Booking Confirmed + Agenda Sync | Stap 5 | `38c81a1959f54f2087ef85aaef9f25d2` |
-| Event Dashboard | Admin | `a8eab20ea60c4ab383ebf15dd1d66864` |
+| Admin Dashboard + Agenda Sync | Admin | `e74f8fd5d4bd418d8ff7d34dc5cc7c8f` |
 
 ### Design System
 

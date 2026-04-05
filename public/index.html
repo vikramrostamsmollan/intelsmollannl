@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&amp;family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-error": "#690005",
+                        "surface-container-lowest": "#0e0e13",
+                        "on-tertiary": "#442c00",
+                        "secondary-fixed": "#ffddaf",
+                        "on-error-container": "#ffdad6",
+                        "error": "#ffb4ab",
+                        "surface-dim": "#131318",
+                        "on-tertiary-fixed": "#281800",
+                        "on-background": "#e4e1e9",
+                        "surface-container-low": "#1b1b20",
+                        "surface-container-high": "#2a292f",
+                        "on-secondary-container": "#5f3f00",
+                        "tertiary": "#ffba44",
+                        "surface-variant": "#35343a",
+                        "surface-tint": "#a2c9ff",
+                        "background": "#0A0A0F",
+                        "outline": "#8b919d",
+                        "inverse-on-surface": "#303036",
+                        "on-primary-container": "#eef3ff",
+                        "secondary-fixed-dim": "#ffba44",
+                        "on-tertiary-fixed-variant": "#614000",
+                        "on-primary-fixed": "#001c38",
+                        "on-tertiary-container": "#fff1e1",
+                        "surface-bright": "#39383e",
+                        "tertiary-fixed-dim": "#ffba44",
+                        "surface": "#0A0A0F",
+                        "primary-fixed": "#d3e4ff",
+                        "secondary-container": "#efa500",
+                        "primary": "#0071C5",
+                        "on-primary-fixed-variant": "#004881",
+                        "on-secondary-fixed-variant": "#614000",
+                        "outline-variant": "#414752",
+                        "on-surface-variant": "#c0c7d3",
+                        "primary-fixed-dim": "#a2c9ff",
+                        "tertiary-container": "#956500",
+                        "on-secondary": "#442c00",
+                        "inverse-primary": "#0060a9",
+                        "surface-container": "#1f1f25",
+                        "on-surface": "#e4e1e9",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#004881",
+                        "error-container": "#93000a",
+                        "secondary": "#F0A500",
+                        "surface-container-highest": "#35343a",
+                        "tertiary-fixed": "#ffddaf",
+                        "inverse-surface": "#e4e1e9",
+                        "on-secondary-fixed": "#281800"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["DM Sans"],
+                        "label": ["Space Grotesk"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0F;
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.04) 1px, transparent 0);
+            background-size: 32px 32px;
+            color: #e4e1e9;
+        }
+        .glass-card {
+            background: rgba(27, 27, 32, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .amber-label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            color: #F0A500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        .hero-gradient-blue {
+            background: radial-gradient(circle at top left, rgba(0, 113, 197, 0.15) 0%, transparent 50%);
+        }
+        .hero-gradient-purple {
+            background: radial-gradient(circle at top right, rgba(147, 51, 234, 0.1) 0%, transparent 40%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="font-body selection:bg-primary selection:text-white">
+<!-- Top Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 bg-slate-950/60 backdrop-blur-xl border-b border-white/10 shadow-[0_8px_32px_rgba(0,113,197,0.1)]">
+<div class="flex justify-between items-center px-8 py-4 max-w-screen-2xl mx-auto">
+<div class="text-xl font-black tracking-tighter text-white uppercase font-headline">INTEL_TRAINING_2024</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-blue-500 border-b-2 border-blue-500 pb-1 font-headline font-bold tracking-tight" href="#">Curriculum</a>
+<a class="text-slate-400 hover:text-white transition-colors font-headline font-bold tracking-tight" href="#">Schedule</a>
+<a class="text-slate-400 hover:text-white transition-colors font-headline font-bold tracking-tight" href="#">Speakers</a>
+<a class="text-slate-400 hover:text-white transition-colors font-headline font-bold tracking-tight" href="#">Venues</a>
+</div>
+<div class="flex items-center gap-4">
+<button onclick="window.location.href='training.html'" class="text-slate-400 hover:text-white transition-all duration-300 font-headline font-bold text-sm">Login</button>
+<button onclick="window.location.href='training.html'" class="bg-primary text-white px-6 py-2 rounded-none font-headline font-bold tracking-tight active:scale-95 duration-200 hover:bg-primary-container transition-all">Register Now</button>
+</div>
+</div>
+</nav>
+<main class="relative pt-24">
+<!-- Ambient Light Gradients -->
+<div class="fixed top-0 left-0 w-full h-full pointer-events-none z-[-1] overflow-hidden">
+<div class="absolute -top-24 -left-24 w-[800px] h-[800px] bg-primary/10 blur-[120px] rounded-full"></div>
+<div class="absolute -top-24 -right-24 w-[600px] h-[600px] bg-purple-600/5 blur-[120px] rounded-full"></div>
+</div>
+<!-- Hero Section -->
+<section class="max-w-screen-2xl mx-auto px-8 py-20 md:py-32 flex flex-col items-center text-center">
+<div class="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-secondary/20 bg-secondary/5 mb-8">
+<span class="text-secondary text-[11px] font-bold font-headline uppercase tracking-[0.1em]">⚡ Intel Partner Program 2025</span>
+</div>
+<h1 class="font-headline text-6xl md:text-8xl font-black text-white tracking-tighter mb-6 leading-tight">
+                Intel Training <br/>
+<span class="bg-gradient-to-r from-primary to-blue-300 bg-clip-text text-transparent">op jouw tempo</span>
+</h1>
+<p class="max-w-2xl text-slate-400 text-lg md:text-xl mb-12">
+                Accelereren in de wereld van hoogwaardige compute. Ontworpen voor professionals die precisie eisen en voorop willen blijven lopen.
+            </p>
+<div class="flex flex-col sm:flex-row gap-6 mb-16">
+<button onclick="window.location.href='training.html'" class="bg-primary text-white px-10 py-4 font-headline font-bold text-lg hover:bg-primary-container transition-all active:scale-95 flex items-center gap-2">
+                    Bekijk trainingen <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="bg-white/5 backdrop-blur-sm text-white border border-white/10 px-10 py-4 font-headline font-bold text-lg hover:bg-white/10 transition-all active:scale-95 flex items-center gap-2">
+                    Meer info <span class="material-symbols-outlined">arrow_downward</span>
+</button>
+</div>
+<!-- Hero Stats -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl">
+<div class="glass-card p-4 flex items-center justify-center gap-3">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-sm font-medium">Officieel Intel Partner</span>
+</div>
+<div class="glass-card p-4 flex items-center justify-center gap-3">
+<span class="material-symbols-outlined text-primary">timer</span>
+<span class="text-sm font-medium">&lt; 2 min registratie</span>
+</div>
+<div class="glass-card p-4 flex items-center justify-center gap-3">
+<span class="material-symbols-outlined text-secondary">school</span>
+<span class="text-sm font-medium">12+ trainingen</span>
+</div>
+<div class="glass-card p-4 flex items-center justify-center gap-3">
+<span class="material-symbols-outlined text-primary">card_giftcard</span>
+<span class="text-sm font-medium">Gratis deelname</span>
+</div>
+</div>
+</section>
+<!-- Features Grid -->
+<section class="max-w-screen-2xl mx-auto px-8 py-20 border-t border-white/5">
+<div class="flex items-center gap-3 mb-12">
+<div class="w-12 h-[2px] bg-secondary"></div>
+<span class="amber-label">WAAROM INTEL TRAINING</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="glass-card p-8 group hover:border-primary/20 transition-all">
+<div class="w-12 h-12 bg-secondary/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-secondary">psychology</span>
+</div>
+<span class="amber-label block mb-2">Architectuur</span>
+<h3 class="font-headline text-2xl font-bold text-white mb-4">Diepe Duik in Hardware</h3>
+<p class="text-slate-400 text-sm leading-relaxed">
+                        Krijg exclusieve toegang tot technische specificaties en roadmap updates die nergens anders publiekelijk beschikbaar zijn.
+                    </p>
+</div>
+<!-- Card 2 -->
+<div class="glass-card p-8 group hover:border-primary/20 transition-all">
+<div class="w-12 h-12 bg-primary/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary">speed</span>
+</div>
+<span class="amber-label block mb-2">Performance</span>
+<h3 class="font-headline text-2xl font-bold text-white mb-4">Edge Computing Focus</h3>
+<p class="text-slate-400 text-sm leading-relaxed">
+                        Optimaliseer workflows voor real-time dataverwerking met de nieuwste Intel® Xeon® en Core™ technologieën.
+                    </p>
+</div>
+<!-- Card 3 -->
+<div class="glass-card p-8 group hover:border-primary/20 transition-all">
+<div class="w-12 h-12 bg-purple-500/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-purple-400">workspace_premium</span>
+</div>
+<span class="amber-label block mb-2">Certificering</span>
+<h3 class="font-headline text-2xl font-bold text-white mb-4">Officiële Erkenning</h3>
+<p class="text-slate-400 text-sm leading-relaxed">
+                        Verdien badges en certificaten die je expertise binnen het Intel partner-ecosysteem valideren en versterken.
+                    </p>
+</div>
+</div>
+</section>
+<!-- How It Works -->
+<section class="max-w-screen-2xl mx-auto px-8 py-20 border-t border-white/5">
+<div class="flex flex-col items-center text-center mb-20">
+<span class="amber-label mb-4">HOE HET WERKT</span>
+<div class="w-8 h-1 bg-secondary"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+<!-- Connecting Line Desktop -->
+<div class="hidden md:block absolute top-1/2 left-0 w-full h-px bg-white/5 -z-10"></div>
+<!-- Step 1 -->
+<div class="flex flex-col items-center text-center">
+<div class="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-3xl font-headline font-black text-white mb-6 shadow-[0_0_40px_rgba(0,113,197,0.2)]">
+                        1
+                    </div>
+<span class="amber-label mb-2">STAP 1</span>
+<h4 class="font-headline text-xl font-bold text-white mb-3 uppercase tracking-tight">Registratie</h4>
+<p class="text-slate-400 text-sm max-w-xs">Meld je aan via het partner portaal met je zakelijke e-mailadres.</p>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center text-center">
+<div class="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-3xl font-headline font-black text-white mb-6 shadow-[0_0_40px_rgba(0,113,197,0.2)]">
+                        2
+                    </div>
+<span class="amber-label mb-2">STAP 2</span>
+<h4 class="font-headline text-xl font-bold text-white mb-3 uppercase tracking-tight">Kies Module</h4>
+<p class="text-slate-400 text-sm max-w-xs">Selecteer de training die past bij jouw specialisme en ervaringsniveau.</p>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center text-center">
+<div class="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-3xl font-headline font-black text-white mb-6 shadow-[0_0_40px_rgba(0,113,197,0.2)]">
+                        3
+                    </div>
+<span class="amber-label mb-2">STAP 3</span>
+<h4 class="font-headline text-xl font-bold text-white mb-3 uppercase tracking-tight">Certificeer</h4>
+<p class="text-slate-400 text-sm max-w-xs">Voltooi de quiz en ontvang je officiële Intel Training badge.</p>
+</div>
+</div>
+</section>
+<!-- Stats Bar -->
+<section class="max-w-screen-2xl mx-auto px-8 py-20 border-y border-white/5 bg-white/[0.02]">
+<div class="flex flex-col items-center text-center mb-12">
+<span class="amber-label mb-2">STATISTIEKEN</span>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="text-center">
+<div class="font-headline text-4xl md:text-5xl font-black text-primary mb-2">500+</div>
+<div class="text-slate-500 text-sm">deelnemers</div>
+</div>
+<div class="text-center">
+<div class="font-headline text-4xl md:text-5xl font-black text-primary mb-2">12+</div>
+<div class="text-slate-500 text-sm">trainingen</div>
+</div>
+<div class="text-center">
+<div class="font-headline text-4xl md:text-5xl font-black text-primary mb-2">4.9/5</div>
+<div class="text-slate-500 text-sm">beoordeling</div>
+</div>
+<div class="text-center">
+<div class="font-headline text-4xl md:text-5xl font-black text-primary mb-2">100%</div>
+<div class="text-slate-500 text-sm">gratis</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="max-w-screen-xl mx-auto px-8 py-32">
+<div class="glass-card p-12 md:p-24 relative overflow-hidden flex flex-col items-center text-center">
+<!-- Background Accent -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/20 blur-[100px] -z-10"></div>
+<span class="amber-label mb-6">KLAAR OM TE STARTEN?</span>
+<h2 class="font-headline text-4xl md:text-6xl font-black text-white mb-8 tracking-tighter">
+                    Maximaliseer je hardware potentieel.
+                </h2>
+<button onclick="window.location.href='training.html'" class="bg-primary text-white px-12 py-5 font-headline font-bold text-xl hover:bg-primary-container transition-all active:scale-95 shadow-[0_20px_50px_rgba(0,113,197,0.3)]">
+                    Direct registreren
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer Shell -->
+<footer class="bg-slate-950 border-t border-white/5 w-full py-12 px-8">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex flex-col items-center md:items-start gap-4">
+<div class="font-['Space_Grotesk'] font-bold text-amber-500 uppercase tracking-widest text-lg">INTEL_CORP</div>
+<p class="font-['DM_Sans'] text-sm text-slate-500 text-center md:text-left">© 2024 Intel Corporation. Engineered for Performance.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="text-slate-500 hover:text-blue-400 transition-colors text-sm font-['DM_Sans']" href="#">Privacy Policy</a>
+<a class="text-slate-500 hover:text-blue-400 transition-colors text-sm font-['DM_Sans']" href="#">Terms of Service</a>
+<a class="text-slate-500 hover:text-blue-400 transition-colors text-sm font-['DM_Sans']" href="#">Cookie Settings</a>
+<a class="text-slate-500 hover:text-blue-400 transition-colors text-sm font-['DM_Sans']" href="#">Contact Support</a>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-slate-500 hover:text-white cursor-pointer transition-colors">public</span>
+<span class="material-symbols-outlined text-slate-500 hover:text-white cursor-pointer transition-colors">hub</span>
+<span class="material-symbols-outlined text-slate-500 hover:text-white cursor-pointer transition-colors">monitoring</span>
+</div>
+</div>
+</footer>
+
+
+</body></html>
