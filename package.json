@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "build": "echo 'No build step — static HTML served by Firebase Hosting'"
+  },
   "dependencies": {
     "dotenv": "^17.4.0"
   }
