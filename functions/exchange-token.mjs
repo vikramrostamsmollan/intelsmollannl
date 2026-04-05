@@ -19,4 +19,4 @@ const client = new google.auth.OAuth2(
 const { tokens } = await client.getToken(code);
 console.log('\nSave this refresh token to functions/.env as GOOGLE_REFRESH_TOKEN:\n');
 console.log(tokens.refresh_token);
-console.log('\nFull token response:', JSON.stringify(tokens, null, 2));
+// Full token response intentionally not logged to avoid leaking access_token/refresh_token in CI logs

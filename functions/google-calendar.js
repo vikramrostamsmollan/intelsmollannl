@@ -22,6 +22,12 @@ const ACCOUNT_MANAGER_EMAIL  = process.env.ACCOUNT_MANAGER_EMAIL;
 const GOOGLE_CLIENT_ID       = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET   = process.env.GOOGLE_CLIENT_SECRET;
 const GOOGLE_REFRESH_TOKEN   = process.env.GOOGLE_REFRESH_TOKEN;
+
+// Fail fast on missing required env vars — better than a cryptic Google API error at call time
+const REQUIRED_ENV = { ACCOUNT_MANAGER_EMAIL, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN };
+for (const [key, val] of Object.entries(REQUIRED_ENV)) {
+  if (!val) throw new Error(`Missing required environment variable: ${key}`);
+}
 const REDIRECT_URI           = process.env.GOOGLE_REDIRECT_URI      || 'http://localhost:3000/auth/google/callback';
 const BOOKING_BASE_URL       = process.env.BOOKING_BASE_URL         || 'https://intel-booking.web.app';
 const TRAINING_CALENDAR_ID   = process.env.TRAINING_CALENDAR_ID     || 'primary'; // set after createCalendar() is run once
