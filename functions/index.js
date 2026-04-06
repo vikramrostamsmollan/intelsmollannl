@@ -1,17 +1,12 @@
-const { setGlobalOptions } = require('firebase-functions');
-const { onRequest } = require('firebase-functions/https');
-const logger = require('firebase-functions/logger');
+import { setGlobalOptions } from 'firebase-functions';
+import { onRequest } from 'firebase-functions/https';
+import { logger } from 'firebase-functions/logger';
+import {
+  createBookingCalendarEvent,
+  listUpcomingBookings as listBookings,
+} from './google-calendar.js';
 
 setGlobalOptions({ maxInstances: 10 });
-
-// Lazy-load the ESM calendar module (this file uses CJS require)
-let calendarModule;
-async function getCalendarModule() {
-  if (!calendarModule) {
-    calendarModule = await import('./google-calendar.js');
-  }
-  return calendarModule;
-}
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -24,7 +19,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  *
  * Returns: { eventId, eventLink }
  */
-exports.createBookingEvent = onRequest(async (req, res) => {
+export const createBookingEvent = onRequest(async (req, res) => {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -45,7 +40,6 @@ exports.createBookingEvent = onRequest(async (req, res) => {
   }
 
   try {
-    const { createBookingCalendarEvent } = await getCalendarModule();
     const result = await createBookingCalendarEvent({
       trainingTitle, customerName, customerEmail, companyName,
       startDateTime, endDateTime, location, bookingReference, notes,
@@ -64,7 +58,7 @@ exports.createBookingEvent = onRequest(async (req, res) => {
  *
  * Returns upcoming Intel training events for the Admin Dashboard.
  */
-exports.listUpcomingBookings = onRequest(async (req, res) => {
+export const listUpcomingBookings = onRequest(async (req, res) => {
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -72,8 +66,7 @@ exports.listUpcomingBookings = onRequest(async (req, res) => {
   const limit = Math.min(parseInt(req.query.limit, 10) || 10, 50);
 
   try {
-    const { listUpcomingBookings } = await getCalendarModule();
-    const bookings = await listUpcomingBookings(limit);
+    const bookings = await listBookings(limit);
     return res.status(200).json({ bookings });
   } catch (err) {
     logger.error('Failed to list bookings', { error: err.message });
