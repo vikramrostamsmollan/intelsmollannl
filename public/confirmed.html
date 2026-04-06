@@ -195,17 +195,17 @@
                             <span class="material-symbols-outlined text-sm ml-auto opacity-50 group-hover:translate-x-1 transition-transform">arrow_forward</span>
 </button>
 <div class="flex justify-center gap-6 mt-4">
-<span class="text-[10px] font-label font-extrabold text-outline hover:text-primary transition-colors cursor-pointer tracking-widest uppercase">Google</span>
-<span class="text-[10px] font-label font-extrabold text-outline hover:text-primary transition-colors cursor-pointer tracking-widest uppercase">Outlook</span>
-<span class="text-[10px] font-label font-extrabold text-outline hover:text-primary transition-colors cursor-pointer tracking-widest uppercase">Apple</span>
+<span id="cal-google" class="text-[10px] font-label font-extrabold text-outline hover:text-primary transition-colors cursor-pointer tracking-widest uppercase">Google</span>
+<span id="cal-outlook" class="text-[10px] font-label font-extrabold text-outline hover:text-primary transition-colors cursor-pointer tracking-widest uppercase">Outlook</span>
+<span id="cal-apple" class="text-[10px] font-label font-extrabold text-outline hover:text-primary transition-colors cursor-pointer tracking-widest uppercase">Apple</span>
 </div>
 </div>
 <div class="grid grid-cols-2 gap-4">
-<button class="bg-surface-container-high text-on-surface py-3 px-6 rounded-lg font-headline font-bold text-sm flex items-center justify-center gap-2 hover:bg-surface-variant transition-colors border border-outline-variant/20">
+<button onclick="window.location.href='training.html'" class="bg-surface-container-high text-on-surface py-3 px-6 rounded-lg font-headline font-bold text-sm flex items-center justify-center gap-2 hover:bg-surface-variant transition-colors border border-outline-variant/20">
 <span class="material-symbols-outlined text-lg">edit_calendar</span>
                             Reschedule
                         </button>
-<button class="text-on-surface-variant py-3 px-6 rounded-lg font-headline font-bold text-sm flex items-center justify-center gap-2 hover:bg-surface-container-high transition-colors">
+<button onclick="if(confirm('Weet je zeker dat je deze boeking wilt annuleren?')) window.location.href='dashboard.html'" class="text-on-surface-variant py-3 px-6 rounded-lg font-headline font-bold text-sm flex items-center justify-center gap-2 hover:bg-surface-container-high transition-colors">
 <span class="material-symbols-outlined text-lg">close</span>
                             Cancel
                         </button>
@@ -238,30 +238,69 @@ function generateRef() {
   return 'INT-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
 }
 
+// ── ICS helpers ───────────────────────────────────────────────────────────────
+function toICSDate(iso) {
+  return iso.replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+}
+
+function downloadICS(booking) {
+  const start = toICSDate(booking.startDateTime);
+  const end   = toICSDate(booking.endDateTime);
+  const ics = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Intel Booking//NL',
+    'BEGIN:VEVENT',
+    `DTSTART:${start}`,
+    `DTEND:${end}`,
+    `SUMMARY:${booking.trainingTitle} — ${booking.companyName}`,
+    `DESCRIPTION:Referentie: ${booking.bookingReference}\\nKlant: ${booking.customerName}`,
+    `LOCATION:${booking.location}`,
+    `UID:${booking.bookingReference}@intel-booking`,
+    'END:VEVENT',
+    'END:VCALENDAR',
+  ].join('\r\n');
+  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = `${booking.bookingReference}.ics`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ── Main sync ─────────────────────────────────────────────────────────────────
 async function syncCalendar() {
   const booking = JSON.parse(sessionStorage.getItem('intelBooking') || '{}');
 
-  // Fill in defaults for missing fields (demo / direct navigation)
-  booking.trainingTitle = booking.trainingTitle || 'Intel Core Ultra Architecture Deep Dive';
-  booking.customerName  = booking.customerName  || 'Deelnemer';
-  booking.customerEmail = booking.customerEmail || 'deelnemer@bedrijf.nl';
-  booking.companyName   = booking.companyName   || 'Onbekend';
-  booking.startDateTime = booking.startDateTime || '2026-03-18T09:00:00';
-  booking.endDateTime   = booking.endDateTime   || '2026-03-18T17:00:00';
-  booking.location      = booking.location      || 'Intel Experience Center Amsterdam';
+  booking.trainingTitle    = booking.trainingTitle    || 'Intel Core Ultra Architecture Deep Dive';
+  booking.customerName     = booking.customerName     || 'Deelnemer';
+  booking.customerEmail    = booking.customerEmail    || 'deelnemer@bedrijf.nl';
+  booking.companyName      = booking.companyName      || 'Onbekend';
+  booking.startDateTime    = booking.startDateTime    || '2026-04-10T09:00:00';
+  booking.endDateTime      = booking.endDateTime      || '2026-04-10T17:00:00';
+  booking.location         = booking.location         || 'Intel Experience Center Amsterdam';
   booking.bookingReference = booking.bookingReference || generateRef();
 
-  // Update visible ref
+  // Visible ref
   document.querySelectorAll('.font-mono').forEach(el => {
-    if (el.textContent.includes('#INT-')) el.textContent = 'Ref: ' + booking.bookingReference;
+    if (el.textContent.includes('#INT-') || el.textContent.includes('Ref:'))
+      el.textContent = 'Ref: ' + booking.bookingReference;
   });
 
-  // Update mini event preview with real data
-  const titleEls = document.querySelectorAll('.font-headline.font-bold.text-white.text-\\[15px\\]');
-  titleEls.forEach(el => el.textContent = booking.trainingTitle);
+  // Title in event preview
+  document.querySelectorAll('.font-headline.font-bold.text-white.text-\\[15px\\]').forEach(el => {
+    el.textContent = booking.trainingTitle;
+  });
+
+  // Outlook + Apple → ICS download
+  const outlookEl = document.getElementById('cal-outlook');
+  const appleEl   = document.getElementById('cal-apple');
+  if (outlookEl) outlookEl.onclick = () => downloadICS(booking);
+  if (appleEl)   appleEl.onclick   = () => downloadICS(booking);
 
   const syncBadge = document.querySelector('.bg-green-500\\/10');
-  const syncMsg = document.querySelector('.text-\\[\\#94A3B8\\].text-xs.mb-5');
+  const syncMsg   = document.querySelector('.text-\\[\\#94A3B8\\].text-xs.mb-5');
 
   try {
     const res = await fetch(CREATE_BOOKING_URL, {
@@ -273,18 +312,17 @@ async function syncCalendar() {
     if (res.ok) {
       const { eventLink } = await res.json();
       if (syncBadge) syncBadge.textContent = 'Gesynchroniseerd';
-      if (syncMsg) syncMsg.textContent = 'Een Google Agenda-uitnodiging is verstuurd naar de accountmanager.';
-      // Update Google calendar link
-      const googleLink = document.querySelector('span.text-\\[10px\\].font-label.font-extrabold.text-outline:first-of-type');
-      if (googleLink && eventLink) { googleLink.onclick = () => window.open(eventLink, '_blank'); }
+      if (syncMsg)   syncMsg.textContent   = 'Een Google Agenda-uitnodiging is verstuurd naar de accountmanager.';
+      const googleEl = document.getElementById('cal-google');
+      if (googleEl && eventLink) googleEl.onclick = () => window.open(eventLink, '_blank');
       sessionStorage.removeItem('intelBooking');
     } else {
       if (syncBadge) { syncBadge.textContent = 'Fout'; syncBadge.classList.replace('text-green-400', 'text-red-400'); }
-      if (syncMsg) syncMsg.textContent = 'Agenda sync mislukt. Neem contact op met de accountmanager.';
+      if (syncMsg)   syncMsg.textContent = 'Agenda sync mislukt. Neem contact op met de accountmanager.';
     }
   } catch (e) {
     if (syncBadge) { syncBadge.textContent = 'Offline'; syncBadge.classList.replace('text-green-400', 'text-yellow-400'); }
-    if (syncMsg) syncMsg.textContent = 'Geen verbinding. De accountmanager wordt handmatig geïnformeerd.';
+    if (syncMsg)   syncMsg.textContent = 'Geen verbinding. De accountmanager wordt handmatig geïnformeerd.';
   }
 }
 

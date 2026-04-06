@@ -193,7 +193,7 @@
 <div class="lg:col-span-8 space-y-6">
 <div class="flex items-center justify-between mb-2">
 <h2 class="text-2xl font-bold font-headline text-[#F0A500]">Aankomende trainingen</h2>
-<button class="text-sm font-bold font-headline text-[#0071C5] hover:underline uppercase tracking-wider">Bekijk alle</button>
+<button onclick="document.getElementById('bookings-list').scrollIntoView({behavior:'smooth'})" class="text-sm font-bold font-headline text-[#0071C5] hover:underline uppercase tracking-wider">Bekijk alle</button>
 </div>
 <div id="bookings-list" class="space-y-6">
 <!-- dynamic bookings injected here -->
@@ -344,21 +344,21 @@
 <div class="glass-card rounded-[22px] p-6">
 <h3 class="font-bold font-headline text-[#F0A500]">Snelle acties</h3>
 <div class="space-y-3">
-<button class="w-full flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all group">
+<button onclick="window.location.href='index.html'" class="w-full flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all group">
 <div class="flex items-center gap-3">
 <span class="material-symbols-outlined text-[#0071C5]" data-icon="add_circle">add_circle</span>
 <span class="text-sm font-medium text-[#CBD5E1]">Training toevoegen</span>
 </div>
 <span class="material-symbols-outlined text-sm text-[#64748B] group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
 </button>
-<button class="w-full flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all group">
+<button onclick="exportBookingsCSV()" class="w-full flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all group">
 <div class="flex items-center gap-3">
 <span class="material-symbols-outlined text-tertiary" data-icon="ios_share">ios_share</span>
 <span class="text-sm font-medium text-[#CBD5E1]">Exporteren</span>
 </div>
 <span class="material-symbols-outlined text-sm text-[#64748B] group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
 </button>
-<button class="w-full flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all group">
+<button onclick="showToast('Rapport wordt gegenereerd...')" class="w-full flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all group">
 <div class="flex items-center gap-3">
 <span class="material-symbols-outlined text-success" data-icon="description">description</span>
 <span class="text-sm font-medium text-[#CBD5E1]">Rapport genereren</span>
@@ -397,6 +397,33 @@
 
 <script>
 const LIST_URL = 'https://listupcomingbookings-sgyijdkq7a-uc.a.run.app';
+
+// ── Toast ─────────────────────────────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.textContent = msg;
+  t.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 bg-[#0071C5] text-white text-sm font-bold px-6 py-3 rounded-xl shadow-xl z-[100] transition-opacity duration-500';
+  document.body.appendChild(t);
+  setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 500); }, 2500);
+}
+
+// ── CSV export ────────────────────────────────────────────────────────────────
+let _cachedBookings = [];
+
+function exportBookingsCSV() {
+  if (!_cachedBookings.length) { showToast('Geen boekingen om te exporteren.'); return; }
+  const header = ['Referentie','Training','Klant','Bedrijf','Start','Einde','Locatie','Status'];
+  const rows   = _cachedBookings.map(b => [
+    b.bookingRef, b.title, b.customerName, b.company,
+    b.start, b.end, b.location, b.status
+  ].map(v => `"${(v||'').replace(/"/g,'""')}"`));
+  const csv  = [header, ...rows].map(r => r.join(',')).join('\r\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = `intel-boekingen-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click(); URL.revokeObjectURL(url);
+}
 
 function formatDate(iso) {
   if (!iso) return '—';
@@ -512,6 +539,7 @@ async function loadBookings() {
     const res      = await fetch(`${LIST_URL}?limit=50`);
     const data     = await res.json();
     const bookings = data.bookings || [];
+    _cachedBookings = bookings; // make available to CSV export
 
     // Booking cards
     if (bookings.length === 0) {

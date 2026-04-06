@@ -184,15 +184,15 @@
 <input class="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white placeholder:text-slate-500 focus:ring-2 focus:ring-[#0071C5] focus:border-transparent transition-all outline-none" placeholder="Zoek op naam, technologie…" type="text"/>
 </div>
 <div class="flex flex-wrap gap-2">
-<button class="px-6 py-2.5 rounded-full bg-[#0071C5] text-white text-sm font-bold transition-all">Alle</button>
-<button class="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm font-bold hover:bg-white/10 transition-all">Core Ultra</button>
-<button class="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm font-bold hover:bg-white/10 transition-all">Arc Graphics</button>
-<button class="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm font-bold hover:bg-white/10 transition-all">AI PC</button>
-<button class="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm font-bold hover:bg-white/10 transition-all">vPro</button>
+<button data-filter="all" class="px-6 py-2.5 rounded-full bg-[#0071C5] text-white text-sm font-bold transition-all">Alle</button>
+<button data-filter="core-ultra" class="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm font-bold hover:bg-white/10 transition-all">Core Ultra</button>
+<button data-filter="arc-graphics" class="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm font-bold hover:bg-white/10 transition-all">Arc Graphics</button>
+<button data-filter="ai-pc" class="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm font-bold hover:bg-white/10 transition-all">AI PC</button>
+<button data-filter="vpro" class="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm font-bold hover:bg-white/10 transition-all">vPro</button>
 </div>
 </section>
 <!-- Training Grid -->
-<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<section id="training-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 <!-- Card 1: Popular Highlight -->
 <div class="glass-card rounded-2xl p-6 border-[#0071C5]/40 ring-1 ring-[#0071C5]/20 relative overflow-hidden group">
 <div class="absolute top-0 right-0 bg-[#0071C5] text-white text-[10px] font-bold px-4 py-1.5 rounded-bl-xl uppercase tracking-tighter">Populair</div>
@@ -337,7 +337,7 @@
 </div>
 <div class="flex flex-col">
 <span class="text-white font-bold text-sm">1 training geselecteerd</span>
-<span class="text-[11px] uppercase tracking-wider" style="color: #F0A500;">Deep Dive: Neural Processing Unit</span>
+<span id="selected-title" class="text-[11px] uppercase tracking-wider" style="color: #F0A500;">Deep Dive: Neural Processing Unit</span>
 </div>
 </div>
 <div class="flex items-center gap-4">
@@ -363,12 +363,69 @@
 
 
 <script>
+// ── Card selection ────────────────────────────────────────────────────────────
+const FILTER_TO_CAT = { 'arc-graphics': 'arc' };
+let selectedCard = null;
+
+document.addEventListener('DOMContentLoaded', () => {
+  const grid        = document.getElementById('training-grid');
+  const cards       = Array.from(grid.querySelectorAll('.glass-card'));
+  const filterBtns  = document.querySelectorAll('[data-filter]');
+  const searchInput = document.querySelector('input[placeholder]');
+  const titleEl     = document.getElementById('selected-title');
+  let activeFilter  = 'all';
+
+  // Tag each card with category derived from its first badge
+  cards.forEach(card => {
+    const badge = card.querySelector('.rounded-full');
+    const cat   = badge ? badge.textContent.trim().toLowerCase().replace(/\s+/g, '-') : '';
+    card.dataset.category = cat;
+    card.style.cursor = 'pointer';
+
+    card.addEventListener('click', () => {
+      // Visual selection ring
+      cards.forEach(c => c.style.outline = '');
+      card.style.outline = '2px solid #0071C5';
+      card.style.outlineOffset = '2px';
+      selectedCard = card;
+      const title = card.querySelector('h3')?.textContent.trim() || '';
+      if (titleEl) titleEl.textContent = title;
+    });
+  });
+
+  // ── Filters ───────────────────────────────────────────────────────────────
+  function applyFilters() {
+    const q = searchInput ? searchInput.value.toLowerCase().trim() : '';
+    cards.forEach(card => {
+      const cat       = card.dataset.category || '';
+      const title     = card.querySelector('h3')?.textContent.toLowerCase() || '';
+      const targetCat = FILTER_TO_CAT[activeFilter] || activeFilter;
+      const matchF    = activeFilter === 'all' || cat === targetCat;
+      const matchS    = !q || title.includes(q);
+      card.style.display = matchF && matchS ? '' : 'none';
+    });
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => {
+        b.className = 'px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm font-bold hover:bg-white/10 transition-all';
+      });
+      btn.className = 'px-6 py-2.5 rounded-full bg-[#0071C5] text-white text-sm font-bold transition-all';
+      activeFilter = btn.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  if (searchInput) searchInput.addEventListener('input', applyFilters);
+});
+
+// ── Save & continue ───────────────────────────────────────────────────────────
 function saveTrainingAndContinue() {
-  const booking = JSON.parse(sessionStorage.getItem('intelBooking') || '{}');
-  // Read the currently highlighted training title from the selection bar
-  const titleEl = document.querySelector('[style*="F0A500"]');
+  const booking  = JSON.parse(sessionStorage.getItem('intelBooking') || '{}');
+  const titleEl  = document.getElementById('selected-title');
   booking.trainingTitle = titleEl ? titleEl.textContent.trim() : 'Intel Core Ultra Architecture Deep Dive';
-  booking.location = 'Intel Experience Center Amsterdam';
+  booking.location      = 'Intel Experience Center Amsterdam';
   sessionStorage.setItem('intelBooking', JSON.stringify(booking));
   window.location.href = 'datetime.html';
 }
