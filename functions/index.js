@@ -6,7 +6,16 @@ import {
   listUpcomingBookings as listBookings,
 } from './google-calendar.js';
 
-setGlobalOptions({ maxInstances: 10 });
+setGlobalOptions({
+  maxInstances: 10,
+  secrets: [
+    'GOOGLE_CLIENT_ID',
+    'GOOGLE_CLIENT_SECRET',
+    'GOOGLE_REFRESH_TOKEN',
+    'ACCOUNT_MANAGER_EMAIL',
+    'TRAINING_CALENDAR_ID',
+  ],
+});
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
