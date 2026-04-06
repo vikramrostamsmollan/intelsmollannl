@@ -195,6 +195,11 @@
 <h2 class="text-2xl font-bold font-headline text-[#F0A500]">Aankomende trainingen</h2>
 <button class="text-sm font-bold font-headline text-[#0071C5] hover:underline uppercase tracking-wider">Bekijk alle</button>
 </div>
+<div id="bookings-list" class="space-y-6">
+<!-- dynamic bookings injected here -->
+</div>
+<!-- Static fallback cards (hidden when real data loads) -->
+<div id="bookings-static">
 <!-- Training Card 1 -->
 <div class="glass-card rounded-[22px] overflow-hidden flex flex-col md:flex-row relative">
 <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-[#0071C5]"></div>
@@ -307,6 +312,7 @@
 </div>
 </div>
 </div>
+</div><!-- end bookings-static -->
 <!-- Right Column: Sidebar -->
 <div class="lg:col-span-4 space-y-8">
 <!-- Mini Calendar -->
@@ -418,4 +424,63 @@
 <div class="fixed bottom-0 left-0 w-full h-px bg-white/5"></div>
 
 
+<script>
+const LIST_URL = 'https://listupcomingbookings-sgyijdkq7a-uc.a.run.app';
+
+function formatDate(iso) {
+  if (!iso) return '—';
+  return new Date(iso).toLocaleDateString('nl-NL', { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' });
+}
+function formatTime(iso) {
+  if (!iso) return '—';
+  return new Date(iso).toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
+}
+
+function renderCard(b) {
+  const start = b.start || '';
+  const end   = b.end   || '';
+  return `
+  <div class="glass-card rounded-[22px] overflow-hidden flex flex-col md:flex-row relative hover:opacity-100 transition-opacity">
+    <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-[#0071C5]"></div>
+    <div class="p-8 flex-1">
+      <div class="flex flex-wrap items-center gap-3 mb-4">
+        <span class="px-3 py-1 bg-[#0071C5]/10 border border-[#0071C5]/20 text-[#0071C5] rounded-full text-[11px] font-bold uppercase tracking-wider">Intel Training</span>
+        <span class="px-3 py-1 bg-success/10 border border-success/20 text-green-400 rounded-full text-[11px] font-bold uppercase tracking-wider">Bevestigd</span>
+        <span class="px-3 py-1 bg-white/5 border border-white/10 text-[#94A3B8] rounded-full text-[10px] font-mono">${b.bookingRef || ''}</span>
+      </div>
+      <h3 class="text-xl font-bold font-headline text-[#F8F8FF] mb-2">${b.title || 'Intel Training'}</h3>
+      <div class="flex flex-wrap items-center gap-4 text-on-surface-variant text-sm mb-4">
+        <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">calendar_today</span> ${formatDate(start)}</span>
+        <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">schedule</span> ${formatTime(start)} – ${formatTime(end)}</span>
+        ${b.location ? `<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">location_on</span> ${b.location}</span>` : ''}
+      </div>
+      ${b.customerName ? `<p class="text-sm text-[#94A3B8]"><span class="text-[#F0A500] font-bold uppercase tracking-wider text-[10px]">Klant</span>&nbsp;&nbsp;${b.customerName}${b.company ? ' — ' + b.company : ''}</p>` : ''}
+    </div>
+    <div class="p-8 border-l border-white/5 flex items-center justify-center bg-white/2">
+      ${b.eventLink ? `<a href="${b.eventLink}" target="_blank" class="w-12 h-12 rounded-xl border border-white/10 hover:bg-white/5 flex items-center justify-center transition-all group"><span class="material-symbols-outlined text-on-surface-variant group-hover:text-[#F8F8FF]">open_in_new</span></a>` : ''}
+    </div>
+  </div>`;
+}
+
+async function loadBookings() {
+  const list   = document.getElementById('bookings-list');
+  const static_ = document.getElementById('bookings-static');
+  try {
+    const res  = await fetch(`${LIST_URL}?limit=10`);
+    const data = await res.json();
+    const bookings = data.bookings || [];
+    if (bookings.length === 0) {
+      list.innerHTML = '<p class="text-[#94A3B8] text-sm py-4">Geen aankomende boekingen gevonden.</p>';
+    } else {
+      list.innerHTML = bookings.map(renderCard).join('');
+    }
+    static_.style.display = 'none';
+  } catch (e) {
+    // Keep static fallback visible on error
+    list.innerHTML = '';
+  }
+}
+
+window.addEventListener('DOMContentLoaded', loadBookings);
+</script>
 </body></html>
