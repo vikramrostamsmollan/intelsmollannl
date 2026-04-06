@@ -125,13 +125,13 @@
 <!-- Header Section -->
 <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
 <div>
-<h1 class="text-[36px] font-bold font-headline tracking-tight text-[#F8F8FF] leading-tight">Welkom terug, Sarah.</h1>
+<h1 class="text-[36px] font-bold font-headline tracking-tight text-[#F8F8FF] leading-tight">Welkom terug, Vikram.</h1>
 <p class="text-secondary-text mt-1 text-on-surface-variant">Hier is de status van je trainingen voor vandaag.</p>
 </div>
-<button class="bg-[#0071C5] text-white px-6 py-4 rounded-[14px] font-headline font-bold text-sm tracking-wide shadow-[0_18px_32px_rgba(0,113,197,0.22)] hover:bg-[#3B8FD4] transition-all flex items-center gap-2 active:scale-95">
+<a href="index.html" class="bg-[#0071C5] text-white px-6 py-4 rounded-[14px] font-headline font-bold text-sm tracking-wide shadow-[0_18px_32px_rgba(0,113,197,0.22)] hover:bg-[#3B8FD4] transition-all flex items-center gap-2 active:scale-95 no-underline">
 <span class="material-symbols-outlined" data-icon="add">add</span>
                 NIEUWE TRAINING
-            </button>
+            </a>
 </div>
 <!-- Stats Grid -->
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
@@ -141,10 +141,10 @@
 <div class="w-12 h-12 rounded-2xl bg-[#0071C5]/10 border border-[#0071C5]/20 flex items-center justify-center">
 <span class="material-symbols-outlined text-[#0071C5]" data-icon="school">school</span>
 </div>
-<span class="text-xs font-bold font-headline text-success px-2 py-1 bg-success/10 border border-success/20 rounded-full">+8%</span>
+<span id="stat-month-badge" class="text-xs font-bold font-headline text-on-surface-variant px-2 py-1 bg-white/5 border border-white/10 rounded-full">—</span>
 </div>
 <div>
-<span class="text-[32px] font-bold font-headline text-[#F8F8FF]">12</span>
+<span id="stat-month" class="text-[32px] font-bold font-headline text-[#F8F8FF]">—</span>
 <p class="text-xs font-bold font-headline text-[#64748B] uppercase tracking-widest mt-1 !text-[#F0A500]">Trainingen deze maand</p>
 </div>
 </div>
@@ -154,11 +154,11 @@
 <div class="w-12 h-12 rounded-2xl bg-tertiary-container/10 border border-tertiary-container/20 flex items-center justify-center">
 <span class="material-symbols-outlined text-tertiary" data-icon="groups">groups</span>
 </div>
-<span class="text-xs font-bold font-headline text-success px-2 py-1 bg-success/10 border border-success/20 rounded-full">+12%</span>
+<span id="stat-upcoming-badge" class="text-xs font-bold font-headline text-on-surface-variant px-2 py-1 bg-white/5 border border-white/10 rounded-full">—</span>
 </div>
 <div>
-<span class="text-[32px] font-bold font-headline text-[#F8F8FF]">47</span>
-<p class="text-xs font-bold font-headline text-[#64748B] uppercase tracking-widest mt-1 !text-[#F0A500]">Deelnemers vandaag</p>
+<span id="stat-upcoming" class="text-[32px] font-bold font-headline text-[#F8F8FF]">—</span>
+<p class="text-xs font-bold font-headline text-[#64748B] uppercase tracking-widest mt-1 !text-[#F0A500]">Aankomende boekingen</p>
 </div>
 </div>
 <!-- Stat Card 3 -->
@@ -318,7 +318,7 @@
 <!-- Mini Calendar -->
 <div class="glass-card rounded-[22px] p-6">
 <div class="flex justify-between items-center mb-6">
-<h3 class="font-bold font-headline text-[#F0A500]">Maart 2026</h3>
+<h3 id="cal-title" class="font-bold font-headline text-[#F0A500]">—</h3>
 <div class="flex gap-2">
 <button class="p-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-all">
 <span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
@@ -337,36 +337,7 @@
 <span class="text-[10px] font-bold text-[#64748B]">ZA</span>
 <span class="text-[10px] font-bold text-[#64748B]">ZO</span>
 </div>
-<div class="grid grid-cols-7 gap-y-2 text-center">
-<span class="text-sm py-2 text-[#64748B]">26</span>
-<span class="text-sm py-2 text-[#64748B]">27</span>
-<span class="text-sm py-2 text-[#64748B]">28</span>
-<span class="text-sm py-2 text-[#F8F8FF]">1</span>
-<span class="text-sm py-2 text-[#F8F8FF]">2</span>
-<span class="text-sm py-2 text-[#F8F8FF]">3</span>
-<span class="text-sm py-2 text-[#F8F8FF]">4</span>
-<!-- Row 2 -->
-<span class="text-sm py-2 text-[#F8F8FF]">5</span>
-<span class="text-sm py-2 text-[#F8F8FF] font-bold relative">
-                            6 <span class="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-tertiary rounded-full"></span>
-</span>
-<span class="text-sm py-2 text-[#F8F8FF]">7</span>
-<span class="text-sm py-2 text-[#F8F8FF]">8</span>
-<span class="text-sm py-2 text-[#F8F8FF]">9</span>
-<span class="text-sm py-2 text-[#F8F8FF]">10</span>
-<span class="text-sm py-2 text-[#F8F8FF]">11</span>
-<!-- Row 3 -->
-<span class="text-sm py-2 text-[#F8F8FF]">12</span>
-<span class="text-sm py-2 text-[#F8F8FF]">13</span>
-<span class="text-sm py-2 bg-[#0071C5] text-white rounded-full font-bold relative">
-                            14 <span class="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-white/40 rounded-full"></span>
-</span>
-<span class="text-sm py-2 text-[#F8F8FF]">15</span>
-<span class="text-sm py-2 text-[#F8F8FF] font-bold relative">
-                            16 <span class="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-tertiary rounded-full"></span>
-</span>
-<span class="text-sm py-2 text-[#F8F8FF]">17</span>
-<span class="text-sm py-2 text-[#F8F8FF]">18</span>
+<div id="cal-grid" class="grid grid-cols-7 gap-y-2 text-center"></div>
 </div>
 </div>
 <!-- Quick Actions -->
@@ -462,19 +433,110 @@ function renderCard(b) {
   </div>`;
 }
 
+// ── Calendar widget ───────────────────────────────────────────────────────────
+
+function renderCalendar(bookingDays) {
+  const now   = new Date();
+  const year  = now.getFullYear();
+  const month = now.getMonth();
+  const today = now.getDate();
+
+  const MONTHS_NL = ['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'];
+  document.getElementById('cal-title').textContent = `${MONTHS_NL[month]} ${year}`;
+
+  // Day of week for 1st of month (Monday-based: Mon=0 … Sun=6)
+  const firstDow = (new Date(year, month, 1).getDay() + 6) % 7;
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const prevDays    = new Date(year, month, 0).getDate();
+
+  let cells = '';
+
+  // Leading days from previous month
+  for (let i = firstDow - 1; i >= 0; i--) {
+    cells += `<span class="text-sm py-2 text-[#64748B]">${prevDays - i}</span>`;
+  }
+
+  // Days of current month
+  for (let d = 1; d <= daysInMonth; d++) {
+    const isToday   = d === today;
+    const hasEvent  = bookingDays.has(d);
+    const dot       = hasEvent ? `<span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 ${isToday ? 'bg-white/60' : 'bg-[#0071C5]'} rounded-full"></span>` : '';
+    if (isToday) {
+      cells += `<span class="text-sm py-2 bg-[#0071C5] text-white rounded-full font-bold relative">${d}${dot}</span>`;
+    } else if (hasEvent) {
+      cells += `<span class="text-sm py-2 text-[#F8F8FF] font-bold relative">${d}${dot}</span>`;
+    } else {
+      cells += `<span class="text-sm py-2 text-[#F8F8FF]">${d}</span>`;
+    }
+  }
+
+  // Trailing days to fill last row
+  const totalCells = firstDow + daysInMonth;
+  const trailing = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
+  for (let d = 1; d <= trailing; d++) {
+    cells += `<span class="text-sm py-2 text-[#64748B]">${d}</span>`;
+  }
+
+  document.getElementById('cal-grid').innerHTML = cells;
+}
+
+// ── Stats ─────────────────────────────────────────────────────────────────────
+
+function updateStats(bookings) {
+  const now = new Date();
+  const thisMonth = now.getMonth();
+  const thisYear  = now.getFullYear();
+
+  const thisMonthCount = bookings.filter(b => {
+    if (!b.start) return false;
+    const d = new Date(b.start);
+    return d.getMonth() === thisMonth && d.getFullYear() === thisYear;
+  }).length;
+
+  document.getElementById('stat-month').textContent        = thisMonthCount;
+  document.getElementById('stat-month-badge').textContent  = thisMonthCount > 0 ? `+${thisMonthCount}` : '0';
+  document.getElementById('stat-upcoming').textContent     = bookings.length;
+  document.getElementById('stat-upcoming-badge').textContent = `${bookings.length} totaal`;
+}
+
+// ── Main ──────────────────────────────────────────────────────────────────────
+
 async function loadBookings() {
-  const list   = document.getElementById('bookings-list');
+  const list    = document.getElementById('bookings-list');
   const static_ = document.getElementById('bookings-static');
+
+  // Render calendar immediately for current month (no events yet)
+  renderCalendar(new Set());
+
   try {
-    const res  = await fetch(`${LIST_URL}?limit=10`);
-    const data = await res.json();
+    const res      = await fetch(`${LIST_URL}?limit=50`);
+    const data     = await res.json();
     const bookings = data.bookings || [];
+
+    // Booking cards
     if (bookings.length === 0) {
       list.innerHTML = '<p class="text-[#94A3B8] text-sm py-4">Geen aankomende boekingen gevonden.</p>';
     } else {
       list.innerHTML = bookings.map(renderCard).join('');
     }
     static_.style.display = 'none';
+
+    // Stats
+    updateStats(bookings);
+
+    // Calendar dots — days in the current month that have a booking
+    const now = new Date();
+    const bookingDays = new Set(
+      bookings
+        .filter(b => {
+          if (!b.start) return false;
+          const d = new Date(b.start);
+          return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+        })
+        .map(b => new Date(b.start).getDate())
+    );
+    renderCalendar(bookingDays);
+
   } catch (e) {
     // Keep static fallback visible on error
     list.innerHTML = '';

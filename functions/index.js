@@ -29,6 +29,11 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  * Returns: { eventId, eventLink }
  */
 export const createBookingEvent = onRequest(async (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.set('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') return res.status(204).send('');
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -57,7 +62,7 @@ export const createBookingEvent = onRequest(async (req, res) => {
     logger.info('Calendar event created', { bookingReference, eventId: result.eventId });
     return res.status(200).json(result);
   } catch (err) {
-    logger.error('Failed to create calendar event', { bookingReference, error: err.message });
+    logger.error('Failed to create calendar event', { bookingReference, error: err.message, stack: err.stack, responseData: err.response?.data });
     return res.status(500).json({ error: 'Failed to create calendar event' });
   }
 });
@@ -68,6 +73,11 @@ export const createBookingEvent = onRequest(async (req, res) => {
  * Returns upcoming Intel training events for the Admin Dashboard.
  */
 export const listUpcomingBookings = onRequest(async (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.set('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') return res.status(204).send('');
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });
   }

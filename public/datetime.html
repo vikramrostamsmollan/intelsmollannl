@@ -189,18 +189,17 @@
 <div class="lg:col-span-7">
 <div class="glass-card rounded-[22px] p-8">
 <div class="flex items-center justify-between mb-8">
-<h2 class="font-headline font-bold text-xl">Maart 2026</h2>
+<h2 id="cal-title" class="font-headline font-bold text-xl">—</h2>
 <div class="flex gap-2">
-<button class="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-white/5">
+<button id="cal-prev" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-white/5">
 <span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
 </button>
-<button class="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-white/5">
+<button id="cal-next" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-white/5">
 <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
 </button>
 </div>
 </div>
-<div class="grid grid-cols-7 gap-y-6 text-center mb-8">
-<!-- Day Labels -->
+<div class="grid grid-cols-7 gap-y-2 text-center mb-2">
 <div class="text-[#64748B] font-bold text-xs uppercase tracking-widest">Ma</div>
 <div class="text-[#64748B] font-bold text-xs uppercase tracking-widest">Di</div>
 <div class="text-[#64748B] font-bold text-xs uppercase tracking-widest">Wo</div>
@@ -208,38 +207,8 @@
 <div class="text-[#64748B] font-bold text-xs uppercase tracking-widest">Vr</div>
 <div class="text-[#64748B] font-bold text-xs uppercase tracking-widest">Za</div>
 <div class="text-[#64748B] font-bold text-xs uppercase tracking-widest">Zo</div>
-<!-- Calendar Days -->
-<div class="text-tertiary-text/30 font-headline font-medium py-3 opacity-20">23</div>
-<div class="text-tertiary-text/30 font-headline font-medium py-3 opacity-20">24</div>
-<div class="text-tertiary-text/30 font-headline font-medium py-3 opacity-20">25</div>
-<div class="text-tertiary-text/30 font-headline font-medium py-3 opacity-20">26</div>
-<div class="text-tertiary-text/30 font-headline font-medium py-3 opacity-20">27</div>
-<div class="text-tertiary-text/30 font-headline font-medium py-3 opacity-20 text-error/30 line-through">28</div>
-<div class="text-[#F8F8FF] font-headline font-medium py-3">1</div>
-<div class="text-[#F8F8FF] font-headline font-medium py-3">2</div>
-<div class="text-[#F8F8FF] font-headline font-medium py-3">3</div>
-<div class="text-[#F8F8FF] font-headline font-medium py-3">4</div>
-<div class="text-[#F8F8FF] font-headline font-medium py-3">5</div>
-<div class="text-[#F8F8FF] font-headline font-medium py-3">6</div>
-<div class="text-[#F8F8FF] font-headline font-medium py-3">7</div>
-<div class="text-[#F8F8FF] font-headline font-medium py-3">8</div>
-<div class="text-[#F8F8FF] font-headline font-medium py-3">9</div>
-<div class="text-[#F8F8FF] font-headline font-medium py-3">10</div>
-<div class="text-[#F8F8FF] font-headline font-medium py-3">11</div>
-<div class="text-[#F8F8FF] font-headline font-medium py-3">12</div>
-<div class="text-[#F8F8FF] font-headline font-medium py-3">13</div>
-<div class="text-[#F8F8FF] font-headline font-medium py-3 text-error/50 line-through">14</div>
-<div class="text-[#F8F8FF] font-headline font-medium py-3">15</div>
-<div class="text-[#F8F8FF] font-headline font-medium py-3">16</div>
-<div class="text-[#F8F8FF] font-headline font-medium py-3">17</div>
-<div class="relative flex items-center justify-center">
-<div class="w-10 h-10 bg-[#0071C5] rounded-full flex items-center justify-center text-white font-headline font-bold shadow-[0_0_20px_rgba(0,113,197,0.4)]">18</div>
 </div>
-<div class="text-[#F8F8FF] font-headline font-medium py-3">19</div>
-<div class="text-[#F8F8FF] font-headline font-medium py-3">20</div>
-<div class="text-[#F8F8FF] font-headline font-medium py-3">21</div>
-<div class="text-[#F8F8FF] font-headline font-medium py-3">22</div>
-</div>
+<div id="cal-days" class="grid grid-cols-7 gap-y-2 text-center mb-8"></div>
 <!-- Legend -->
 <div class="flex flex-wrap gap-6 pt-6 border-t border-white/5">
 <div class="flex items-center gap-2">
@@ -260,44 +229,8 @@
 <!-- Right Column: Slots & Info -->
 <div class="lg:col-span-5 space-y-6">
 <div>
-<h2 class="font-headline font-bold text-xl mb-4" style="color: #F0A500;">Beschikbare tijden — Wo 18 Mrt</h2>
-<div class="space-y-3">
-<!-- Time Slot 1 (Selected) -->
-<div class="glass-card rounded-xl p-4 border-[#0071C5] bg-[#0071C5]/10 flex items-center justify-between cursor-pointer group hover:bg-[#0071C5]/20 transition-all">
-<div class="flex items-center gap-4">
-<span class="font-headline font-bold text-xl">09:00</span>
-<span class="text-sm text-[#94A3B8]">Start training</span>
-</div>
-<div class="text-right">
-<div class="text-[#86EFAC] text-[11px] font-bold uppercase tracking-widest">12 plekken vrij</div>
-<div class="w-5 h-5 rounded-full border-2 border-[#0071C5] bg-[#0071C5] flex items-center justify-center mt-1 ml-auto">
-<span class="material-symbols-outlined text-[14px] text-white" style="font-variation-settings: 'wght' 700;">check</span>
-</div>
-</div>
-</div>
-<!-- Time Slot 2 -->
-<div class="glass-card rounded-xl p-4 flex items-center justify-between cursor-pointer group hover:bg-white/5 transition-all">
-<div class="flex items-center gap-4">
-<span class="font-headline font-bold text-xl text-[#F8F8FF]">11:00</span>
-<span class="text-sm text-[#94A3B8]">Start training</span>
-</div>
-<div class="text-right">
-<div class="text-[#86EFAC] text-[11px] font-bold uppercase tracking-widest">8 plekken vrij</div>
-<div class="w-5 h-5 rounded-full border-2 border-white/20 mt-1 ml-auto group-hover:border-primary transition-colors"></div>
-</div>
-</div>
-<!-- Time Slot 3 -->
-<div class="glass-card rounded-xl p-4 flex items-center justify-between cursor-pointer group hover:bg-white/5 transition-all">
-<div class="flex items-center gap-4">
-<span class="font-headline font-bold text-xl text-[#F8F8FF]">13:30</span>
-<span class="text-sm text-[#94A3B8]">Start training</span>
-</div>
-<div class="text-right">
-<div class="text-[#F59E0B] text-[11px] font-bold uppercase tracking-widest">Laatste 2 plekken</div>
-<div class="w-5 h-5 rounded-full border-2 border-white/20 mt-1 ml-auto group-hover:border-primary transition-colors"></div>
-</div>
-</div>
-</div>
+<h2 id="slots-title" class="font-headline font-bold text-xl mb-4" style="color: #F0A500;">Selecteer eerst een datum</h2>
+<div id="slots-container" class="space-y-3"></div>
 </div>
 <!-- Location Info -->
 <div class="glass-card rounded-[22px] overflow-hidden">
@@ -330,7 +263,7 @@
 <div class="flex items-center gap-6">
 <div class="hidden sm:flex flex-col">
 <span class="text-[#94A3B8] text-[10px] uppercase font-bold tracking-widest font-label">Jouw Selectie</span>
-<span class="font-headline font-bold text-lg text-white">Wo 18 Mrt • 09:00 — 8 uur</span>
+<span id="sticky-summary" class="font-headline font-bold text-lg text-white">Geen selectie</span>
 </div>
 </div>
 <div class="flex items-center gap-4 w-full md:w-auto">
@@ -348,13 +281,191 @@
 
 
 <script>
+// ── State ─────────────────────────────────────────────────────────────────────
+const MONTHS_NL = ['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'];
+const DAYS_SHORT = ['ma','di','wo','do','vr','za','zo'];
+
+const TIME_SLOTS = [
+  { label: '09:00', endHour: 17, endMin: 0,  spots: 12 },
+  { label: '11:00', endHour: 19, endMin: 0,  spots: 8  },
+  { label: '13:30', endHour: 21, endMin: 30, spots: 2  },
+];
+
+let calYear, calMonth;
+let selectedDate = null;   // { year, month, day }
+let selectedSlot = null;   // index into TIME_SLOTS
+
+// ── Calendar ──────────────────────────────────────────────────────────────────
+
+function initCalendar() {
+  const now = new Date();
+  calYear  = now.getFullYear();
+  calMonth = now.getMonth();
+  renderCalendar();
+}
+
+function renderCalendar() {
+  document.getElementById('cal-title').textContent = `${MONTHS_NL[calMonth]} ${calYear}`;
+
+  const now     = new Date();
+  const today   = { y: now.getFullYear(), m: now.getMonth(), d: now.getDate() };
+  const firstDow = (new Date(calYear, calMonth, 1).getDay() + 6) % 7; // Mon=0
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+  const prevDays    = new Date(calYear, calMonth, 0).getDate();
+
+  let html = '';
+
+  // Leading days (prev month, greyed)
+  for (let i = firstDow - 1; i >= 0; i--) {
+    html += `<div class="font-headline font-medium py-3 opacity-20 text-[#64748B]">${prevDays - i}</div>`;
+  }
+
+  // Days of this month
+  for (let d = 1; d <= daysInMonth; d++) {
+    const isPast = calYear < today.y ||
+      (calYear === today.y && calMonth < today.m) ||
+      (calYear === today.y && calMonth === today.m && d < today.d);
+    const isToday = calYear === today.y && calMonth === today.m && d === today.d;
+    const isSel   = selectedDate &&
+      selectedDate.year === calYear && selectedDate.month === calMonth && selectedDate.day === d;
+
+    if (isPast) {
+      html += `<div class="font-headline font-medium py-3 opacity-20 text-[#64748B] line-through">${d}</div>`;
+    } else if (isSel) {
+      html += `<div class="flex items-center justify-center"><div class="w-10 h-10 bg-[#0071C5] rounded-full flex items-center justify-center text-white font-headline font-bold shadow-[0_0_20px_rgba(0,113,197,0.4)] cursor-pointer" data-day="${d}">${d}</div></div>`;
+    } else if (isToday) {
+      html += `<div class="flex items-center justify-center"><div class="w-10 h-10 border-2 border-[#0071C5] rounded-full flex items-center justify-center text-[#0071C5] font-headline font-bold cursor-pointer hover:bg-[#0071C5]/10 transition-colors" data-day="${d}">${d}</div></div>`;
+    } else {
+      html += `<div class="font-headline font-medium py-3 text-[#F8F8FF] cursor-pointer hover:text-[#0071C5] transition-colors rounded-full" data-day="${d}">${d}</div>`;
+    }
+  }
+
+  // Trailing days
+  const total    = firstDow + daysInMonth;
+  const trailing = total % 7 === 0 ? 0 : 7 - (total % 7);
+  for (let d = 1; d <= trailing; d++) {
+    html += `<div class="font-headline font-medium py-3 opacity-20 text-[#64748B]">${d}</div>`;
+  }
+
+  const grid = document.getElementById('cal-days');
+  grid.innerHTML = html;
+
+  // Attach click handlers
+  grid.querySelectorAll('[data-day]').forEach(el => {
+    el.addEventListener('click', () => selectDay(parseInt(el.dataset.day)));
+  });
+}
+
+function selectDay(d) {
+  selectedDate = { year: calYear, month: calMonth, day: d };
+  selectedSlot = 0; // default to first slot
+  renderCalendar();
+  renderSlots();
+  updateSummary();
+}
+
+// ── Time slots ────────────────────────────────────────────────────────────────
+
+function renderSlots() {
+  if (!selectedDate) {
+    document.getElementById('slots-title').textContent = 'Selecteer eerst een datum';
+    document.getElementById('slots-container').innerHTML = '';
+    return;
+  }
+
+  const dateObj = new Date(selectedDate.year, selectedDate.month, selectedDate.day);
+  const dayName = DAYS_SHORT[(dateObj.getDay() + 6) % 7];
+  const dayNum  = selectedDate.day;
+  const monName = MONTHS_NL[selectedDate.month].slice(0, 3);
+  document.getElementById('slots-title').textContent = `Beschikbare tijden — ${dayName} ${dayNum} ${monName}`;
+
+  const container = document.getElementById('slots-container');
+  container.innerHTML = TIME_SLOTS.map((slot, i) => {
+    const isSel  = selectedSlot === i;
+    const isLast = slot.spots <= 3;
+    const spotsLabel = isLast
+      ? `<div class="text-[#F59E0B] text-[11px] font-bold uppercase tracking-widest">Laatste ${slot.spots} plekken</div>`
+      : `<div class="text-[#86EFAC] text-[11px] font-bold uppercase tracking-widest">${slot.spots} plekken vrij</div>`;
+    const radio = isSel
+      ? `<div class="w-5 h-5 rounded-full border-2 border-[#0071C5] bg-[#0071C5] flex items-center justify-center mt-1 ml-auto"><span class="material-symbols-outlined text-[14px] text-white" style="font-variation-settings: 'wght' 700;">check</span></div>`
+      : `<div class="w-5 h-5 rounded-full border-2 border-white/20 mt-1 ml-auto group-hover:border-primary transition-colors"></div>`;
+    const cardCls = isSel
+      ? 'glass-card rounded-xl p-4 border-[#0071C5] bg-[#0071C5]/10 flex items-center justify-between cursor-pointer group hover:bg-[#0071C5]/20 transition-all'
+      : 'glass-card rounded-xl p-4 flex items-center justify-between cursor-pointer group hover:bg-white/5 transition-all';
+    return `
+    <div class="${cardCls}" data-slot="${i}">
+      <div class="flex items-center gap-4">
+        <span class="font-headline font-bold text-xl ${isSel ? '' : 'text-[#F8F8FF]'}">${slot.label}</span>
+        <span class="text-sm text-[#94A3B8]">Start training</span>
+      </div>
+      <div class="text-right">${spotsLabel}${radio}</div>
+    </div>`;
+  }).join('');
+
+  container.querySelectorAll('[data-slot]').forEach(el => {
+    el.addEventListener('click', () => {
+      selectedSlot = parseInt(el.dataset.slot);
+      renderSlots();
+      updateSummary();
+    });
+  });
+}
+
+// ── Summary ───────────────────────────────────────────────────────────────────
+
+function updateSummary() {
+  if (!selectedDate || selectedSlot === null) {
+    document.getElementById('sticky-summary').textContent = 'Geen selectie';
+    return;
+  }
+  const dateObj = new Date(selectedDate.year, selectedDate.month, selectedDate.day);
+  const dayName = DAYS_SHORT[(dateObj.getDay() + 6) % 7];
+  const monName = MONTHS_NL[selectedDate.month].slice(0, 3);
+  const slot    = TIME_SLOTS[selectedSlot];
+  document.getElementById('sticky-summary').textContent =
+    `${dayName} ${selectedDate.day} ${monName} • ${slot.label} — 8 uur`;
+}
+
+// ── Nav buttons ───────────────────────────────────────────────────────────────
+
+document.getElementById('cal-prev').addEventListener('click', () => {
+  const now = new Date();
+  if (calYear === now.getFullYear() && calMonth === now.getMonth()) return; // don't go before today's month
+  calMonth--;
+  if (calMonth < 0) { calMonth = 11; calYear--; }
+  renderCalendar();
+});
+
+document.getElementById('cal-next').addEventListener('click', () => {
+  calMonth++;
+  if (calMonth > 11) { calMonth = 0; calYear++; }
+  renderCalendar();
+});
+
+// ── Save & continue ───────────────────────────────────────────────────────────
+
 function saveDateAndContinue() {
+  if (!selectedDate || selectedSlot === null) {
+    alert('Selecteer eerst een datum en tijdstip.');
+    return;
+  }
+
+  const slot  = TIME_SLOTS[selectedSlot];
+  const pad   = n => String(n).padStart(2, '0');
+  const dateStr = `${selectedDate.year}-${pad(selectedDate.month + 1)}-${pad(selectedDate.day)}`;
+  const startISO = `${dateStr}T${slot.label}:00`;
+  const endISO   = `${dateStr}T${pad(slot.endHour)}:${pad(slot.endMin)}:00`;
+
   const booking = JSON.parse(sessionStorage.getItem('intelBooking') || '{}');
-  // Default to the displayed selection; a real implementation would read clicked date/slot
-  booking.startDateTime = booking.startDateTime || '2026-03-18T09:00:00';
-  booking.endDateTime = booking.endDateTime || '2026-03-18T17:00:00';
+  booking.startDateTime = startISO;
+  booking.endDateTime   = endISO;
   sessionStorage.setItem('intelBooking', JSON.stringify(booking));
   window.location.href = 'details.html';
 }
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+
+initCalendar();
+renderSlots();
 </script>
 </body></html>
