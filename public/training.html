@@ -342,7 +342,7 @@
 </div>
 <div class="flex items-center gap-4">
 <button onclick="window.location.href='index.html'" class="px-6 py-2.5 rounded-xl text-slate-400 font-bold font-headline hover:text-white hover:bg-white/5 transition-all">Vorige</button>
-<button onclick="window.location.href='datetime.html'" class="bg-[#0071C5] text-white px-8 py-3 rounded-xl font-bold font-headline shadow-[0_10px_25px_rgba(0,113,197,0.3)] hover:brightness-110 active:scale-95 transition-all flex items-center gap-2">
+<button onclick="saveTrainingAndContinue()" class="bg-[#0071C5] text-white px-8 py-3 rounded-xl font-bold font-headline shadow-[0_10px_25px_rgba(0,113,197,0.3)] hover:brightness-110 active:scale-95 transition-all flex items-center gap-2">
                     Volgende stap <span class="material-symbols-outlined">arrow_forward</span>
 </button>
 </div>
@@ -362,4 +362,15 @@
 </div>
 
 
+<script>
+function saveTrainingAndContinue() {
+  const booking = JSON.parse(sessionStorage.getItem('intelBooking') || '{}');
+  // Read the currently highlighted training title from the selection bar
+  const titleEl = document.querySelector('[style*="F0A500"]');
+  booking.trainingTitle = titleEl ? titleEl.textContent.trim() : 'Intel Core Ultra Architecture Deep Dive';
+  booking.location = 'Intel Experience Center Amsterdam';
+  sessionStorage.setItem('intelBooking', JSON.stringify(booking));
+  window.location.href = 'datetime.html';
+}
+</script>
 </body></html>

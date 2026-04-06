@@ -231,4 +231,63 @@
 </div>
 
 
+<script>
+const CREATE_BOOKING_URL = 'https://createbookingevent-sgyijdkq7a-uc.a.run.app';
+
+function generateRef() {
+  return 'INT-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
+}
+
+async function syncCalendar() {
+  const booking = JSON.parse(sessionStorage.getItem('intelBooking') || '{}');
+
+  // Fill in defaults for missing fields (demo / direct navigation)
+  booking.trainingTitle = booking.trainingTitle || 'Intel Core Ultra Architecture Deep Dive';
+  booking.customerName  = booking.customerName  || 'Deelnemer';
+  booking.customerEmail = booking.customerEmail || 'deelnemer@bedrijf.nl';
+  booking.companyName   = booking.companyName   || 'Onbekend';
+  booking.startDateTime = booking.startDateTime || '2026-03-18T09:00:00';
+  booking.endDateTime   = booking.endDateTime   || '2026-03-18T17:00:00';
+  booking.location      = booking.location      || 'Intel Experience Center Amsterdam';
+  booking.bookingReference = booking.bookingReference || generateRef();
+
+  // Update visible ref
+  document.querySelectorAll('.font-mono').forEach(el => {
+    if (el.textContent.includes('#INT-')) el.textContent = 'Ref: ' + booking.bookingReference;
+  });
+
+  // Update mini event preview with real data
+  const titleEls = document.querySelectorAll('.font-headline.font-bold.text-white.text-\\[15px\\]');
+  titleEls.forEach(el => el.textContent = booking.trainingTitle);
+
+  const syncBadge = document.querySelector('.bg-green-500\\/10');
+  const syncMsg = document.querySelector('.text-\\[\\#94A3B8\\].text-xs.mb-5');
+
+  try {
+    const res = await fetch(CREATE_BOOKING_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(booking),
+    });
+
+    if (res.ok) {
+      const { eventLink } = await res.json();
+      if (syncBadge) syncBadge.textContent = 'Gesynchroniseerd';
+      if (syncMsg) syncMsg.textContent = 'Een Google Agenda-uitnodiging is verstuurd naar de accountmanager.';
+      // Update Google calendar link
+      const googleLink = document.querySelector('span.text-\\[10px\\].font-label.font-extrabold.text-outline:first-of-type');
+      if (googleLink && eventLink) { googleLink.onclick = () => window.open(eventLink, '_blank'); }
+      sessionStorage.removeItem('intelBooking');
+    } else {
+      if (syncBadge) { syncBadge.textContent = 'Fout'; syncBadge.classList.replace('text-green-400', 'text-red-400'); }
+      if (syncMsg) syncMsg.textContent = 'Agenda sync mislukt. Neem contact op met de accountmanager.';
+    }
+  } catch (e) {
+    if (syncBadge) { syncBadge.textContent = 'Offline'; syncBadge.classList.replace('text-green-400', 'text-yellow-400'); }
+    if (syncMsg) syncMsg.textContent = 'Geen verbinding. De accountmanager wordt handmatig geïnformeerd.';
+  }
+}
+
+window.addEventListener('DOMContentLoaded', syncCalendar);
+</script>
 </body></html>

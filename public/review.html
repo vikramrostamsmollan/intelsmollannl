@@ -285,7 +285,7 @@
                                 Gratis
                             </div>
 </div>
-<button onclick="window.location.href='confirmed.html'" class="w-full bg-[#0071C5] hover:bg-[#3B8FD4] text-white py-4 rounded-xl font-bold font-headline text-lg shadow-[0_18px_32px_rgba(0,113,197,0.3)] active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+<button onclick="confirmBooking()" class="w-full bg-[#0071C5] hover:bg-[#3B8FD4] text-white py-4 rounded-xl font-bold font-headline text-lg shadow-[0_18px_32px_rgba(0,113,197,0.3)] active:scale-[0.98] transition-all flex items-center justify-center gap-2">
                             Boeking bevestigen
                             <span class="material-symbols-outlined">arrow_forward</span>
 </button>
@@ -320,7 +320,7 @@
 <button onclick="window.location.href='details.html'" class="px-6 py-3 rounded-xl border border-white/10 text-slate-300 font-bold hover:bg-white/5 transition-all active:scale-95">
                     Vorige
                 </button>
-<button onclick="window.location.href='confirmed.html'" class="px-8 py-3 rounded-xl bg-[#0071C5] text-white font-bold font-headline shadow-lg shadow-[#0071C5]/20 hover:bg-[#3B8FD4] transition-all active:scale-95 flex items-center gap-2">
+<button onclick="confirmBooking()" class="px-8 py-3 rounded-xl bg-[#0071C5] text-white font-bold font-headline shadow-lg shadow-[#0071C5]/20 hover:bg-[#3B8FD4] transition-all active:scale-95 flex items-center gap-2">
                     Boeking bevestigen
                     <span class="material-symbols-outlined">arrow_forward</span>
 </button>
@@ -329,4 +329,12 @@
 </div>
 
 
+<script>
+function confirmBooking() {
+  const booking = JSON.parse(sessionStorage.getItem('intelBooking') || '{}');
+  booking.bookingReference = 'INT-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
+  sessionStorage.setItem('intelBooking', JSON.stringify(booking));
+  window.location.href = 'confirmed.html';
+}
+</script>
 </body></html>
