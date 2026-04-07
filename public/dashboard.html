@@ -6,6 +6,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Firebase Auth -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script>
+  // Expose a promise so auth code can wait for Firebase to be ready
+  window._firebaseReady = fetch('/__/firebase/init.json')
+    .then(r => r.json())
+    .then(config => firebase.initializeApp(config));
+</script>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -44,7 +53,7 @@
               "on-error": "#690005",
               "on-tertiary-fixed": "#25005a",
               "on-secondary-fixed": "#001c3b",
-              "background": "#0A0A0F",
+              "background": "#050A1E",
               "inverse-surface": "#e4e1e9",
               "primary-fixed-dim": "#a2c9ff",
               "on-primary-container": "#eef3ff",
@@ -72,7 +81,7 @@
     </script>
 <style>
         body {
-            background-color: #0A0A0F;
+            background-color: #050A1E;
             background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
             background-size: 32px 32px;
         }
@@ -95,37 +104,76 @@
     </style>
 </head>
 <body class="font-body text-on-surface min-h-screen">
+
+<!-- ── Login Overlay (shown when not authenticated) ──────────────────────── -->
+<div id="login-overlay" class="fixed inset-0 z-[100] bg-[#050A1E] flex items-center justify-center px-6" style="display:none!important">
+  <div class="w-full max-w-md glass-card rounded-[24px] p-10 flex flex-col items-center text-center gap-6">
+    <div class="w-14 h-14 rounded-2xl bg-[#0071C5]/15 border border-[#0071C5]/30 flex items-center justify-center mb-2">
+      <span class="material-symbols-outlined text-[#0071C5] text-3xl">lock</span>
+    </div>
+    <div>
+      <h1 class="font-headline text-2xl font-bold text-[#F8F8FF] mb-2">Trainer Dashboard</h1>
+      <p class="text-[#94A3B8] text-sm">Voer je Smollan e-mailadres in. Je ontvangt een inloglink.</p>
+    </div>
+    <!-- Email input state -->
+    <div id="login-form" class="w-full flex flex-col gap-3">
+      <input id="login-email" type="email" placeholder="jouw@smollan.nl"
+        class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[#F8F8FF] text-sm font-body placeholder:text-[#64748B] focus:outline-none focus:border-[#0071C5]/60 transition-colors"
+        onkeydown="if(event.key==='Enter') sendLoginLink()" />
+      <button onclick="sendLoginLink()"
+        class="w-full bg-[#0071C5] hover:bg-[#0060A9] text-white font-headline font-bold text-sm py-3 rounded-xl transition-colors active:scale-[0.98]">
+        Stuur inloglink
+      </button>
+      <p id="login-error" class="text-red-400 text-xs hidden"></p>
+    </div>
+    <!-- Sent state -->
+    <div id="login-sent" class="w-full flex flex-col items-center gap-4 hidden">
+      <div class="w-12 h-12 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center">
+        <span class="material-symbols-outlined text-green-400 text-2xl">mark_email_read</span>
+      </div>
+      <p class="text-[#F8F8FF] font-bold font-headline">Check je inbox</p>
+      <p class="text-[#94A3B8] text-sm">Klik op de link in de e-mail om in te loggen.<br/>Je kunt dit tabblad sluiten.</p>
+      <button onclick="document.getElementById('login-sent').classList.add('hidden');document.getElementById('login-form').classList.remove('hidden')"
+        class="text-[#0071C5] text-xs hover:underline">Ander e-mailadres gebruiken</button>
+    </div>
+  </div>
+</div>
+
 <!-- Global Background Accents -->
 <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
 <div class="glow-blob-blue absolute -top-24 -left-24 w-[600px] h-[600px]"></div>
 <div class="glow-blob-purple absolute top-1/4 -right-24 w-[500px] h-[500px]"></div>
 </div>
 <!-- Top Navigation Shell -->
-<header class="fixed top-0 w-full z-50 bg-[#0A0A0F]/85 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-blue-900/20 h-20 flex justify-between items-center px-8">
+<header style="background:#1535A0;border-bottom:1px solid rgba(255,255,255,0.15);" class="fixed top-0 w-full z-50 h-14 flex justify-between items-center px-8 shadow-lg">
 <div class="flex items-center gap-8">
-<span class="text-xl font-bold text-[#F8F8FF] tracking-tighter font-headline">Intel Training</span>
-<nav class="hidden md:flex gap-6">
-<a class="font-headline font-bold tracking-tight text-sm uppercase text-[#0071C5] border-b-2 border-[#0071C5] pb-1" href="#">Overzicht</a>
-<a class="font-headline font-bold tracking-tight text-sm uppercase text-[#64748B] hover:text-[#94A3B8] transition-colors duration-200" href="#">Trainingen</a>
-<a class="font-headline font-bold tracking-tight text-sm uppercase text-[#64748B] hover:text-[#94A3B8] transition-colors duration-200" href="#">Deelnemers</a>
-<a class="font-headline font-bold tracking-tight text-sm uppercase text-[#64748B] hover:text-[#94A3B8] transition-colors duration-200" href="#">Statistieken</a>
-</nav>
+  <a href="index.html" class="flex items-center gap-3" style="text-decoration:none;">
+    <span class="font-headline font-extrabold text-white text-lg tracking-tight">intel<span style="color:#00C7FD;">.</span></span>
+    <span class="hidden md:block" style="width:1px;height:16px;background:rgba(255,255,255,0.3);"></span>
+    <span class="hidden md:block font-['DM_Sans'] text-sm font-normal" style="color:rgba(255,255,255,0.75);letter-spacing:0.03em;">Retail Edge Program</span>
+  </a>
+  <nav class="hidden md:flex gap-6">
+    <a class="font-headline font-bold text-sm uppercase text-white border-b-2 border-white pb-0.5" href="dashboard.html">Overzicht</a>
+    <a class="font-headline font-bold text-sm uppercase hover:text-white transition-colors" style="color:rgba(255,255,255,0.65);" href="javascript:void(0)" onclick="showToast('Binnenkort beschikbaar')">Trainingen</a>
+    <a class="font-headline font-bold text-sm uppercase hover:text-white transition-colors" style="color:rgba(255,255,255,0.65);" href="javascript:void(0)" onclick="showToast('Binnenkort beschikbaar')">Deelnemers</a>
+    <a class="font-headline font-bold text-sm uppercase hover:text-white transition-colors" style="color:rgba(255,255,255,0.65);" href="javascript:void(0)" onclick="showToast('Binnenkort beschikbaar')">Statistieken</a>
+  </nav>
 </div>
-<div class="flex items-center gap-4">
-<button class="hover:bg-white/5 p-2 rounded-full transition-colors active:scale-95">
-<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
-</button>
-<button class="bg-white/5 px-4 py-2 rounded-lg font-headline font-bold text-sm uppercase text-[#F8F8FF] border border-white/10 hover:bg-white/10 transition-all">
-                Beheer
-            </button>
-<img alt="User Profile" class="w-10 h-10 rounded-full border-2 border-primary-container" data-alt="portrait of a professional woman with a friendly expression in a modern office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKRJR3-F2SdDGnFh_vt0aBMzjwnxjWVP02Uc3V843a_oDOVbfnBmBlVk0_91FwCYch_m15FLHUQ5pEZBjtPkVpCiVmdbzI5rtINm0y36bWZIGkxd6mLml4KzrRRBocZ5KT0BLBNwkODHh0110KzI_gVV9yTqbJa3KidSx1PVV5Mr3kniE6_XXyY0LdSN8z8TQ_wS8UfqxDi0KyOb2tx7dTesbPOfQQ8nKFyElhDIc7hZuiqxr7wM3toTBHetMAjNOXDB2OpGhP52R7"/>
+<div class="flex items-center gap-3">
+  <button onclick="showToast('Geen nieuwe meldingen')" class="p-2 rounded-full transition-colors hover:bg-white/10 active:scale-95">
+    <span class="material-symbols-outlined text-white/80" data-icon="notifications">notifications</span>
+  </button>
+  <button onclick="showToast('Beheer binnenkort beschikbaar')" class="font-headline font-bold text-sm px-4 py-1.5 rounded transition-all" style="background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.25);">
+    Beheer
+  </button>
+  <div class="w-8 h-8 rounded-full flex items-center justify-center font-headline font-bold text-sm" style="background:white;color:#1535A0;">VR</div>
 </div>
 </header>
 <main class="relative z-10 pt-32 pb-20 px-8 max-w-[1600px] mx-auto">
 <!-- Header Section -->
 <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
 <div>
-<h1 class="text-[36px] font-bold font-headline tracking-tight text-[#F8F8FF] leading-tight">Welkom terug, Vikram.</h1>
+<h1 id="dashboard-greeting" class="text-[36px] font-bold font-headline tracking-tight text-[#F8F8FF] leading-tight">Welkom terug, Vikram.</h1>
 <p class="text-secondary-text mt-1 text-on-surface-variant">Hier is de status van je trainingen voor vandaag.</p>
 </div>
 <a href="index.html" class="bg-[#0071C5] text-white px-6 py-4 rounded-[14px] font-headline font-bold text-sm tracking-wide shadow-[0_18px_32px_rgba(0,113,197,0.22)] hover:bg-[#3B8FD4] transition-all flex items-center gap-2 active:scale-95 no-underline">
@@ -233,7 +281,7 @@
 </div>
 </div>
 <div class="p-8 border-l border-white/5 flex items-center justify-center bg-white/2">
-<button class="w-12 h-12 rounded-xl border border-white/10 hover:bg-white/5 flex items-center justify-center transition-all group">
+<button onclick="showToast('Trainingsdetails binnenkort beschikbaar')" class="w-12 h-12 rounded-xl border border-white/10 hover:bg-white/5 flex items-center justify-center transition-all group">
 <span class="material-symbols-outlined text-on-surface-variant group-hover:text-[#F8F8FF]" data-icon="chevron_right">chevron_right</span>
 </button>
 </div>
@@ -270,7 +318,7 @@
 </div>
 </div>
 <div class="p-8 border-l border-white/5 flex items-center justify-center bg-white/2">
-<button class="w-12 h-12 rounded-xl border border-white/10 hover:bg-white/5 flex items-center justify-center transition-all group">
+<button onclick="showToast('Trainingsdetails binnenkort beschikbaar')" class="w-12 h-12 rounded-xl border border-white/10 hover:bg-white/5 flex items-center justify-center transition-all group">
 <span class="material-symbols-outlined text-on-surface-variant group-hover:text-[#F8F8FF]" data-icon="chevron_right">chevron_right</span>
 </button>
 </div>
@@ -306,7 +354,7 @@
 </div>
 </div>
 <div class="p-8 border-l border-white/5 flex items-center justify-center bg-white/2">
-<button class="w-12 h-12 rounded-xl border border-white/10 hover:bg-white/5 flex items-center justify-center transition-all group">
+<button onclick="showToast('Trainingsdetails binnenkort beschikbaar')" class="w-12 h-12 rounded-xl border border-white/10 hover:bg-white/5 flex items-center justify-center transition-all group">
 <span class="material-symbols-outlined text-on-surface-variant group-hover:text-[#F8F8FF]" data-icon="chevron_right">chevron_right</span>
 </button>
 </div>
@@ -320,10 +368,10 @@
 <div class="flex justify-between items-center mb-6">
 <h3 id="cal-title" class="font-bold font-headline text-[#F0A500]">—</h3>
 <div class="flex gap-2">
-<button class="p-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-all">
+<button id="dash-cal-prev" class="p-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-all">
 <span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
 </button>
-<button class="p-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-all">
+<button id="dash-cal-next" class="p-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-all">
 <span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
 </button>
 </div>
@@ -358,7 +406,7 @@
 </div>
 <span class="material-symbols-outlined text-sm text-[#64748B] group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
 </button>
-<button onclick="showToast('Rapport wordt gegenereerd...')" class="w-full flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all group">
+<button onclick="generateReport()" class="w-full flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all group">
 <div class="flex items-center gap-3">
 <span class="material-symbols-outlined text-success" data-icon="description">description</span>
 <span class="text-sm font-medium text-[#CBD5E1]">Rapport genereren</span>
@@ -372,17 +420,17 @@
 <h3 class="font-bold font-headline text-[#F0A500]">Recente activiteit</h3>
 <div class="space-y-6 relative before:absolute before:left-3 before:top-2 before:bottom-2 before:w-[1px] before:bg-white/10">
 <div class="relative pl-8">
-<div class="absolute left-1.5 top-1.5 w-3 h-3 rounded-full border-2 border-[#0A0A0F] bg-[#F0A500]"></div>
+<div class="absolute left-1.5 top-1.5 w-3 h-3 rounded-full border-2 border-[#050A1E] bg-[#F0A500]"></div>
 <p class="text-xs text-on-surface-variant mb-1 uppercase font-bold tracking-wider !text-[#F0A500]">VANDAAG, 10:24</p>
 <p class="text-sm text-[#CBD5E1]">Nieuwe aanmelding: <span class="text-[#F8F8FF] font-medium">Marc Veenstra</span> voor Kubernetes Security.</p>
 </div>
 <div class="relative pl-8">
-<div class="absolute left-1.5 top-1.5 w-3 h-3 rounded-full bg-success border-2 border-[#0A0A0F]"></div>
+<div class="absolute left-1.5 top-1.5 w-3 h-3 rounded-full bg-success border-2 border-[#050A1E]"></div>
 <p class="text-xs text-on-surface-variant mb-1 uppercase font-bold tracking-wider !text-[#F0A500]">VANDAAG, 08:45</p>
 <p class="text-sm text-[#CBD5E1]">Training <span class="text-[#F8F8FF] font-medium">Docker Fundamentals</span> succesvol afgerond.</p>
 </div>
 <div class="relative pl-8">
-<div class="absolute left-1.5 top-1.5 w-3 h-3 rounded-full border-2 border-[#0A0A0F] bg-[#F0A500]"></div>
+<div class="absolute left-1.5 top-1.5 w-3 h-3 rounded-full border-2 border-[#050A1E] bg-[#F0A500]"></div>
 <p class="text-xs text-on-surface-variant mb-1 uppercase font-bold tracking-wider !text-[#F0A500]">GISTEREN, 16:30</p>
 <p class="text-sm text-[#CBD5E1]"><span class="text-[#F8F8FF] font-medium">Sander Post</span> heeft een certificaat ontvangen.</p>
 </div>
@@ -425,6 +473,29 @@ function exportBookingsCSV() {
   a.click(); URL.revokeObjectURL(url);
 }
 
+function generateReport() {
+  if (!_cachedBookings.length) { showToast('Geen boekingen voor rapport.'); return; }
+  const now = new Date();
+  const thisMonth = _cachedBookings.filter(b => { const d = new Date(b.start); return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear(); });
+  const upcoming  = _cachedBookings.filter(b => new Date(b.start) >= now);
+  const lines = [
+    `INTEL TRAINING RAPPORT — ${now.toLocaleDateString('nl-NL', { day:'numeric', month:'long', year:'numeric' })}`,
+    `${'='.repeat(50)}`,
+    `Totaal boekingen: ${_cachedBookings.length}`,
+    `Aankomend: ${upcoming.length}`,
+    `Deze maand: ${thisMonth.length}`,
+    ``,
+    `AANKOMENDE TRAININGEN:`,
+    ...upcoming.map(b => `  • ${b.title || '—'} | ${new Date(b.start).toLocaleDateString('nl-NL')} | ${b.location || '—'} | ${b.customerName || '—'}`),
+  ];
+  const blob = new Blob([lines.join('\r\n')], { type: 'text/plain;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = `intel-rapport-${now.toISOString().slice(0,10)}.txt`;
+  a.click(); URL.revokeObjectURL(url);
+  showToast('Rapport gedownload');
+}
+
 function formatDate(iso) {
   if (!iso) return '—';
   return new Date(iso).toLocaleDateString('nl-NL', { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' });
@@ -432,6 +503,10 @@ function formatDate(iso) {
 function formatTime(iso) {
   if (!iso) return '—';
   return new Date(iso).toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
+}
+
+function escapeHtml(str) {
+  return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 function renderCard(b) {
@@ -444,49 +519,52 @@ function renderCard(b) {
       <div class="flex flex-wrap items-center gap-3 mb-4">
         <span class="px-3 py-1 bg-[#0071C5]/10 border border-[#0071C5]/20 text-[#0071C5] rounded-full text-[11px] font-bold uppercase tracking-wider">Intel Training</span>
         <span class="px-3 py-1 bg-success/10 border border-success/20 text-green-400 rounded-full text-[11px] font-bold uppercase tracking-wider">Bevestigd</span>
-        <span class="px-3 py-1 bg-white/5 border border-white/10 text-[#94A3B8] rounded-full text-[10px] font-mono">${b.bookingRef || ''}</span>
+        <span class="px-3 py-1 bg-white/5 border border-white/10 text-[#94A3B8] rounded-full text-[10px] font-mono">${escapeHtml(b.bookingRef)}</span>
       </div>
-      <h3 class="text-xl font-bold font-headline text-[#F8F8FF] mb-2">${b.title || 'Intel Training'}</h3>
+      <h3 class="text-xl font-bold font-headline text-[#F8F8FF] mb-2">${escapeHtml(b.title) || 'Intel Training'}</h3>
       <div class="flex flex-wrap items-center gap-4 text-on-surface-variant text-sm mb-4">
         <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">calendar_today</span> ${formatDate(start)}</span>
         <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">schedule</span> ${formatTime(start)} – ${formatTime(end)}</span>
-        ${b.location ? `<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">location_on</span> ${b.location}</span>` : ''}
+        ${b.location ? `<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">location_on</span> ${escapeHtml(b.location)}</span>` : ''}
       </div>
-      ${b.customerName ? `<p class="text-sm text-[#94A3B8]"><span class="text-[#F0A500] font-bold uppercase tracking-wider text-[10px]">Klant</span>&nbsp;&nbsp;${b.customerName}${b.company ? ' — ' + b.company : ''}</p>` : ''}
+      ${b.customerName ? `<p class="text-sm text-[#94A3B8]"><span class="text-[#F0A500] font-bold uppercase tracking-wider text-[10px]">Klant</span>&nbsp;&nbsp;${escapeHtml(b.customerName)}${b.company ? ' — ' + escapeHtml(b.company) : ''}</p>` : ''}
     </div>
     <div class="p-8 border-l border-white/5 flex items-center justify-center bg-white/2">
-      ${b.eventLink ? `<a href="${b.eventLink}" target="_blank" class="w-12 h-12 rounded-xl border border-white/10 hover:bg-white/5 flex items-center justify-center transition-all group"><span class="material-symbols-outlined text-on-surface-variant group-hover:text-[#F8F8FF]">open_in_new</span></a>` : ''}
+      ${b.eventLink ? `<a href="${escapeHtml(b.eventLink)}" target="_blank" class="w-12 h-12 rounded-xl border border-white/10 hover:bg-white/5 flex items-center justify-center transition-all group"><span class="material-symbols-outlined text-on-surface-variant group-hover:text-[#F8F8FF]">open_in_new</span></a>` : ''}
     </div>
   </div>`;
 }
 
 // ── Calendar widget ───────────────────────────────────────────────────────────
 
+let _calMonth = new Date().getMonth();
+let _calYear  = new Date().getFullYear();
+let _calBookingDays = new Set();
+
 function renderCalendar(bookingDays) {
+  if (bookingDays) _calBookingDays = bookingDays;
   const now   = new Date();
-  const year  = now.getFullYear();
-  const month = now.getMonth();
-  const today = now.getDate();
+  const year  = _calYear;
+  const month = _calMonth;
+  const isCurrentMonth = (year === now.getFullYear() && month === now.getMonth());
+  const today = isCurrentMonth ? now.getDate() : -1;
 
   const MONTHS_NL = ['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'];
   document.getElementById('cal-title').textContent = `${MONTHS_NL[month]} ${year}`;
 
-  // Day of week for 1st of month (Monday-based: Mon=0 … Sun=6)
   const firstDow = (new Date(year, month, 1).getDay() + 6) % 7;
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const prevDays    = new Date(year, month, 0).getDate();
 
   let cells = '';
 
-  // Leading days from previous month
   for (let i = firstDow - 1; i >= 0; i--) {
     cells += `<span class="text-sm py-2 text-[#64748B]">${prevDays - i}</span>`;
   }
 
-  // Days of current month
   for (let d = 1; d <= daysInMonth; d++) {
     const isToday   = d === today;
-    const hasEvent  = bookingDays.has(d);
+    const hasEvent  = _calBookingDays.has(d);
     const dot       = hasEvent ? `<span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 ${isToday ? 'bg-white/60' : 'bg-[#0071C5]'} rounded-full"></span>` : '';
     if (isToday) {
       cells += `<span class="text-sm py-2 bg-[#0071C5] text-white rounded-full font-bold relative">${d}${dot}</span>`;
@@ -497,7 +575,6 @@ function renderCalendar(bookingDays) {
     }
   }
 
-  // Trailing days to fill last row
   const totalCells = firstDow + daysInMonth;
   const trailing = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
   for (let d = 1; d <= trailing; d++) {
@@ -506,6 +583,15 @@ function renderCalendar(bookingDays) {
 
   document.getElementById('cal-grid').innerHTML = cells;
 }
+
+document.getElementById('dash-cal-prev').addEventListener('click', () => {
+  _calMonth--; if (_calMonth < 0) { _calMonth = 11; _calYear--; }
+  renderCalendar();
+});
+document.getElementById('dash-cal-next').addEventListener('click', () => {
+  _calMonth++; if (_calMonth > 11) { _calMonth = 0; _calYear++; }
+  renderCalendar();
+});
 
 // ── Stats ─────────────────────────────────────────────────────────────────────
 
@@ -571,6 +657,85 @@ async function loadBookings() {
   }
 }
 
-window.addEventListener('DOMContentLoaded', loadBookings);
+// ── Auth ──────────────────────────────────────────────────────────────────────
+
+const LOGIN_REDIRECT_URL = window.location.origin + '/dashboard.html';
+const ALLOWED_EMAILS = [
+  'vikramrostam@gmail.com',
+  'v.rostam@hamiltonbright.com',
+  'vikram.rostamx@retailedgeintel.com',
+];
+
+function showOverlay()  { document.getElementById('login-overlay').style.setProperty('display','flex',''); }
+function hideOverlay()  { document.getElementById('login-overlay').style.setProperty('display','none','important'); }
+
+async function sendLoginLink() {
+  const email = document.getElementById('login-email').value.trim();
+  const errEl = document.getElementById('login-error');
+  errEl.classList.add('hidden');
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    errEl.textContent = 'Voer een geldig e-mailadres in.';
+    errEl.classList.remove('hidden');
+    return;
+  }
+  const btn = document.querySelector('#login-form button');
+  btn.textContent = 'Versturen…';
+  btn.disabled = true;
+  try {
+    await window._firebaseReady;
+    await firebase.auth().sendSignInLinkToEmail(email, {
+      url: LOGIN_REDIRECT_URL,
+      handleCodeInApp: true,
+    });
+    localStorage.setItem('emailForSignIn', email);
+    document.getElementById('login-form').classList.add('hidden');
+    document.getElementById('login-sent').classList.remove('hidden');
+  } catch (err) {
+    console.error('sendSignInLinkToEmail error:', err);
+    errEl.textContent = 'Versturen mislukt: ' + err.message;
+    errEl.classList.remove('hidden');
+    btn.textContent = 'Stuur inloglink';
+    btn.disabled = false;
+  }
+}
+
+window.addEventListener('DOMContentLoaded', async () => {
+  await window._firebaseReady;
+  const auth = firebase.auth();
+
+  // Complete sign-in if this page load is a magic link redirect
+  if (auth.isSignInWithEmailLink(window.location.href)) {
+    let email = localStorage.getItem('emailForSignIn');
+    if (!email) email = prompt('Bevestig je e-mailadres om in te loggen:');
+    if (email) {
+      try {
+        await auth.signInWithEmailLink(email, window.location.href);
+        localStorage.removeItem('emailForSignIn');
+        history.replaceState(null, '', '/dashboard.html');
+      } catch (err) {
+        console.error('Email link sign-in failed:', err);
+      }
+    }
+  }
+
+  // Gate the page on auth state
+  auth.onAuthStateChanged(user => {
+    if (user) {
+      if (!ALLOWED_EMAILS.includes(user.email)) {
+        auth.signOut();
+        const errEl = document.getElementById('login-error');
+        errEl.textContent = 'Geen toegang voor dit e-mailadres.';
+        errEl.classList.remove('hidden');
+        showOverlay();
+        return;
+      }
+      hideOverlay();
+      loadBookings();
+    } else {
+      showOverlay();
+    }
+  });
+});
+
 </script>
 </body></html>

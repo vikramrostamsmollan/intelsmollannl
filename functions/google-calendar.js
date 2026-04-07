@@ -65,10 +65,13 @@ async function calendarFetch(method, path, body) {
 export async function createBookingCalendarEvent(booking) {
   const { ACCOUNT_MANAGER_EMAIL, TRAINING_CALENDAR_ID } = getEnv();
 
+  const locationParts = [booking.storeName, booking.storeLocation, booking.city].filter(Boolean);
+  const resolvedLocation = locationParts.length ? locationParts.join(', ') : (booking.location || 'Locatie wordt bevestigd');
+
   const event = {
     summary:     `📋 ${booking.trainingTitle} — ${booking.companyName}`,
-    location:    booking.location,
-    description: buildEventDescription(booking),
+    location:    resolvedLocation,
+    description: buildEventDescription(booking, resolvedLocation),
     start: { dateTime: booking.startDateTime, timeZone: 'Europe/Amsterdam' },
     end:   { dateTime: booking.endDateTime,   timeZone: 'Europe/Amsterdam' },
     attendees: [
@@ -153,7 +156,7 @@ export async function listUpcomingBookings(maxResults = 10) {
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
-function buildEventDescription(booking) {
+function buildEventDescription(booking, resolvedLocation) {
   const BOOKING_BASE_URL = process.env.BOOKING_BASE_URL?.trim() || 'https://intel-booking.web.app';
   return [
     `Intel Training Booking`,
@@ -162,7 +165,7 @@ function buildEventDescription(booking) {
     `Training:    ${booking.trainingTitle}`,
     `Klant:       ${booking.customerName} (${booking.companyName})`,
     `E-mail:      ${booking.customerEmail}`,
-    `Locatie:     ${booking.location}`,
+    `Locatie:     ${resolvedLocation}`,
     booking.notes ? `\nNotities:\n${booking.notes}` : '',
     ``,
     `Beheer deze boeking: ${BOOKING_BASE_URL}/dashboard`,

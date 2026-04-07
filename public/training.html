@@ -74,8 +74,8 @@
     </script>
 <style>
         body {
-            background-color: #0A0A0F;
-            background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+            background-color: #050A1E;
+            background-image: radial-gradient(circle, rgba(0,80,200,0.07) 1px, transparent 1px);
             background-size: 32px 32px;
             color: #F8F8FF;
             font-family: 'DM Sans', sans-serif;
@@ -86,19 +86,22 @@
             right: -100px;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle at center, rgba(0,113,197,0.12), transparent 70%);
+            background: radial-gradient(circle at center, rgba(0,113,197,0.14), transparent 70%);
             pointer-events: none;
             z-index: 0;
         }
         .glass-card {
-            background: rgba(15, 23, 42, 0.84);
+            background: rgba(8, 16, 42, 0.88);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(0, 80, 200, 0.12);
         }
         .glass-nav {
-            background: rgba(10, 10, 15, 0.85);
+            background: rgba(5, 10, 30, 0.88);
             backdrop-filter: blur(20px);
         }
+        .tier-badge-base { background: rgba(0,113,197,0.12); border: 1px solid rgba(0,113,197,0.25); color: #60A5FA; }
+        .tier-badge-npu  { background: rgba(0,113,197,0.18); border: 1px solid rgba(0,113,197,0.35); color: #93C5FD; }
+        .tier-badge-tops { background: rgba(0,174,239,0.12); border: 1px solid rgba(0,174,239,0.30); color: #00AEEF; }
         .intel-gradient-text {
             background: linear-gradient(to right, #0071C5, #3B8FD4);
             -webkit-background-clip: text;
@@ -107,27 +110,29 @@
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
+        .focus-tag { display:inline-flex; align-items:center; padding:2px 8px; border-radius:4px; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; background:rgba(240,165,0,0.15); border:1px solid rgba(240,165,0,0.35); color:#F0A500; }
+        .reg-tag   { display:inline-flex; align-items:center; padding:2px 8px; border-radius:4px; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.10); color:#94A3B8; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-primary-container selection:text-white">
 <div class="hero-glow"></div>
 <!-- Top Navigation -->
-<nav class="fixed top-0 w-full z-50 glass-nav border-b border-white/10">
-<div class="flex justify-between items-center px-6 py-4 max-w-screen-2xl mx-auto">
-<div class="flex items-center gap-8">
-<div class="text-xl font-bold text-[#F8F8FF] font-['Space_Grotesk'] tracking-tight flex items-center gap-2">
-<span class="text-[#0071C5]">Intel</span> Training
-                </div>
-<div class="hidden md:flex gap-6">
-<a class="text-[#0071C5] border-b-2 border-[#0071C5] pb-1 font-medium transition-all duration-300" href="#">Catalogus</a>
-<a class="text-slate-400 font-medium hover:text-[#F8F8FF] transition-all duration-300" href="#">Curriculum</a>
-<a class="text-slate-400 font-medium hover:text-[#F8F8FF] transition-all duration-300" href="#">Certificaten</a>
-</div>
-</div>
-<div class="flex items-center gap-4">
-<button class="text-slate-400 font-medium hover:text-[#F8F8FF] px-4 py-2 transition-all duration-300">Inloggen</button>
-<button class="bg-primary-container text-white px-6 py-2.5 rounded-xl font-bold font-['Space_Grotesk'] hover:bg-primary transition-transform active:scale-95">Mijn trainingen</button>
-</div>
+<nav style="background:#1535A0;border-bottom:1px solid rgba(255,255,255,0.15);" class="fixed top-0 w-full z-50 shadow-lg">
+<div class="flex justify-between items-center px-8 h-14 max-w-screen-2xl mx-auto">
+  <a href="index.html" class="flex items-center gap-3" style="text-decoration:none;">
+    <span class="font-['Space_Grotesk'] font-extrabold text-white text-lg tracking-tight">intel<span style="color:#00C7FD;">.</span></span>
+    <span class="hidden md:block" style="width:1px;height:16px;background:rgba(255,255,255,0.3);"></span>
+    <span class="hidden md:block font-['DM_Sans'] text-sm font-normal" style="color:rgba(255,255,255,0.75);letter-spacing:0.03em;">Retail Edge Program</span>
+  </a>
+  <div class="hidden md:flex items-center gap-8">
+    <a class="font-['Space_Grotesk'] font-bold text-sm text-white border-b-2 border-white pb-0.5" href="training.html">Catalogus</a>
+    <a class="font-['Space_Grotesk'] font-bold text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.65);" href="javascript:void(0)" onclick="showToast('Binnenkort beschikbaar')">Curriculum</a>
+    <a class="font-['Space_Grotesk'] font-bold text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.65);" href="javascript:void(0)" onclick="showToast('Binnenkort beschikbaar')">Certificaten</a>
+  </div>
+  <div class="flex items-center gap-3">
+    <button onclick="window.location.href='index.html'" class="font-['Space_Grotesk'] font-bold text-sm px-4 py-2 rounded transition-all" style="color:rgba(255,255,255,0.8);">Inloggen</button>
+    <button onclick="window.location.href='dashboard.html'" class="font-['Space_Grotesk'] font-bold text-sm px-5 py-2 rounded active:scale-95 transition-all" style="background:white;color:#1535A0;">Mijn trainingen</button>
+  </div>
 </div>
 </nav>
 <!-- Main Content Container -->
@@ -144,22 +149,22 @@
 </div>
 <!-- Step 2 -->
 <div class="relative z-10 flex flex-col items-center gap-3">
-<div class="w-12 h-12 rounded-full bg-[#0A0A0F] border-2 border-white/15 flex items-center justify-center font-bold text-white/40">2</div>
+<div class="w-12 h-12 rounded-full bg-[#050A1E] border-2 border-white/15 flex items-center justify-center font-bold text-white/40">2</div>
 <span class="text-sm font-medium text-white/40 uppercase tracking-wider">Datum</span>
 </div>
 <!-- Step 3 -->
 <div class="relative z-10 flex flex-col items-center gap-3">
-<div class="w-12 h-12 rounded-full bg-[#0A0A0F] border-2 border-white/15 flex items-center justify-center font-bold text-white/40">3</div>
+<div class="w-12 h-12 rounded-full bg-[#050A1E] border-2 border-white/15 flex items-center justify-center font-bold text-white/40">3</div>
 <span class="text-sm font-medium text-white/40 uppercase tracking-wider">Details</span>
 </div>
 <!-- Step 4 -->
 <div class="relative z-10 flex flex-col items-center gap-3">
-<div class="w-12 h-12 rounded-full bg-[#0A0A0F] border-2 border-white/15 flex items-center justify-center font-bold text-white/40">4</div>
+<div class="w-12 h-12 rounded-full bg-[#050A1E] border-2 border-white/15 flex items-center justify-center font-bold text-white/40">4</div>
 <span class="text-sm font-medium text-white/40 uppercase tracking-wider">Bevestiging</span>
 </div>
 <!-- Step 5 -->
 <div class="relative z-10 flex flex-col items-center gap-3">
-<div class="w-12 h-12 rounded-full bg-[#0A0A0F] border-2 border-white/15 flex items-center justify-center font-bold text-white/40">5</div>
+<div class="w-12 h-12 rounded-full bg-[#050A1E] border-2 border-white/15 flex items-center justify-center font-bold text-white/40">5</div>
 <span class="text-sm font-medium text-white/40 uppercase tracking-wider">Klaar</span>
 </div>
 </div>
@@ -178,154 +183,275 @@
             </p>
 </header>
 <!-- Search & Filter Row -->
-<section class="flex flex-col md:flex-row gap-4 mb-10 items-center">
+<section class="flex flex-col md:flex-row gap-4 mb-4 items-center">
 <div class="relative w-full md:max-w-md">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">search</span>
-<input class="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white placeholder:text-slate-500 focus:ring-2 focus:ring-[#0071C5] focus:border-transparent transition-all outline-none" placeholder="Zoek op naam, technologie…" type="text"/>
+<input class="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white placeholder:text-slate-500 focus:ring-2 focus:ring-[#0071C5] focus:border-transparent transition-all outline-none" placeholder="Zoek op naam, training…" type="text"/>
 </div>
 <div class="flex flex-wrap gap-2">
-<button data-filter="all" class="px-6 py-2.5 rounded-full bg-[#0071C5] text-white text-sm font-bold transition-all">Alle</button>
-<button data-filter="core-ultra" class="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm font-bold hover:bg-white/10 transition-all">Core Ultra</button>
-<button data-filter="arc-graphics" class="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm font-bold hover:bg-white/10 transition-all">Arc Graphics</button>
-<button data-filter="ai-pc" class="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm font-bold hover:bg-white/10 transition-all">AI PC</button>
-<button data-filter="vpro" class="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm font-bold hover:bg-white/10 transition-all">vPro</button>
+<button data-filter="all" class="px-5 py-2 rounded-full bg-[#0071C5] text-white text-sm font-bold transition-all">Alle</button>
+<button data-filter="gebruik" class="px-5 py-2 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm font-bold hover:bg-white/10 transition-all">Pc gebruik</button>
+<button data-filter="processors" class="px-5 py-2 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm font-bold hover:bg-white/10 transition-all">Processors</button>
+<button data-filter="technologie" class="px-5 py-2 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm font-bold hover:bg-white/10 transition-all">Technologieën</button>
+<button data-filter="basis" class="px-5 py-2 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm font-bold hover:bg-white/10 transition-all">De basis</button>
 </div>
 </section>
+<!-- Focus legend -->
+<div class="flex items-center gap-2 mb-8 text-xs text-slate-400">
+  <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded" style="background:rgba(240,165,0,0.15);border:1px solid rgba(240,165,0,0.35);color:#F0A500;font-weight:700;">⚡ Extra focus</span>
+  <span>= productcategorie met verhoogde verkoopprioriteit</span>
+</div>
 <!-- Training Grid -->
-<section id="training-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-<!-- Card 1: Popular Highlight -->
-<div class="glass-card rounded-2xl p-6 border-[#0071C5]/40 ring-1 ring-[#0071C5]/20 relative overflow-hidden group">
-<div class="absolute top-0 right-0 bg-[#0071C5] text-white text-[10px] font-bold px-4 py-1.5 rounded-bl-xl uppercase tracking-tighter">Populair</div>
-<div class="flex justify-between items-start mb-6">
-<div class="flex gap-2">
-<span class="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-bold uppercase tracking-wider">AI PC</span>
-<span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-400 text-[10px] font-bold uppercase tracking-wider">45 min</span>
+<section id="training-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTIE 1: IK WIL EEN NIEUWE PC VOOR...       -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="col-span-full flex items-center gap-3 mt-2 mb-1">
+  <span class="material-symbols-outlined text-[#0071C5]">laptop</span>
+  <span class="text-xs font-bold uppercase tracking-widest text-[#0071C5]">Ik wil een nieuwe pc voor...</span>
+  <div class="flex-1 h-px bg-[#0071C5]/20"></div>
 </div>
+
+<!-- Card: Dagelijks gebruik & Onderwijs -->
+<div data-cat="gebruik" data-duration="30" class="glass-card rounded-2xl p-6 relative overflow-hidden group cursor-pointer hover:border-[#0071C5]/30 transition-all">
+  <div class="flex gap-2 mb-3">
+    <span class="px-3 py-1 rounded-full bg-[#0071C5]/10 border border-[#0071C5]/25 text-blue-300 text-[10px] font-bold uppercase tracking-wider">Pc gebruik</span>
+    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-400 text-[10px] font-bold uppercase tracking-wider">30 min</span>
+  </div>
+  <h3 class="text-lg font-headline font-bold text-white mb-1 group-hover:text-[#0071C5] transition-colors">Dagelijks gebruik &amp; Onderwijs</h3>
+  <p class="text-slate-400 text-sm mb-4 leading-relaxed">Help klanten de perfecte alledaagse of educatieve laptop vinden: batterijduur, schermkwaliteit, gewicht en Windows 11.</p>
+  <div class="border-t border-white/5 pt-4">
+    <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Productcategorieën — extra focus</p>
+    <div class="flex flex-wrap gap-1.5">
+      <span class="focus-tag">⚡ Notebook 12-14.5</span>
+      <span class="focus-tag">⚡ Notebook 15,6</span>
+      <span class="reg-tag">Convertables 13,3+</span>
+      <span class="reg-tag">Chromebooks</span>
+      <span class="reg-tag">AIO PC</span>
+    </div>
+  </div>
+  <div class="flex items-center justify-between mt-4">
+    <span class="text-[10px] font-bold uppercase tracking-widest" style="color:#F0A500;">Beginner</span>
+    <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Retail Edge Training</span>
+  </div>
 </div>
-<h3 class="text-2xl font-headline font-bold text-white mb-3 group-hover:text-[#0071C5] transition-colors">Neural Processing Unit Deep Dive</h3>
-<p class="text-slate-400 text-sm mb-6 leading-relaxed">Optimaliseer AI-workloads op de nieuwste Intel Core Ultra architectuur met OpenVINO toolkit.</p>
-<div class="flex items-center justify-between mt-auto">
-<div class="flex items-center gap-1">
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="text-xs text-slate-500 ml-1">(4.9)</span>
+
+<!-- Card: Gamen -->
+<div data-cat="gebruik" data-duration="45" class="glass-card rounded-2xl p-6 relative overflow-hidden group cursor-pointer hover:border-[#0071C5]/30 transition-all">
+  <div class="flex gap-2 mb-3">
+    <span class="px-3 py-1 rounded-full bg-[#0071C5]/10 border border-[#0071C5]/25 text-blue-300 text-[10px] font-bold uppercase tracking-wider">Pc gebruik</span>
+    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-400 text-[10px] font-bold uppercase tracking-wider">45 min</span>
+  </div>
+  <h3 class="text-lg font-headline font-bold text-white mb-1 group-hover:text-[#0071C5] transition-colors">Gamen — Performance verkopen</h3>
+  <p class="text-slate-400 text-sm mb-4 leading-relaxed">GPU's, frame rates, Intel Arc graphics en koeling: vertel het gaming verhaal dat klanten overtuigt.</p>
+  <div class="border-t border-white/5 pt-4">
+    <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Productcategorieën — extra focus</p>
+    <div class="flex flex-wrap gap-1.5">
+      <span class="reg-tag">Gaming Notebooks</span>
+      <span class="reg-tag">Gaming desktop</span>
+      <span class="reg-tag">Gaming notebook 16,7+</span>
+      <span class="reg-tag">Handheld PC Console</span>
+    </div>
+  </div>
+  <div class="flex items-center justify-between mt-4">
+    <span class="text-[10px] font-bold uppercase tracking-widest" style="color:#F0A500;">Gevorderd</span>
+    <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Retail Edge Training</span>
+  </div>
 </div>
-<span class="text-[10px] font-bold uppercase tracking-widest" style="color: #F0A500;">Gevorderd</span>
+
+<!-- Card: Zakelijk gebruik & Contentcreatie -->
+<div data-cat="gebruik" data-duration="45" class="glass-card rounded-2xl p-6 relative overflow-hidden group cursor-pointer hover:border-[#0071C5]/30 transition-all">
+  <div class="flex gap-2 mb-3">
+    <span class="px-3 py-1 rounded-full bg-[#0071C5]/10 border border-[#0071C5]/25 text-blue-300 text-[10px] font-bold uppercase tracking-wider">Pc gebruik</span>
+    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-400 text-[10px] font-bold uppercase tracking-wider">45 min</span>
+  </div>
+  <h3 class="text-lg font-headline font-bold text-white mb-1 group-hover:text-[#0071C5] transition-colors">Zakelijk gebruik &amp; Contentcreatie</h3>
+  <p class="text-slate-400 text-sm mb-4 leading-relaxed">Intel vPro beveiliging, Thunderbolt connectiviteit en creators workflow voor video, foto en design.</p>
+  <div class="border-t border-white/5 pt-4">
+    <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Productcategorieën — extra focus</p>
+    <div class="flex flex-wrap gap-1.5">
+      <span class="focus-tag">⚡ Notebook 12-14.5</span>
+      <span class="focus-tag">⚡ Notebook 15,6</span>
+      <span class="reg-tag">Creators</span>
+      <span class="reg-tag">PC Desktop</span>
+      <span class="reg-tag">Mini desktop</span>
+    </div>
+  </div>
+  <div class="flex items-center justify-between mt-4">
+    <span class="text-[10px] font-bold uppercase tracking-widest" style="color:#F0A500;">Gevorderd</span>
+    <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Retail Edge Training</span>
+  </div>
 </div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTIE 2: INTEL PROCESSORS                    -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="col-span-full flex items-center gap-3 mt-4 mb-1">
+  <span class="material-symbols-outlined text-[#0071C5]">memory</span>
+  <span class="text-xs font-bold uppercase tracking-widest text-[#0071C5]">Intel® processors</span>
+  <div class="flex-1 h-px bg-[#0071C5]/20"></div>
 </div>
-<!-- Card 2 -->
-<div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:border-white/20 transition-all">
-<div class="flex justify-between items-start mb-6">
-<div class="flex gap-2">
-<span class="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-[10px] font-bold uppercase tracking-wider">Core Ultra</span>
-<span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-400 text-[10px] font-bold uppercase tracking-wider">30 min</span>
+
+<!-- Card: Core Ultra vs Core -->
+<div data-cat="processors" data-duration="60" class="glass-card rounded-2xl p-6 relative overflow-hidden group cursor-pointer hover:border-[#0071C5]/30 transition-all">
+  <div class="flex gap-2 mb-3">
+    <span class="px-3 py-1 rounded-full bg-[#0071C5]/10 border border-[#0071C5]/25 text-blue-300 text-[10px] font-bold uppercase tracking-wider">Processors</span>
+    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-400 text-[10px] font-bold uppercase tracking-wider">60 min</span>
+  </div>
+  <h3 class="text-lg font-headline font-bold text-white mb-1 group-hover:text-[#0071C5] transition-colors">Core Ultra vs Core — de juiste keuze</h3>
+  <p class="text-slate-400 text-sm mb-4 leading-relaxed">Uitleggen welk processormodel past bij welke klantbehoefte: series, generaties, en wat NPU toevoegt aan de alledaagse gebruiker.</p>
+  <div class="border-t border-white/5 pt-4">
+    <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Productcategorieën — extra focus</p>
+    <div class="flex flex-wrap gap-1.5">
+      <span class="focus-tag">⚡ Notebook 12-14.5</span>
+      <span class="focus-tag">⚡ Notebook 15,6</span>
+      <span class="reg-tag">Notebook 16,7+</span>
+      <span class="reg-tag">PC Desktop</span>
+      <span class="reg-tag">AIO PC</span>
+    </div>
+  </div>
+  <div class="flex items-center justify-between mt-4">
+    <span class="text-[10px] font-bold uppercase tracking-widest" style="color:#F0A500;">Gevorderd</span>
+    <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Retail Edge Training</span>
+  </div>
 </div>
+
+<!-- Card: Intel vs AMD / Apple / Qualcomm -->
+<div data-cat="processors" data-duration="45" class="glass-card rounded-2xl p-6 relative overflow-hidden group cursor-pointer hover:border-[#0071C5]/30 transition-all">
+  <div class="flex gap-2 mb-3">
+    <span class="px-3 py-1 rounded-full bg-[#0071C5]/10 border border-[#0071C5]/25 text-blue-300 text-[10px] font-bold uppercase tracking-wider">Processors</span>
+    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-400 text-[10px] font-bold uppercase tracking-wider">45 min</span>
+  </div>
+  <h3 class="text-lg font-headline font-bold text-white mb-1 group-hover:text-[#0071C5] transition-colors">Intel versus AMD / Apple / Qualcomm</h3>
+  <p class="text-slate-400 text-sm mb-4 leading-relaxed">Verkoopargumenten per concurrent: benchmark verhalen, softwarecompatibiliteit en totale eigendomskosten.</p>
+  <div class="border-t border-white/5 pt-4">
+    <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Productcategorieën — extra focus</p>
+    <div class="flex flex-wrap gap-1.5">
+      <span class="focus-tag">⚡ Notebook 12-14.5</span>
+      <span class="focus-tag">⚡ Notebook 15,6</span>
+      <span class="reg-tag">Gaming Notebooks</span>
+      <span class="reg-tag">Convertables 13,3+</span>
+    </div>
+  </div>
+  <div class="flex items-center justify-between mt-4">
+    <span class="text-[10px] font-bold uppercase tracking-widest" style="color:#F0A500;">Gevorderd</span>
+    <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Retail Edge Training</span>
+  </div>
 </div>
-<h3 class="text-2xl font-headline font-bold text-white mb-3 group-hover:text-[#0071C5] transition-colors">Meteor Lake Architecture 101</h3>
-<p class="text-slate-400 text-sm mb-6 leading-relaxed">Een fundamentel overzicht van de tegelgebaseerde architectuur en energie-efficiëntie.</p>
-<div class="flex items-center justify-between mt-auto">
-<div class="flex items-center gap-1">
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-slate-600 text-sm">star</span>
-<span class="text-xs text-slate-500 ml-1">(4.2)</span>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTIE 3: TECHNOLOGIEËN                       -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="col-span-full flex items-center gap-3 mt-4 mb-1">
+  <span class="material-symbols-outlined text-[#0071C5]">bolt</span>
+  <span class="text-xs font-bold uppercase tracking-widest text-[#0071C5]">Technologieën</span>
+  <div class="flex-1 h-px bg-[#0071C5]/20"></div>
 </div>
-<span class="text-[10px] font-bold uppercase tracking-widest" style="color: #F0A500;">Beginner</span>
+
+<!-- Card: AI-ervaringen + Wi-Fi 7 + Thunderbolt -->
+<div data-cat="technologie" data-duration="45" class="glass-card rounded-2xl p-6 relative overflow-hidden group cursor-pointer hover:border-[#00AEEF]/25 transition-all">
+  <div class="flex gap-2 mb-3">
+    <span class="px-3 py-1 rounded-full bg-[#00AEEF]/10 border border-[#00AEEF]/25 text-[#00AEEF] text-[10px] font-bold uppercase tracking-wider">Technologieën</span>
+    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-400 text-[10px] font-bold uppercase tracking-wider">45 min</span>
+  </div>
+  <h3 class="text-lg font-headline font-bold text-white mb-1 group-hover:text-[#00AEEF] transition-colors">AI-ervaringen, Wi-Fi 7 &amp; Thunderbolt</h3>
+  <p class="text-slate-400 text-sm mb-4 leading-relaxed">NPU voor on-device AI, Copilot+ features, Wi-Fi 7 (5 Gig) snelheid en Thunderbolt 4/5 voor professionals.</p>
+  <div class="border-t border-white/5 pt-4">
+    <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Productcategorieën — extra focus</p>
+    <div class="flex flex-wrap gap-1.5">
+      <span class="focus-tag">⚡ Notebook 12-14.5</span>
+      <span class="focus-tag">⚡ Notebook 15,6</span>
+      <span class="reg-tag">Creators</span>
+      <span class="reg-tag">Convertables 13,3+</span>
+    </div>
+  </div>
+  <div class="flex items-center justify-between mt-4">
+    <span class="text-[10px] font-bold uppercase tracking-widest" style="color:#F0A500;">Gevorderd</span>
+    <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Retail Edge Training</span>
+  </div>
 </div>
+
+<!-- Card: Intel Arc & Hybride architectuur -->
+<div data-cat="technologie" data-duration="30" class="glass-card rounded-2xl p-6 relative overflow-hidden group cursor-pointer hover:border-[#00AEEF]/25 transition-all">
+  <div class="flex gap-2 mb-3">
+    <span class="px-3 py-1 rounded-full bg-[#00AEEF]/10 border border-[#00AEEF]/25 text-[#00AEEF] text-[10px] font-bold uppercase tracking-wider">Technologieën</span>
+    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-400 text-[10px] font-bold uppercase tracking-wider">30 min</span>
+  </div>
+  <h3 class="text-lg font-headline font-bold text-white mb-1 group-hover:text-[#00AEEF] transition-colors">Intel Arc &amp; Hybride architectuur</h3>
+  <p class="text-slate-400 text-sm mb-4 leading-relaxed">Arc graphics voor gaming en creatie, hybride prestatiecores (P+E cores) en energiebeheer uitleggen.</p>
+  <div class="border-t border-white/5 pt-4">
+    <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Productcategorieën — extra focus</p>
+    <div class="flex flex-wrap gap-1.5">
+      <span class="reg-tag">Gaming Notebooks</span>
+      <span class="reg-tag">Gaming desktop</span>
+      <span class="reg-tag">Creators</span>
+      <span class="reg-tag">Notebook 16,7+</span>
+    </div>
+  </div>
+  <div class="flex items-center justify-between mt-4">
+    <span class="text-[10px] font-bold uppercase tracking-widest" style="color:#F0A500;">Beginner</span>
+    <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Retail Edge Training</span>
+  </div>
 </div>
-<!-- Card 3 -->
-<div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:border-white/20 transition-all">
-<div class="flex justify-between items-start mb-6">
-<div class="flex gap-2">
-<span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-bold uppercase tracking-wider">vPro</span>
-<span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-400 text-[10px] font-bold uppercase tracking-wider">60 min</span>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTIE 4: DE BASIS                            -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="col-span-full flex items-center gap-3 mt-4 mb-1">
+  <span class="material-symbols-outlined text-[#0071C5]">monitor</span>
+  <span class="text-xs font-bold uppercase tracking-widest text-[#0071C5]">De basis</span>
+  <div class="flex-1 h-px bg-[#0071C5]/20"></div>
 </div>
+
+<!-- Card: Waarom upgraden & Intel Evo -->
+<div data-cat="basis" data-duration="30" class="glass-card rounded-2xl p-6 relative overflow-hidden group cursor-pointer hover:border-[#0071C5]/30 transition-all">
+  <div class="flex gap-2 mb-3">
+    <span class="px-3 py-1 rounded-full bg-[#0071C5]/10 border border-[#0071C5]/25 text-blue-300 text-[10px] font-bold uppercase tracking-wider">De basis</span>
+    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-400 text-[10px] font-bold uppercase tracking-wider">30 min</span>
+  </div>
+  <h3 class="text-lg font-headline font-bold text-white mb-1 group-hover:text-[#0071C5] transition-colors">Waarom upgraden &amp; Intel Evo</h3>
+  <p class="text-slate-400 text-sm mb-4 leading-relaxed">Pc-basisbeginselen, wanneer is vervangen de juiste keuze, en het Intel Evo™ kwaliteitskeurmerk voor premium laptops.</p>
+  <div class="border-t border-white/5 pt-4">
+    <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Productcategorieën — extra focus</p>
+    <div class="flex flex-wrap gap-1.5">
+      <span class="focus-tag">⚡ Notebook 12-14.5</span>
+      <span class="focus-tag">⚡ Notebook 15,6</span>
+      <span class="reg-tag">Convertables 11,7+</span>
+      <span class="reg-tag">AIO PC</span>
+      <span class="reg-tag">Mini desktop</span>
+    </div>
+  </div>
+  <div class="flex items-center justify-between mt-4">
+    <span class="text-[10px] font-bold uppercase tracking-widest" style="color:#F0A500;">Beginner</span>
+    <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Retail Edge Training</span>
+  </div>
 </div>
-<h3 class="text-2xl font-headline font-bold text-white mb-3 group-hover:text-[#0071C5] transition-colors">Beveiliging op Hardwareniveau</h3>
-<p class="text-slate-400 text-sm mb-6 leading-relaxed">Beheer en beveilig bedrijfsvloten met Intel vPro Enterprise en Active Management Technology.</p>
-<div class="flex items-center justify-between mt-auto">
-<div class="flex items-center gap-1">
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star_half</span>
-<span class="text-xs text-slate-500 ml-1">(4.7)</span>
+
+<!-- Card: Modellen & vergelijking -->
+<div data-cat="basis" data-duration="30" class="glass-card rounded-2xl p-6 relative overflow-hidden group cursor-pointer hover:border-[#0071C5]/30 transition-all">
+  <div class="flex gap-2 mb-3">
+    <span class="px-3 py-1 rounded-full bg-[#0071C5]/10 border border-[#0071C5]/25 text-blue-300 text-[10px] font-bold uppercase tracking-wider">De basis</span>
+    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-400 text-[10px] font-bold uppercase tracking-wider">30 min</span>
+  </div>
+  <h3 class="text-lg font-headline font-bold text-white mb-1 group-hover:text-[#0071C5] transition-colors">Modellen &amp; assortiment vergelijken</h3>
+  <p class="text-slate-400 text-sm mb-4 leading-relaxed">Navigeer door het volledige assortiment: formfactors, schermgroottes, specificaties en welk model bij welke klant past.</p>
+  <div class="border-t border-white/5 pt-4">
+    <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Productcategorieën — extra focus</p>
+    <div class="flex flex-wrap gap-1.5">
+      <span class="focus-tag">⚡ Notebook 12-14.5</span>
+      <span class="focus-tag">⚡ Notebook 15,6</span>
+      <span class="reg-tag">Notebook 16,7+</span>
+      <span class="reg-tag">Convertibles 11.7-13.3</span>
+      <span class="reg-tag">PC Desktop</span>
+    </div>
+  </div>
+  <div class="flex items-center justify-between mt-4">
+    <span class="text-[10px] font-bold uppercase tracking-widest" style="color:#F0A500;">Beginner</span>
+    <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Retail Edge Training</span>
+  </div>
 </div>
-<span class="text-[10px] font-bold uppercase tracking-widest" style="color: #F0A500;">Expert</span>
-</div>
-</div>
-<!-- Card 4 -->
-<div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:border-white/20 transition-all">
-<div class="flex justify-between items-start mb-6">
-<div class="flex gap-2">
-<span class="px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-400 text-[10px] font-bold uppercase tracking-wider">Arc</span>
-<span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-400 text-[10px] font-bold uppercase tracking-wider">40 min</span>
-</div>
-</div>
-<h3 class="text-2xl font-headline font-bold text-white mb-3 group-hover:text-[#0071C5] transition-colors">Xᵉ Super Sampling (XeSS)</h3>
-<p class="text-slate-400 text-sm mb-6 leading-relaxed">Implementeer AI-gestuurde upscaling voor high-performance gaming op Intel Arc GPU's.</p>
-<div class="flex items-center justify-between mt-auto">
-<div class="flex items-center gap-1">
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-slate-600 text-sm">star</span>
-<span class="text-xs text-slate-500 ml-1">(4.4)</span>
-</div>
-<span class="text-[10px] font-bold uppercase tracking-widest" style="color: #F0A500;">Gevorderd</span>
-</div>
-</div>
-<!-- Card 5 -->
-<div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:border-white/20 transition-all">
-<div class="flex justify-between items-start mb-6">
-<div class="flex gap-2">
-<span class="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-bold uppercase tracking-wider">AI PC</span>
-<span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-400 text-[10px] font-bold uppercase tracking-wider">20 min</span>
-</div>
-</div>
-<h3 class="text-2xl font-headline font-bold text-white mb-3 group-hover:text-[#0071C5] transition-colors">AI Versnelling in Windows 11</h3>
-<p class="text-slate-400 text-sm mb-6 leading-relaxed">Maak gebruik van de NPU voor Studio Effects, Copilot en live vertalingen.</p>
-<div class="flex items-center justify-between mt-auto">
-<div class="flex items-center gap-1">
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="text-xs text-slate-500 ml-1">(4.8)</span>
-</div>
-<span class="text-[10px] font-bold uppercase tracking-widest" style="color: #F0A500;">Beginner</span>
-</div>
-</div>
-<!-- Card 6 -->
-<div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:border-white/20 transition-all">
-<div class="flex justify-between items-start mb-6">
-<div class="flex gap-2">
-<span class="px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-[10px] font-bold uppercase tracking-wider">Infrastructuur</span>
-<span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-400 text-[10px] font-bold uppercase tracking-wider">90 min</span>
-</div>
-</div>
-<h3 class="text-2xl font-headline font-bold text-white mb-3 group-hover:text-[#0071C5] transition-colors">Xeon Scalable Gen 5 Opschaling</h3>
-<p class="text-slate-400 text-sm mb-6 leading-relaxed">Optimaliseer datacenters voor AI-inferentie en cloud-native workloads.</p>
-<div class="flex items-center justify-between mt-auto">
-<div class="flex items-center gap-1">
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-slate-600 text-sm">star</span>
-<span class="text-xs text-slate-500 ml-1">(4.5)</span>
-</div>
-<span class="text-[10px] font-bold uppercase tracking-widest" style="color: #F0A500;">Expert</span>
-</div>
-</div>
+
 </section>
 </main>
 <!-- Footer Sticky CTA -->
@@ -335,9 +461,9 @@
 <div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center">
 <span class="material-symbols-outlined text-[#0071C5]">check_circle</span>
 </div>
-<div class="flex flex-col">
-<span class="text-white font-bold text-sm">1 training geselecteerd</span>
-<span id="selected-title" class="text-[11px] uppercase tracking-wider" style="color: #F0A500;">Deep Dive: Neural Processing Unit</span>
+<div class="flex flex-col gap-0.5">
+<span id="selection-count" class="text-white font-bold text-sm">Geen training geselecteerd</span>
+<span id="selection-time" class="text-[11px] uppercase tracking-wider font-bold" style="color: #F0A500;"></span>
 </div>
 </div>
 <div class="flex items-center gap-4">
@@ -353,55 +479,69 @@
 <div class="max-w-screen-2xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
 <span class="font-['DM_Sans'] text-xs uppercase tracking-widest text-slate-500">© 2024 Intel Corporation. Alle rechten voorbehouden.</span>
 <div class="flex gap-8">
-<a class="font-['DM_Sans'] text-xs uppercase tracking-widest text-slate-500 hover:text-[#0071C5] transition-all" href="#">Privacybeleid</a>
-<a class="font-['DM_Sans'] text-xs uppercase tracking-widest text-slate-500 hover:text-[#0071C5] transition-all" href="#">Gebruiksvoorwaarden</a>
-<a class="font-['DM_Sans'] text-xs uppercase tracking-widest text-slate-500 hover:text-[#0071C5] transition-all" href="#">Cookies</a>
-<a class="font-['DM_Sans'] text-xs uppercase tracking-widest text-slate-500 hover:text-[#0071C5] transition-all" href="#">Support</a>
+<a class="font-['DM_Sans'] text-xs uppercase tracking-widest text-slate-500 hover:text-[#0071C5] transition-all" href="javascript:void(0)" onclick="showToast('Binnenkort beschikbaar')">Privacybeleid</a>
+<a class="font-['DM_Sans'] text-xs uppercase tracking-widest text-slate-500 hover:text-[#0071C5] transition-all" href="javascript:void(0)" onclick="showToast('Binnenkort beschikbaar')">Gebruiksvoorwaarden</a>
+<a class="font-['DM_Sans'] text-xs uppercase tracking-widest text-slate-500 hover:text-[#0071C5] transition-all" href="javascript:void(0)" onclick="showToast('Binnenkort beschikbaar')">Cookies</a>
+<a class="font-['DM_Sans'] text-xs uppercase tracking-widest text-slate-500 hover:text-[#0071C5] transition-all" href="javascript:void(0)" onclick="showToast('Binnenkort beschikbaar')">Support</a>
 </div>
 </div>
 </div>
 
 
 <script>
-// ── Card selection ────────────────────────────────────────────────────────────
-const FILTER_TO_CAT = { 'arc-graphics': 'arc' };
-let selectedCard = null;
+// ── Multi-select state ────────────────────────────────────────────────────────
+const selectedCards = new Set();
+
+function updateFooter() {
+  const countEl = document.getElementById('selection-count');
+  const timeEl  = document.getElementById('selection-time');
+  const count   = selectedCards.size;
+  const totalMin = [...selectedCards].reduce((sum, c) => sum + (parseInt(c.dataset.duration) || 0), 0);
+  if (count === 0) {
+    countEl.textContent = 'Geen training geselecteerd';
+    timeEl.textContent  = '';
+  } else {
+    countEl.textContent = `${count} training${count > 1 ? 'en' : ''} geselecteerd`;
+    const hrs = Math.floor(totalMin / 60);
+    const mins = totalMin % 60;
+    timeEl.textContent = hrs > 0
+      ? `${hrs}u ${mins > 0 ? mins + ' min' : ''} totaal`.trim()
+      : `${totalMin} min totaal`;
+  }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   const grid        = document.getElementById('training-grid');
   const cards       = Array.from(grid.querySelectorAll('.glass-card'));
   const filterBtns  = document.querySelectorAll('[data-filter]');
   const searchInput = document.querySelector('input[placeholder]');
-  const titleEl     = document.getElementById('selected-title');
   let activeFilter  = 'all';
 
-  // Tag each card with category derived from its first badge
+  // ── Card toggle ─────────────────────────────────────────────────────────────
   cards.forEach(card => {
-    const badge = card.querySelector('.rounded-full');
-    const cat   = badge ? badge.textContent.trim().toLowerCase().replace(/\s+/g, '-') : '';
-    card.dataset.category = cat;
-    card.style.cursor = 'pointer';
-
     card.addEventListener('click', () => {
-      // Visual selection ring
-      cards.forEach(c => c.style.outline = '');
-      card.style.outline = '2px solid #0071C5';
-      card.style.outlineOffset = '2px';
-      selectedCard = card;
-      const title = card.querySelector('h3')?.textContent.trim() || '';
-      if (titleEl) titleEl.textContent = title;
+      const ringColor = card.dataset.cat === 'technologie' ? '#00AEEF' : '#0071C5';
+      if (selectedCards.has(card)) {
+        selectedCards.delete(card);
+        card.style.outline      = '';
+        card.style.outlineOffset = '';
+        card.style.boxShadow    = '';
+      } else {
+        selectedCards.add(card);
+        card.style.outline      = `2px solid ${ringColor}`;
+        card.style.outlineOffset = '3px';
+        card.style.boxShadow    = `0 0 18px ${ringColor}40`;
+      }
+      updateFooter();
     });
   });
 
-  // ── Filters ───────────────────────────────────────────────────────────────
+  // ── Filters ──────────────────────────────────────────────────────────────────
   function applyFilters() {
     const q = searchInput ? searchInput.value.toLowerCase().trim() : '';
     cards.forEach(card => {
-      const cat       = card.dataset.category || '';
-      const title     = card.querySelector('h3')?.textContent.toLowerCase() || '';
-      const targetCat = FILTER_TO_CAT[activeFilter] || activeFilter;
-      const matchF    = activeFilter === 'all' || cat === targetCat;
-      const matchS    = !q || title.includes(q);
+      const matchF = activeFilter === 'all' || card.dataset.cat === activeFilter;
+      const matchS = !q || (card.querySelector('h3')?.textContent.toLowerCase() || '').includes(q);
       card.style.display = matchF && matchS ? '' : 'none';
     });
   }
@@ -409,25 +549,36 @@ document.addEventListener('DOMContentLoaded', () => {
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       filterBtns.forEach(b => {
-        b.className = 'px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm font-bold hover:bg-white/10 transition-all';
+        b.className = 'px-5 py-2 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm font-bold hover:bg-white/10 transition-all';
       });
-      btn.className = 'px-6 py-2.5 rounded-full bg-[#0071C5] text-white text-sm font-bold transition-all';
+      btn.className = 'px-5 py-2 rounded-full bg-[#0071C5] text-white text-sm font-bold transition-all';
       activeFilter = btn.dataset.filter;
       applyFilters();
     });
   });
 
   if (searchInput) searchInput.addEventListener('input', applyFilters);
+  updateFooter();
 });
 
 // ── Save & continue ───────────────────────────────────────────────────────────
 function saveTrainingAndContinue() {
-  const booking  = JSON.parse(sessionStorage.getItem('intelBooking') || '{}');
-  const titleEl  = document.getElementById('selected-title');
-  booking.trainingTitle = titleEl ? titleEl.textContent.trim() : 'Intel Core Ultra Architecture Deep Dive';
-  booking.location      = 'Intel Experience Center Amsterdam';
+  if (selectedCards.size === 0) { showToast('Selecteer minimaal één training'); return; }
+  const booking   = JSON.parse(sessionStorage.getItem('intelBooking') || '{}');
+  const titles    = [...selectedCards].map(c => c.querySelector('h3')?.textContent.trim() || '');
+  const totalMin  = [...selectedCards].reduce((sum, c) => sum + (parseInt(c.dataset.duration) || 0), 0);
+  booking.trainingTitle   = titles.join(', ');
+  booking.trainingTitles  = titles;
+  booking.trainingMinutes = totalMin;
   sessionStorage.setItem('intelBooking', JSON.stringify(booking));
   window.location.href = 'datetime.html';
+}
+
+function showToast(msg) {
+  let t = document.getElementById('toast');
+  if (!t) { t = document.createElement('div'); t.id = 'toast'; t.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#1E293B;color:#F8F8FF;padding:.75rem 1.5rem;border-radius:12px;font-size:.875rem;font-weight:600;z-index:9999;opacity:0;transition:opacity .3s;border:1px solid rgba(255,255,255,.1);'; document.body.appendChild(t); }
+  t.textContent = msg; t.style.opacity = '1';
+  clearTimeout(t._tid); t._tid = setTimeout(() => t.style.opacity = '0', 2500);
 }
 </script>
 </body></html>

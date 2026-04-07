@@ -9,12 +9,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <style>
         body {
-            background-color: #0A0A0F;
+            background-color: #050A1E;
             background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
             background-size: 32px 32px;
         }
         .glass-card {
-            background: rgba(15, 23, 42, 0.84);
+            background: rgba(8, 16, 42, 0.88);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
@@ -46,8 +46,8 @@
                     colors: {
                         "primary": "#0071C5",
                         "primary-bright": "#3B8FD4",
-                        "surface": "#0A0A0F",
-                        "card-bg": "rgba(15, 23, 42, 0.84)",
+                        "surface": "#050A1E",
+                        "card-bg": "rgba(8, 16, 42, 0.88)",
                         "on-surface": "#F8F8FF",
                         "secondary-text": "#94A3B8",
                         "tertiary-text": "#64748B",
@@ -68,22 +68,24 @@
         }
     </script>
 </head>
-<body class="font-body text-on-surface antialiased min-h-screen pb-32">
+<body class="font-body text-[#F8F8FF] antialiased min-h-screen pb-32">
 <div class="purple-glow"></div>
-<!-- Navigation (TopNavBar from JSON) -->
-<header class="fixed top-0 w-full z-50 bg-[#0A0A0F]/85 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-black/50">
-<div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
-<div class="text-xl font-bold tracking-tighter text-[#F8F8FF] font-headline">
-                Intel Training
-            </div>
-<nav class="hidden md:flex items-center gap-8">
-<a class="text-[#94A3B8] font-headline font-bold text-sm tracking-tight hover:text-[#3B8FD4] transition-colors" href="#">Bookings</a>
-<a class="text-[#94A3B8] font-headline font-bold text-sm tracking-tight hover:text-[#3B8FD4] transition-colors" href="#">Schedule</a>
-<a class="text-[#94A3B8] font-headline font-bold text-sm tracking-tight hover:text-[#3B8FD4] transition-colors" href="#">Resources</a>
-</nav>
-<button class="bg-primary text-white font-headline font-bold text-sm tracking-tight px-6 py-2 rounded-lg active:scale-95 transition-transform hover:bg-primary-bright">
-                Inloggen
-            </button>
+<!-- Navigation -->
+<header style="background:#1535A0;border-bottom:1px solid rgba(255,255,255,0.15);" class="fixed top-0 w-full z-50 shadow-lg">
+<div class="flex justify-between items-center px-8 h-14 max-w-7xl mx-auto">
+  <a href="index.html" class="flex items-center gap-3" style="text-decoration:none;">
+    <span class="font-['Space_Grotesk'] font-extrabold text-white text-lg tracking-tight">intel<span style="color:#00C7FD;">.</span></span>
+    <span class="hidden md:block" style="width:1px;height:16px;background:rgba(255,255,255,0.3);"></span>
+    <span class="hidden md:block font-['DM_Sans'] text-sm font-normal" style="color:rgba(255,255,255,0.75);letter-spacing:0.03em;">Retail Edge Program</span>
+  </a>
+  <nav class="hidden md:flex items-center gap-8">
+    <a class="font-['Space_Grotesk'] font-bold text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.75);" href="dashboard.html">Bookings</a>
+    <a class="font-['Space_Grotesk'] font-bold text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.75);" href="training.html">Schedule</a>
+    <a class="font-['Space_Grotesk'] font-bold text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.75);" href="javascript:void(0)" onclick="showToast('Binnenkort beschikbaar')">Resources</a>
+  </nav>
+  <button onclick="window.location.href='index.html'" class="font-['Space_Grotesk'] font-bold text-sm px-5 py-2 rounded active:scale-95 transition-all" style="background:white;color:#1535A0;">
+    Inloggen
+  </button>
 </div>
 </header>
 <main class="relative pt-24 px-6 max-w-7xl mx-auto z-10">
@@ -94,31 +96,31 @@
 <div class="absolute top-1/2 left-0 w-full h-0.5 bg-white/5 -translate-y-1/2 z-0"></div>
 <!-- Step 1 (Completed) -->
 <div class="relative z-10 flex flex-col items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white ring-8 ring-[#0A0A0F]">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white ring-8 ring-[#050A1E]">
 <span class="material-symbols-outlined text-xl">check</span>
 </div>
 <span class="text-[11px] font-bold uppercase tracking-widest text-primary font-headline">Training</span>
 </div>
 <!-- Step 2 (Completed) -->
 <div class="relative z-10 flex flex-col items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white ring-8 ring-[#0A0A0F]">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white ring-8 ring-[#050A1E]">
 <span class="material-symbols-outlined text-xl">check</span>
 </div>
 <span class="text-[11px] font-bold uppercase tracking-widest text-primary font-headline">Datum</span>
 </div>
 <!-- Step 3 (Active) -->
 <div class="relative z-10 flex flex-col items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-headline font-bold text-lg ring-8 ring-[#0A0A0F]">3</div>
-<span class="text-[11px] font-bold uppercase tracking-widest text-on-surface font-headline">Details</span>
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-headline font-bold text-lg ring-8 ring-[#050A1E]">3</div>
+<span class="text-[11px] font-bold uppercase tracking-widest text-[#F8F8FF] font-headline">Details</span>
 </div>
 <!-- Step 4 (Muted) -->
 <div class="relative z-10 flex flex-col items-center gap-3">
-<div class="w-10 h-10 rounded-full border-2 border-white/10 bg-[#0A0A0F] flex items-center justify-center text-tertiary-text font-headline font-bold text-lg ring-8 ring-[#0A0A0F]">4</div>
+<div class="w-10 h-10 rounded-full border-2 border-white/10 bg-[#050A1E] flex items-center justify-center text-tertiary-text font-headline font-bold text-lg ring-8 ring-[#050A1E]">4</div>
 <span class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text font-headline">Bevestiging</span>
 </div>
 <!-- Step 5 (Muted) -->
 <div class="relative z-10 flex flex-col items-center gap-3">
-<div class="w-10 h-10 rounded-full border-2 border-white/10 bg-[#0A0A0F] flex items-center justify-center text-tertiary-text font-headline font-bold text-lg ring-8 ring-[#0A0A0F]">5</div>
+<div class="w-10 h-10 rounded-full border-2 border-white/10 bg-[#050A1E] flex items-center justify-center text-tertiary-text font-headline font-bold text-lg ring-8 ring-[#050A1E]">5</div>
 <span class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text font-headline">Klaar</span>
 </div>
 </div>
@@ -126,21 +128,21 @@
 <!-- Booking Summary Card -->
 <div class="glass-card rounded-lg p-6 mb-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
 <div class="flex-1">
-<h3 class="font-headline font-bold text-xl text-white mb-2 tracking-tight">Intel Core Ultra Architecture Deep Dive</h3>
+<h3 id="summary-title" class="font-headline font-bold text-xl text-white mb-2 tracking-tight">Intel Core Ultra Architecture Deep Dive</h3>
 <div class="flex flex-wrap gap-4 text-secondary-text text-sm">
 <div class="flex items-center gap-1.5">
 <span class="material-symbols-outlined text-lg opacity-70">calendar_today</span>
-                        Wo 18 Mrt 2026 • 09:00–17:00
-                    </div>
+<span id="summary-datetime">Wo 18 Mrt 2026 • 09:00–17:00</span>
+</div>
 <div class="flex items-center gap-1.5">
 <span class="material-symbols-outlined text-lg opacity-70">location_on</span>
-                        Intel Experience Center Amsterdam
+<span id="details-summary-location">Nog niet geselecteerd</span>
                     </div>
 </div>
 </div>
 <div class="flex items-center gap-3">
 <span class="bg-primary/10 text-primary border border-primary/20 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider">Core Ultra</span>
-<span class="bg-white/5 text-secondary-text border border-white/10 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider">8 uur</span>
+<span id="summary-duration" class="bg-white/5 text-secondary-text border border-white/10 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider">8 uur</span>
 <button onclick="window.location.href='datetime.html'" class="text-secondary-text hover:text-white text-sm font-bold ml-4 underline underline-offset-4 decoration-white/20">Wijzigen</button>
 </div>
 </div>
@@ -163,56 +165,64 @@
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
 <div class="space-y-2">
 <label class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text ml-1" style="color: #F0A500;">Voornaam</label>
-<input id="firstName" class="w-full bg-surface-container-low border border-white/10 rounded-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all text-on-surface" placeholder="Bijv. Mark" type="text"/>
+<input id="firstName" class="w-full bg-[rgba(8,16,42,0.88)] border border-white/10 rounded-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all text-[#F8F8FF]" placeholder="Bijv. Mark" type="text"/>
 </div>
 <div class="space-y-2">
-<label class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text ml-1" style="color: #F0A500;">Voornaam</label>
-<input id="lastName" class="w-full bg-surface-container-low border border-white/10 rounded-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all text-on-surface" placeholder="Bijv. Jansen" type="text"/>
+<label class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text ml-1" style="color: #F0A500;">Achternaam</label>
+<input id="lastName" class="w-full bg-[rgba(8,16,42,0.88)] border border-white/10 rounded-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all text-[#F8F8FF]" placeholder="Bijv. Jansen" type="text"/>
 </div>
 </div>
 <div class="space-y-2 mb-6">
-<label class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text ml-1" style="color: #F0A500;">Voornaam</label>
+<label class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text ml-1" style="color: #F0A500;">E-mailadres</label>
 <div class="relative">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-tertiary-text">mail</span>
-<input id="email" class="w-full bg-surface-container-low border border-white/10 rounded-lg pl-12 pr-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all text-on-surface" placeholder="naam@bedrijf.nl" type="email"/>
+<input id="email" class="w-full bg-[rgba(8,16,42,0.88)] border border-white/10 rounded-lg pl-12 pr-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all text-[#F8F8FF]" placeholder="naam@bedrijf.nl" type="email"/>
 </div>
 </div>
 <div class="space-y-2">
-<label class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text ml-1" style="color: #F0A500;">Voornaam</label>
+<label class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text ml-1" style="color: #F0A500;">Telefoonnummer</label>
 <div class="flex">
 <div class="flex items-center gap-2 bg-white/5 border border-white/10 border-r-0 rounded-l-lg px-4 py-3">
 <img alt="Netherlands Flag" class="w-5 h-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdxnmvefTuygOfAxQuc07EzlflTIwLz9a12SvCuU5PqVKcKdKqKozBvWlRu40h9rW87TY4p-BtAA83D_E1DGRJYua0UnQDZZOAoBcKkmTLaX5zTDPduJAPoS7mrgqdZCfJMeMviUQDAj9yyBNwzH8GM_j4iQ41gThH1eUNXINV8hymHJecp6nZnPVPq_rtVORdAFdl5P_b3Hl1Lvw-DCzoZmYqRtuKMw4koy1WIHfzty7kYzUx-nHBCRoaICu0186i8LGtkt377azc"/>
 <span class="text-sm text-secondary-text">+31</span>
 </div>
-<input id="phone" class="w-full bg-surface-container-low border border-white/10 rounded-r-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all text-on-surface" placeholder="6 12345678" type="tel"/>
+<input id="phone" class="w-full bg-[rgba(8,16,42,0.88)] border border-white/10 rounded-r-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all text-[#F8F8FF]" placeholder="6 12345678" type="tel"/>
 </div>
 </div>
 </div>
 <!-- Section 2: Bedrijfsgegevens -->
 <div>
 <div class="flex items-center gap-3 mb-8">
-<span class="w-2 h-2 rounded-full bg-primary opacity-50" style="background-color: #F0A500;"></span>
+<span class="w-2 h-2 rounded-full opacity-50" style="background-color: #F0A500;"></span>
 <h2 class="text-[12px] font-bold uppercase tracking-[0.15em] text-[#F0A500] font-headline">Bedrijfsgegevens</h2>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<!-- Store Search -->
+<div id="storeSearchWrapper" class="space-y-2 mb-6 relative">
+<label class="text-[11px] font-bold uppercase tracking-widest ml-1" style="color: #F0A500;">Winkel zoeken</label>
+<div class="relative">
+  <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-[#64748B]">search</span>
+  <input id="storeSearch" autocomplete="off" class="w-full bg-[rgba(8,16,42,0.88)] border border-white/10 rounded-lg pl-12 pr-4 py-3 focus:ring-1 focus:ring-[#0071C5] focus:border-[#0071C5] outline-none text-[#F8F8FF] placeholder-[#64748B]" placeholder="Zoek op winkelnaam of stad..." type="text"/>
+</div>
+<div id="storeDropdown" class="absolute z-50 left-0 right-0 mt-1 rounded-lg border border-white/10 overflow-hidden hidden" style="background:rgba(15,23,42,0.98);backdrop-filter:blur(12px);max-height:260px;overflow-y:auto;"></div>
+</div>
+<!-- Selected store display -->
+<div id="storeSelected" class="hidden mb-6 p-4 rounded-lg border border-[#0071C5]/30 bg-[#0071C5]/5 flex items-start gap-3">
+  <span class="material-symbols-outlined text-[#0071C5] mt-0.5">store</span>
+  <div class="flex-1 min-w-0">
+    <p id="storeSelectedName" class="text-[#F8F8FF] font-bold text-sm font-headline"></p>
+    <p id="storeSelectedInfo" class="text-[#94A3B8] text-xs mt-0.5"></p>
+  </div>
+  <button onclick="clearStore()" class="text-[#64748B] hover:text-white transition-colors text-xs underline flex-shrink-0">Wijzigen</button>
+</div>
+<!-- Hidden fields filled by store selection -->
+<input id="companyName" type="hidden"/>
+<input id="city" type="hidden"/>
+<input id="storeLocation" type="hidden"/>
+<input id="retailer" type="hidden"/>
+<!-- Functietitel stays manual -->
 <div class="space-y-2">
-<label class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text ml-1" style="color: #F0A500;">Bedrijfsnaam</label>
-<input id="companyName" class="w-full bg-surface-container-low border border-white/10 rounded-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none text-on-surface" type="text"/>
-</div>
-<div class="space-y-2">
-<label class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text ml-1" style="color: #F0A500;">Functietitel</label>
-<input id="jobTitle" class="w-full bg-surface-container-low border border-white/10 rounded-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none text-on-surface" type="text"/>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div class="space-y-2">
-<label class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text ml-1" style="color: #F0A500;">Stad</label>
-<input id="city" class="w-full bg-surface-container-low border border-white/10 rounded-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none text-on-surface" type="text"/>
-</div>
-<div class="space-y-2">
-<label class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text ml-1" style="color: #F0A500;">LinkedIn</label>
-<input id="linkedin" class="w-full bg-surface-container-low border border-white/10 rounded-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none text-on-surface" placeholder="linkedin.com/in/gebruiker" type="url"/>
-</div>
+<label class="text-[11px] font-bold uppercase tracking-widest ml-1" style="color: #F0A500;">Functietitel</label>
+<input id="jobTitle" class="w-full bg-[rgba(8,16,42,0.88)] border border-white/10 rounded-lg px-4 py-3 focus:ring-1 focus:ring-[#0071C5] focus:border-[#0071C5] outline-none text-[#F8F8FF]" placeholder="Bijv. Store Manager" type="text"/>
 </div>
 </div>
 <!-- Section 3: Dieetwensen -->
@@ -222,20 +232,20 @@
 <h2 class="text-[12px] font-bold uppercase tracking-[0.15em] text-[#F0A500] font-headline">Dieetwensen &amp; bijzonderheden</h2>
 </div>
 <div class="space-y-2">
-<textarea id="notes" class="w-full bg-surface-container-low border border-white/10 rounded-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none text-on-surface resize-none" placeholder="Zijn er specifieke dieetwensen of andere zaken waar we rekening mee moeten houden?" rows="3"></textarea>
+<textarea id="notes" class="w-full bg-[rgba(8,16,42,0.88)] border border-white/10 rounded-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none text-[#F8F8FF] resize-none" placeholder="Zijn er specifieke dieetwensen of andere zaken waar we rekening mee moeten houden?" rows="3"></textarea>
 </div>
 </div>
 <!-- Checkboxes -->
 <div class="space-y-4 pt-4 border-t border-white/5">
 <label class="flex items-start gap-3 cursor-pointer group">
-<input class="mt-1 w-5 h-5 bg-surface-container-low border-white/10 rounded text-primary focus:ring-offset-[#0A0A0F] focus:ring-primary" required="" type="checkbox"/>
-<span class="text-sm text-secondary-text group-hover:text-on-surface transition-colors">
-                                Ik ga akkoord met de <a class="text-primary hover:underline" href="#">Algemene Voorwaarden</a> en het <a class="text-primary hover:underline" href="#">Privacybeleid</a> van Intel Training.
+<input class="mt-1 w-5 h-5 bg-[rgba(8,16,42,0.88)] border-white/10 rounded text-primary focus:ring-offset-[#050A1E] focus:ring-primary" required="" type="checkbox"/>
+<span class="text-sm text-secondary-text group-hover:text-[#F8F8FF] transition-colors">
+                                Ik ga akkoord met de <a class="text-primary hover:underline" href="javascript:void(0)" onclick="showToast('Binnenkort beschikbaar')">Algemene Voorwaarden</a> en het <a class="text-primary hover:underline" href="javascript:void(0)" onclick="showToast('Binnenkort beschikbaar')">Privacybeleid</a> van Intel Training.
                             </span>
 </label>
 <label class="flex items-start gap-3 cursor-pointer group">
-<input class="mt-1 w-5 h-5 bg-surface-container-low border-white/10 rounded text-primary focus:ring-offset-[#0A0A0F] focus:ring-primary" type="checkbox"/>
-<span class="text-sm text-secondary-text group-hover:text-on-surface transition-colors">
+<input class="mt-1 w-5 h-5 bg-[rgba(8,16,42,0.88)] border-white/10 rounded text-primary focus:ring-offset-[#050A1E] focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-secondary-text group-hover:text-[#F8F8FF] transition-colors">
                                 Houd me op de hoogte van nieuwe Intel trainingen en architectuur updates via e-mail.
                             </span>
 </label>
@@ -255,7 +265,7 @@
 </div>
 <div>
 <p class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text mb-1" style="color: #F0A500;">Training</p>
-<p class="text-sm font-bold text-on-surface">Intel Core Ultra Deep Dive</p>
+<p id="sidebar-training" class="text-sm font-bold text-[#F8F8FF]">Intel Core Ultra Deep Dive</p>
 </div>
 </div>
 <div class="flex gap-4">
@@ -264,7 +274,7 @@
 </div>
 <div>
 <p class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text mb-1" style="color: #F0A500;">Wanneer</p>
-<p class="text-sm font-bold text-on-surface">18 Maart 2026, 09:00</p>
+<p id="sidebar-datetime" class="text-sm font-bold text-[#F8F8FF]">18 Maart 2026, 09:00</p>
 </div>
 </div>
 <div class="flex gap-4">
@@ -273,17 +283,17 @@
 </div>
 <div>
 <p class="text-[11px] font-bold uppercase tracking-widest text-tertiary-text mb-1" style="color: #F0A500;">Locatie</p>
-<p class="text-sm font-bold text-on-surface">Intel Experience Center</p>
+<p id="details-sidebar-location" class="text-sm font-bold text-[#F8F8FF]">Nog niet geselecteerd</p>
 </div>
 </div>
 <div class="pt-6 border-t border-white/5 space-y-3">
 <div class="flex justify-between text-sm">
 <span class="text-secondary-text">Subtotaal</span>
-<span class="text-on-surface">€ 0,00</span>
+<span class="text-[#F8F8FF]">€ 0,00</span>
 </div>
 <div class="flex justify-between text-sm">
 <span class="text-secondary-text">BTW (21%)</span>
-<span class="text-on-surface">€ 0,00</span>
+<span class="text-[#F8F8FF]">€ 0,00</span>
 </div>
 <div class="flex justify-between items-center pt-3 border-t border-white/10">
 <span class="font-headline font-bold text-lg text-white">Totaal</span>
@@ -301,17 +311,17 @@
 <!-- Preview Image -->
 <div class="mt-6 glass-card rounded-lg overflow-hidden h-48 relative">
 <img alt="Training Center" class="w-full h-full object-cover opacity-50" data-alt="interior of a modern tech training center with dark furniture, blue led accents, and high-end workstation setups in a sleek architectural style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp7u-6LzDAYmB1rDLgNAgsn065AqbxwHQ47FfYI-KsmAgQ1I_Wyq4fA8bF2wemZxTE-zGS27P4D11BuaTp8nrpP5Ak1S6SNzEL9AHTv1BgeB6YCgw114dd6Fo3rLS_TsDvaaA4skTxuAJfO2B0JW8DH5yLVp2bTet6hkb0LxJwo4zS00yogOkPJvXg-kKxVAWGsIqAaYnpc5vHdIpsOS8IceXlaCe3VQhVVV0-qp9Plj1PiuRHHdsK154a_yONYV7S0Z5nqYVs2J7s"/>
-<div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0F] to-transparent"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-[#050A1E] to-transparent"></div>
 <div class="absolute bottom-4 left-4">
 <p class="text-[10px] font-bold uppercase tracking-widest text-white/60 mb-1" style="color: #F0A500;">Host Locatie</p>
-<p class="text-sm font-bold text-white">Amsterdam Experience Center</p>
+<p id="details-host-location" class="text-sm font-bold text-white">Nog niet geselecteerd</p>
 </div>
 </div>
 </div>
 </div>
 </main>
 <!-- Sticky Bottom CTA Bar -->
-<div class="fixed bottom-0 left-0 w-full z-40 bg-[#0A0A0F]/90 backdrop-blur-xl border-t border-white/10">
+<div class="fixed bottom-0 left-0 w-full z-40 bg-[#050A1E]/90 backdrop-blur-xl border-t border-white/10">
 <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 <div class="flex items-center gap-4">
 <span class="text-secondary-text text-sm font-headline font-bold">Stap 3 van 5</span>
@@ -320,7 +330,7 @@
 </div>
 </div>
 <div class="flex items-center gap-4">
-<button onclick="window.location.href='datetime.html'" class="px-6 py-3 rounded-lg text-on-surface font-headline font-bold text-sm hover:bg-white/5 transition-colors border border-transparent active:scale-95 duration-200">
+<button onclick="window.location.href='datetime.html'" class="px-6 py-3 rounded-lg text-[#F8F8FF] font-headline font-bold text-sm hover:bg-white/5 transition-colors border border-transparent active:scale-95 duration-200">
                     Vorige
                 </button>
 <button onclick="saveAndContinue()" class="px-8 py-3 rounded-lg bg-primary text-white font-headline font-bold text-sm shadow-[0_18px_32px_rgba(0,113,197,0.22)] hover:bg-primary-bright active:scale-95 transition-all flex items-center gap-2">
@@ -331,7 +341,7 @@
 </div>
 </div>
 <!-- Mobile Bottom Navigation (BottomNavBar from JSON) -->
-<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-[22px] bg-[#0A0A0F]/90 backdrop-blur-lg border-t border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-[22px] bg-[#050A1E]/90 backdrop-blur-lg border-t border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
 <div class="flex justify-around items-center h-20 px-4 pb-safe">
 <div class="flex flex-col items-center justify-center text-[#64748B] hover:bg-white/5 duration-200 active:scale-90">
 <span class="material-symbols-outlined">home</span>
@@ -354,28 +364,259 @@
 
 
 <script>
-function saveAndContinue() {
-  const booking = JSON.parse(sessionStorage.getItem('intelBooking') || '{}');
-  booking.customerName = (document.getElementById('firstName').value.trim() + ' ' + document.getElementById('lastName').value.trim()).trim() || 'Onbekend';
-  booking.customerEmail = document.getElementById('email').value.trim();
-  booking.companyName = document.getElementById('companyName').value.trim() || 'Onbekend';
-  booking.phone = document.getElementById('phone').value.trim();
-  booking.notes = document.getElementById('notes').value.trim();
-  sessionStorage.setItem('intelBooking', JSON.stringify(booking));
-  window.location.href = 'review.html';
+// ── Store Data (exact from Intel store list) ──────────────────────────────────
+const STORES = [
+  { name: 'Media Markt Amersfoort', retailer: 'Media Markt', city: 'Amersfoort', location: 'Eemplein 3', storeCode: '1255' },
+  { name: 'Media Markt Utrecht Hoog Catharijne', retailer: 'Media Markt', city: 'Utrecht', location: 'Gildenkwartier 18', storeCode: '862' },
+  { name: 'Media Markt Amsterdam ArenA', retailer: 'Media Markt', city: 'Amsterdam', location: 'Arena Boulevard', storeCode: '854' },
+  { name: 'Media Markt Amsterdam Gelderlandplein', retailer: 'Media Markt', city: 'Amsterdam', location: 'Gelderlandplein 1', storeCode: '' },
+  { name: 'Media Markt Assen', retailer: 'Media Markt', city: 'Assen', location: 'Kroonwerk 21', storeCode: '1246' },
+  { name: 'Media Markt Groningen Sontplein', retailer: 'Media Markt', city: 'Groningen', location: 'Sontplein 3C', storeCode: '360' },
+  { name: 'Media Markt Groningen Centrum', retailer: 'Media Markt', city: 'Groningen', location: 'Westerhaven 48', storeCode: '857' },
+  { name: 'Media Markt Beverwijk', retailer: 'Media Markt', city: 'Beverwijk', location: 'Parallelweg 100', storeCode: '' },
+  { name: 'Media Markt Alkmaar', retailer: 'Media Markt', city: 'Alkmaar', location: 'Noorderkade 172', storeCode: '865' },
+  { name: 'Media Markt Ede', retailer: 'Media Markt', city: 'Ede', location: 'Brouwerstraat 21', storeCode: '871' },
+  { name: 'Media Markt Nijmegen Dukenburg', retailer: 'Media Markt', city: 'Nijmegen', location: 'Zwanenveld 8406', storeCode: '' },
+  { name: 'Media Markt Nieuwegein', retailer: 'Media Markt', city: 'Nieuwegein', location: 'Raadstede 41', storeCode: '1149' },
+  { name: 'Media Markt Leeuwarden', retailer: 'Media Markt', city: 'Leeuwarden', location: 'Plein de Centrale', storeCode: '855' },
+  { name: 'Media Markt Drachten', retailer: 'Media Markt', city: 'Drachten', location: 'Raadhuisplein 37', storeCode: '1325' },
+  { name: 'Media Markt Amsterdam West - Outlet', retailer: 'Media Markt', city: 'Amsterdam', location: 'Zuidermolenweg', storeCode: '1298' },
+  { name: 'Media Markt Amsterdam Centrum', retailer: 'Media Markt', city: 'Amsterdam', location: 'Oosterdokskade 4', storeCode: '1208' },
+  { name: 'Media Markt Utrecht The Wall', retailer: 'Media Markt', city: 'Utrecht', location: 'Hertogswetering', storeCode: '637' },
+  { name: 'Media Markt Almere', retailer: 'Media Markt', city: 'Almere', location: 'Brouwerstraat 3', storeCode: '861' },
+  { name: 'Media Markt Alphen aan den Rijn', retailer: 'Media Markt', city: 'Alphen aan den Rijn', location: 'Rijnplein 9', storeCode: '869' },
+  { name: 'Media Markt Delft', retailer: 'Media Markt', city: 'Delft', location: 'Bastiaansplein 13', storeCode: '' },
+  { name: 'Media Markt Den Haag', retailer: 'Media Markt', city: 'Den Haag', location: 'Grote Marktstraat', storeCode: '858' },
+  { name: 'Media Markt Rijswijk', retailer: 'Media Markt', city: 'Rijswijk', location: 'Prins Willem Alexanderlaan', storeCode: '856' },
+  { name: 'Media Markt Leidschendam', retailer: 'Media Markt', city: 'Leidschendam', location: 'Liguster 102', storeCode: 'N038' },
+  { name: 'Media Markt Heerhugowaard', retailer: 'Media Markt', city: 'Heerhugowaard', location: 'Th. van Doesburglaan', storeCode: '880' },
+  { name: 'Media Markt Hoorn', retailer: 'Media Markt', city: 'Hoorn', location: 'C.J.K. van Aalstweg', storeCode: '1239' },
+  { name: 'Media Markt Apeldoorn', retailer: 'Media Markt', city: 'Apeldoorn', location: 'De Voorwaarts 1', storeCode: '1322' },
+  { name: 'Media Markt Hengelo', retailer: 'Media Markt', city: 'Hengelo', location: 'Het Plein 130', storeCode: '864' },
+  { name: 'Media Markt Enschede', retailer: 'Media Markt', city: 'Enschede', location: 'Klanderij 63', storeCode: '863' },
+  { name: 'Media Markt Duiven', retailer: 'Media Markt', city: 'Duiven', location: 'Cartograaf 3', storeCode: '1381' },
+  { name: 'Media Markt Rotterdam Alexandrium', retailer: 'Media Markt', city: 'Rotterdam', location: 'Watermanweg 32', storeCode: '853' },
+  { name: 'Media Markt Rotterdam Centrum', retailer: 'Media Markt', city: 'Rotterdam', location: 'Binnenwegplein 5', storeCode: '852' },
+  { name: 'Media Markt Rotterdam Zuid', retailer: 'Media Markt', city: 'Rotterdam', location: 'Beijerlandselaan', storeCode: '746' },
+  { name: 'Media Markt Den Bosch', retailer: 'Media Markt', city: "'s-Hertogenbosch", location: 'Tinnegieterstraat', storeCode: '1391' },
+  { name: 'Media Markt Eindhoven Ekkersrijt', retailer: 'Media Markt', city: 'Son en Breugel', location: 'Ekkersrijt 4086', storeCode: '1360' },
+  { name: 'Media Markt Cruquius', retailer: 'Media Markt', city: 'Cruquius', location: 'Cruquiusplein 10', storeCode: '875' },
+  { name: 'Media Markt Zoeterwoude', retailer: 'Media Markt', city: 'Zoeterwoude', location: 'Hoge Rijndijk 311', storeCode: '' },
+  { name: 'Media Markt Zoetermeer', retailer: 'Media Markt', city: 'Zoetermeer', location: 'Burgemeester Jamesplein', storeCode: '868' },
+  { name: 'Media Markt Tilburg', retailer: 'Media Markt', city: 'Tilburg', location: 'Pieter Vreedeplein', storeCode: '499' },
+  { name: 'Media Markt Breda', retailer: 'Media Markt', city: 'Breda', location: 'Kruisvoort 14', storeCode: '867' },
+  { name: 'Media Markt Bergen op Zoom', retailer: 'Media Markt', city: 'Bergen op Zoom', location: 'Burgemeester Stulemeijerlaan', storeCode: '876' },
+  { name: 'Media Markt Hoofddorp', retailer: 'Media Markt', city: 'Hoofddorp', location: 'Burgemeester van Stamplein', storeCode: '194' },
+  { name: 'Media Markt Amsterdam Noord', retailer: 'Media Markt', city: 'Amsterdam', location: 'Buikslotermeerplem', storeCode: '642' },
+  { name: 'Media Markt Zwolle', retailer: 'Media Markt', city: 'Zwolle', location: 'Maagjesbolwerk', storeCode: '859' },
+  { name: 'Media Markt Eindhoven Centrum', retailer: 'Media Markt', city: 'Eindhoven', location: 'Boschdijktunnel 1', storeCode: '872' },
+  { name: 'Media Markt Barendrecht', retailer: 'Media Markt', city: 'Barendrecht', location: "Van 't Hoffstraat", storeCode: '' },
+  { name: 'Media Markt Dordrecht', retailer: 'Media Markt', city: 'Dordrecht', location: 'Johan de Wittstraat', storeCode: '1275' },
+  { name: 'Media Markt Arnhem', retailer: 'Media Markt', city: 'Arnhem', location: 'Velperplein 13', storeCode: '873' },
+  { name: 'BCC Purmerend', retailer: 'BCC', city: 'Purmerend', location: 'Singelgracht', storeCode: '' },
+  { name: 'Media Markt Venlo', retailer: 'Media Markt', city: 'Venlo', location: 'Maasstraat 12', storeCode: '1102' },
+  { name: 'Media Markt Roermond', retailer: 'Media Markt', city: 'Roermond', location: 'Schaarbroekerweg', storeCode: '484' },
+  { name: 'Media Markt Heerlen', retailer: 'Media Markt', city: 'Heerlen', location: 'Corio Center 9', storeCode: '860' },
+  { name: 'Media Markt Maastricht', retailer: 'Media Markt', city: 'Maastricht', location: 'Franciscus Romanusweg', storeCode: '866' },
+  { name: 'Media Markt Emmen', retailer: 'Media Markt', city: 'Emmen', location: 'Noorderplein 90', storeCode: '1299' },
+  { name: 'Media Markt Middelburg', retailer: 'Media Markt', city: 'Middelburg', location: 'Mortiereboulevard', storeCode: '870' },
+  { name: 'BCC Bergen op Zoom', retailer: 'BCC', city: 'Bergen op Zoom', location: 'Van Konijnenburgweg', storeCode: '' },
+];
+
+// ── Store Search Logic ────────────────────────────────────────────────────────
+let selectedStore = null;
+
+function renderDropdown(results) {
+  const dd = document.getElementById('storeDropdown');
+  if (!results.length) { dd.classList.add('hidden'); return; }
+  dd.innerHTML = results.map((s, i) =>
+    `<div class="px-4 py-3 cursor-pointer hover:bg-white/10 transition-colors border-b border-white/5 last:border-0 flex items-center gap-3"
+         onclick="selectStore(${i === -1 ? 'null' : `filteredStores[${i}]`})">
+       <span class="material-symbols-outlined text-[#0071C5] text-base flex-shrink-0">store</span>
+       <div>
+         <p class="text-[#F8F8FF] text-sm font-bold font-headline">${s.name}</p>
+         <p class="text-[#94A3B8] text-xs">${s.retailer} · ${s.city}</p>
+       </div>
+     </div>`
+  ).join('');
+  dd.classList.remove('hidden');
 }
-// Pre-fill if returning
-window.addEventListener('DOMContentLoaded', () => {
+
+let filteredStores = [];
+
+document.addEventListener('DOMContentLoaded', () => {
+  const input = document.getElementById('storeSearch');
+  const dd = document.getElementById('storeDropdown');
+
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    if (!q) { dd.classList.add('hidden'); filteredStores = []; return; }
+    filteredStores = STORES.filter(s =>
+      s.name.toLowerCase().includes(q) ||
+      s.city.toLowerCase().includes(q) ||
+      s.retailer.toLowerCase().includes(q)
+    ).slice(0, 8);
+    // Re-render with indices into filteredStores
+    if (!filteredStores.length) { dd.classList.add('hidden'); return; }
+    dd.innerHTML = filteredStores.map((s, i) =>
+      `<div class="px-4 py-3 cursor-pointer hover:bg-white/10 transition-colors border-b border-white/5 last:border-0 flex items-center gap-3"
+           onclick="selectStore(filteredStores[${i}])">
+         <span class="material-symbols-outlined text-[#0071C5] text-base flex-shrink-0">store</span>
+         <div>
+           <p class="text-[#F8F8FF] text-sm font-bold font-headline">${s.name}</p>
+           <p class="text-[#94A3B8] text-xs">${s.retailer} · ${s.city}</p>
+         </div>
+       </div>`
+    ).join('');
+    dd.classList.remove('hidden');
+  });
+
+  // Close dropdown on outside click
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#storeSearch') && !e.target.closest('#storeDropdown')) {
+      dd.classList.add('hidden');
+    }
+  });
+
+  // Populate summary from sessionStorage
   const b = JSON.parse(sessionStorage.getItem('intelBooking') || '{}');
+
+  // Summary card — title
+  if (b.trainingTitle) {
+    const titleEl = document.getElementById('summary-title');
+    const sidebarTraining = document.getElementById('sidebar-training');
+    if (titleEl) titleEl.textContent = b.trainingTitle;
+    if (sidebarTraining) sidebarTraining.textContent = b.trainingTitle.length > 40 ? b.trainingTitle.slice(0, 38) + '…' : b.trainingTitle;
+  }
+
+  // Summary card — date & time
+  if (b.selectedDate || b.startDateTime) {
+    const MONTHS = ['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'];
+    const DAYS = ['zo','ma','di','wo','do','vr','za'];
+    const d = new Date(b.selectedDate || b.startDateTime);
+    const dayShort = DAYS[d.getDay()].charAt(0).toUpperCase() + DAYS[d.getDay()].slice(1);
+    const monShort = MONTHS[d.getMonth()].slice(0, 3);
+    let startTime, endTime;
+    if (b.selectedTime) {
+      const parts = b.selectedTime.split('–');
+      startTime = parts[0].trim();
+      endTime   = parts[1] ? parts[1].trim() : '';
+    } else if (b.startDateTime) {
+      startTime = b.startDateTime.slice(11, 16);
+      if (b.endDateTime) endTime = b.endDateTime.slice(11, 16);
+      else if (b.trainingMinutes) {
+        const startMin = parseInt(startTime.slice(0,2)) * 60 + parseInt(startTime.slice(3,5));
+        const endMin   = startMin + b.trainingMinutes;
+        endTime = String(Math.floor(endMin/60)).padStart(2,'0') + ':' + String(endMin%60).padStart(2,'0');
+      }
+    } else {
+      startTime = '09:00'; endTime = '';
+    }
+    const datetimeStr = `${dayShort} ${d.getDate()} ${monShort} ${d.getFullYear()} • ${startTime}${endTime ? '–' + endTime : ''}`;
+    const sidebarStr  = `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}, ${startTime}`;
+    const dtEl = document.getElementById('summary-datetime');
+    const sidebarDt = document.getElementById('sidebar-datetime');
+    if (dtEl) dtEl.textContent = datetimeStr;
+    if (sidebarDt) sidebarDt.textContent = sidebarStr;
+  }
+
+  // Duration badge
+  if (b.trainingMinutes) {
+    const durEl = document.getElementById('summary-duration');
+    if (durEl) {
+      const hrs = Math.floor(b.trainingMinutes / 60);
+      const mins = b.trainingMinutes % 60;
+      durEl.textContent = hrs > 0 ? `${hrs}u${mins > 0 ? ' ' + mins + ' min' : ''}` : `${b.trainingMinutes} min`;
+    }
+  }
+
+  // Pre-fill if returning
   if (b.customerName) {
     const parts = b.customerName.split(' ');
     document.getElementById('firstName').value = parts[0] || '';
     document.getElementById('lastName').value = parts.slice(1).join(' ') || '';
   }
   if (b.customerEmail) document.getElementById('email').value = b.customerEmail;
-  if (b.companyName) document.getElementById('companyName').value = b.companyName;
   if (b.phone) document.getElementById('phone').value = b.phone;
   if (b.notes) document.getElementById('notes').value = b.notes;
+  if (b.jobTitle) document.getElementById('jobTitle').value = b.jobTitle;
+  // Restore store selection
+  if (b.storeName) {
+    const match = STORES.find(s => s.name === b.storeName);
+    if (match) selectStore(match, false);
+  }
+
+  // Location display is updated live by selectStore() when store is chosen
 });
+
+function selectStore(store, focusNext = true) {
+  selectedStore = store;
+  document.getElementById('companyName').value = store.name;
+  document.getElementById('city').value = store.city;
+  document.getElementById('storeLocation').value = store.location;
+  document.getElementById('retailer').value = store.retailer;
+
+  document.getElementById('storeSelectedName').textContent = store.name;
+  document.getElementById('storeSelectedInfo').textContent = `${store.retailer} · ${store.location}, ${store.city}`;
+  document.getElementById('storeSelected').classList.remove('hidden');
+  document.getElementById('storeSearchWrapper').classList.add('hidden');
+  document.getElementById('storeDropdown').classList.add('hidden');
+
+  // Update summary/sidebar location displays
+  const label = `${store.name} — ${store.city}`;
+  const summaryEl = document.getElementById('details-summary-location');
+  const sidebarEl = document.getElementById('details-sidebar-location');
+  const hostEl    = document.getElementById('details-host-location');
+  if (summaryEl) summaryEl.textContent = label;
+  if (sidebarEl) sidebarEl.textContent = store.name;
+  if (hostEl)    hostEl.textContent    = store.name;
+
+  if (focusNext) document.getElementById('jobTitle').focus();
+}
+
+function clearStore() {
+  selectedStore = null;
+  document.getElementById('companyName').value = '';
+  document.getElementById('city').value = '';
+  document.getElementById('storeLocation').value = '';
+  document.getElementById('retailer').value = '';
+  document.getElementById('storeSelected').classList.add('hidden');
+  document.getElementById('storeSearchWrapper').classList.remove('hidden');
+  const input = document.getElementById('storeSearch');
+  input.value = '';
+  input.focus();
+  document.getElementById('storeDropdown').classList.add('hidden');
+
+  // Reset location displays
+  const summaryEl = document.getElementById('details-summary-location');
+  const sidebarEl = document.getElementById('details-sidebar-location');
+  const hostEl    = document.getElementById('details-host-location');
+  if (summaryEl) summaryEl.textContent = 'Nog niet geselecteerd';
+  if (sidebarEl) sidebarEl.textContent = 'Nog niet geselecteerd';
+  if (hostEl)    hostEl.textContent    = 'Nog niet geselecteerd';
+}
+
+function saveAndContinue() {
+  const booking = JSON.parse(sessionStorage.getItem('intelBooking') || '{}');
+  booking.customerName = (document.getElementById('firstName').value.trim() + ' ' + document.getElementById('lastName').value.trim()).trim() || 'Onbekend';
+  booking.customerEmail = document.getElementById('email').value.trim();
+  booking.companyName = document.getElementById('companyName').value.trim() || 'Onbekend';
+  booking.city = document.getElementById('city').value.trim();
+  booking.storeLocation = document.getElementById('storeLocation').value.trim();
+  booking.retailer = document.getElementById('retailer').value.trim();
+  booking.storeName = document.getElementById('companyName').value.trim();
+  booking.phone = document.getElementById('phone').value.trim();
+  booking.jobTitle = document.getElementById('jobTitle').value.trim();
+  booking.notes = document.getElementById('notes').value.trim();
+  sessionStorage.setItem('intelBooking', JSON.stringify(booking));
+  window.location.href = 'review.html';
+}
+
+function showToast(msg) {
+  let t = document.getElementById('toast');
+  if (!t) { t = document.createElement('div'); t.id = 'toast'; t.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#1E293B;color:#F8F8FF;padding:.75rem 1.5rem;border-radius:12px;font-size:.875rem;font-weight:600;z-index:9999;opacity:0;transition:opacity .3s;border:1px solid rgba(255,255,255,.1);'; document.body.appendChild(t); }
+  t.textContent = msg; t.style.opacity = '1';
+  clearTimeout(t._tid); t._tid = setTimeout(() => t.style.opacity = '0', 2500);
+}
 </script>
 </body></html>

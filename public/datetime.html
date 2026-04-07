@@ -73,7 +73,7 @@
         }
     </script>
 <style>
-        body { background-color: #0A0A0F; color: #F8F8FF; font-family: 'DM Sans', sans-serif; }
+        body { background-color: #050A1E; color: #F8F8FF; font-family: 'DM Sans', sans-serif; }
         .dot-grid {
             background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
             background-size: 32px 32px;
@@ -83,7 +83,7 @@
             background: radial-gradient(circle at left top, rgba(0,113,197,0.15), transparent 45%);
         }
         .glass-card {
-            background: rgba(15, 23, 42, 0.84);
+            background: rgba(8, 16, 42, 0.88);
             border: 1px solid rgba(255,255,255,0.07);
             backdrop-filter: blur(12px);
         }
@@ -103,16 +103,18 @@
 <div class="absolute inset-0 radial-glow-blue"></div>
 </div>
 <!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#0A0A0F]/85 backdrop-blur-xl border-b border-white/10">
-<div class="flex items-center gap-2">
-<span class="text-xl font-bold text-[#F8F8FF] font-['Space_Grotesk'] tracking-tight">Intel Booking</span>
-</div>
-<div class="hidden md:flex gap-8 items-center">
-<a class="text-[#94A3B8] hover:text-[#3B8FD4] transition-colors font-['Space_Grotesk'] font-bold text-sm" href="#">Mijn trainingen</a>
-<button class="bg-[#0071C5] text-white px-5 py-2 rounded-xl font-bold font-['Space_Grotesk'] active:scale-95 duration-200 transition-all shadow-[0_18px_32px_rgba(0,113,197,0.22)]">
-                Inloggen
-            </button>
-</div>
+<nav style="background:#1535A0;border-bottom:1px solid rgba(255,255,255,0.15);" class="fixed top-0 w-full z-50 flex justify-between items-center px-8 h-14 shadow-lg">
+  <a href="index.html" class="flex items-center gap-3" style="text-decoration:none;">
+    <span class="font-['Space_Grotesk'] font-extrabold text-white text-lg tracking-tight">intel<span style="color:#00C7FD;">.</span></span>
+    <span class="hidden md:block" style="width:1px;height:16px;background:rgba(255,255,255,0.3);"></span>
+    <span class="hidden md:block font-['DM_Sans'] text-sm font-normal" style="color:rgba(255,255,255,0.75);letter-spacing:0.03em;">Retail Edge Program</span>
+  </a>
+  <div class="hidden md:flex gap-8 items-center">
+    <a class="font-['Space_Grotesk'] font-bold text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.75);" href="dashboard.html">Mijn trainingen</a>
+    <button onclick="window.location.href='index.html'" class="font-['Space_Grotesk'] font-bold text-sm px-5 py-2 rounded active:scale-95 transition-all" style="background:white;color:#1535A0;">
+      Inloggen
+    </button>
+  </div>
 </nav>
 <!-- Main Content Canvas -->
 <main class="relative z-10 pt-24 max-w-6xl mx-auto px-6">
@@ -129,28 +131,28 @@
 </div>
 <!-- Step 2: Datum (Active) -->
 <div class="flex flex-col items-center gap-3 relative z-10">
-<div class="w-12 h-12 rounded-full bg-[#0071C5] flex items-center justify-center text-white ring-4 ring-[#0071C5]/20 ring-offset-4 ring-offset-[#0A0A0F]">
+<div class="w-12 h-12 rounded-full bg-[#0071C5] flex items-center justify-center text-white ring-4 ring-[#0071C5]/20 ring-offset-4 ring-offset-[#050A1E]">
 <span class="font-headline font-bold text-lg">2</span>
 </div>
 <span class="font-label text-[11px] uppercase tracking-widest text-[#F8F8FF] font-bold" style="color: #F0A500;">Datum</span>
 </div>
 <!-- Step 3: Details -->
 <div class="flex flex-col items-center gap-3 relative z-10 opacity-40">
-<div class="w-12 h-12 rounded-full border-2 border-white/20 bg-[#0A0A0F] flex items-center justify-center text-[#94A3B8]">
+<div class="w-12 h-12 rounded-full border-2 border-white/20 bg-[#050A1E] flex items-center justify-center text-[#94A3B8]">
 <span class="font-headline font-bold text-lg text-[#94A3B8]">3</span>
 </div>
 <span class="font-label text-[11px] uppercase tracking-widest font-bold text-[#F0A500]">Details</span>
 </div>
 <!-- Step 4: Bevestiging -->
 <div class="flex flex-col items-center gap-3 relative z-10 opacity-40">
-<div class="w-12 h-12 rounded-full border-2 border-white/20 bg-[#0A0A0F] flex items-center justify-center text-[#94A3B8]">
+<div class="w-12 h-12 rounded-full border-2 border-white/20 bg-[#050A1E] flex items-center justify-center text-[#94A3B8]">
 <span class="font-headline font-bold text-lg text-[#94A3B8]">4</span>
 </div>
 <span class="font-label text-[11px] uppercase tracking-widest font-bold text-[#F0A500]">Bevestiging</span>
 </div>
 <!-- Step 5: Klaar -->
 <div class="flex flex-col items-center gap-3 relative z-10 opacity-40">
-<div class="w-12 h-12 rounded-full border-2 border-white/20 bg-[#0A0A0F] flex items-center justify-center text-[#94A3B8]">
+<div class="w-12 h-12 rounded-full border-2 border-white/20 bg-[#050A1E] flex items-center justify-center text-[#94A3B8]">
 <span class="font-headline font-bold text-lg text-[#94A3B8]">5</span>
 </div>
 <span class="font-label text-[11px] uppercase tracking-widest font-bold text-[#F0A500]">Klaar</span>
@@ -170,7 +172,7 @@
 </div>
 </div>
 </div>
-<a class="text-primary text-sm font-bold flex items-center gap-2 hover:text-[#3B8FD4] transition-colors group" href="#">
+<a class="text-primary text-sm font-bold flex items-center gap-2 hover:text-[#3B8FD4] transition-colors group" href="training.html">
                 Geselecteerde training wijzigen
                 <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform" data-icon="edit">edit</span>
 </a>
@@ -233,24 +235,13 @@
 <div id="slots-container" class="space-y-3"></div>
 </div>
 <!-- Location Info -->
-<div class="glass-card rounded-[22px] overflow-hidden">
-<div class="p-5 flex items-start gap-4">
-<div class="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-primary" data-icon="location_on">location_on</span>
+<div class="glass-card rounded-[22px] p-5 flex items-start gap-4">
+<div class="w-10 h-10 rounded-xl bg-[#0071C5]/10 border border-[#0071C5]/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#0071C5]">store</span>
 </div>
 <div>
-<h4 class="font-headline font-bold text-white">Intel Innovation Hub Amsterdam</h4>
-<p class="text-sm text-[#94A3B8] mt-1">Science Park 402, 1098 XH Amsterdam</p>
-</div>
-</div>
-<div class="h-40 w-full relative">
-<img class="w-full h-full object-cover opacity-60" data-alt="Modern dark schematic map with glowing neon blue lines showing city streets and hub location pin" data-location="Amsterdam" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXnA_l8CYWOJ2PGZOH1TUZfjhjGnr62q7l4FAurtrX4vnsVRpjuIhJMS08y4QIx5UvM41hiLz01UX_9k-i40VG5HsQYvaxhCftkCSgHkJWkRLDazbyIn0eIcig8N4AGYzk8jwEf7lNVoiwoxN9H9oooP2F93xgJ1lIcNQn0M4YkfJicI4QiWgX43IcwKhIosEk99mwngoAJ_VWkZF3AfmrdKCtW5Rf0MXGgm8424OAIQ24Zpoo7KToeHPfof0nFjfhBkn9nYKFkDSw"/>
-<div class="absolute inset-0 bg-gradient-to-t from-[#0F172A] to-transparent"></div>
-<div class="absolute inset-0 flex items-center justify-center">
-<div class="w-10 h-10 bg-[#0071C5] rounded-full animate-pulse flex items-center justify-center">
-<div class="w-3 h-3 bg-white rounded-full"></div>
-</div>
-</div>
+<h4 class="font-headline font-bold text-white text-sm" id="dt-store-name">Winkel wordt geselecteerd in stap 3</h4>
+<p class="text-xs text-[#94A3B8] mt-1">Kies jouw winkellocatie bij het invullen van je gegevens</p>
 </div>
 </div>
 </div>
@@ -259,7 +250,7 @@
 <!-- Sticky CTA Bar / BottomNavBar -->
 <div class="fixed bottom-0 left-0 w-full z-50">
 <div class="max-w-6xl mx-auto px-6 mb-8">
-<div class="bg-[#0A0A0F]/85 backdrop-blur-xl border border-white/10 rounded-2xl px-8 py-5 flex flex-col md:flex-row justify-between items-center shadow-2xl gap-4">
+<div class="bg-[#050A1E]/85 backdrop-blur-xl border border-white/10 rounded-2xl px-8 py-5 flex flex-col md:flex-row justify-between items-center shadow-2xl gap-4">
 <div class="flex items-center gap-6">
 <div class="hidden sm:flex flex-col">
 <span class="text-[#94A3B8] text-[10px] uppercase font-bold tracking-widest font-label">Jouw Selectie</span>
@@ -285,11 +276,32 @@
 const MONTHS_NL = ['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'];
 const DAYS_SHORT = ['ma','di','wo','do','vr','za','zo'];
 
-const TIME_SLOTS = [
-  { label: '09:00', endHour: 17, endMin: 0,  spots: 12 },
-  { label: '11:00', endHour: 19, endMin: 0,  spots: 8  },
-  { label: '13:30', endHour: 21, endMin: 30, spots: 2  },
-];
+// Read duration chosen in training selection (step 1), default 60 min
+const _booking0 = JSON.parse(sessionStorage.getItem('intelBooking') || '{}');
+const _durationMin = _booking0.trainingMinutes || 60;
+
+// Generate hourly slots 09:00 → last slot that ends by 18:00
+const TIME_SLOTS = (() => {
+  const slots = [];
+  const endLimit = 18 * 60; // 18:00 in minutes
+  for (let startMin = 9 * 60; startMin + _durationMin <= endLimit; startMin += 60) {
+    const endMin = startMin + _durationMin;
+    const pad = n => String(n).padStart(2, '0');
+    const label = `${pad(Math.floor(startMin / 60))}:${pad(startMin % 60)}`;
+    // Vary spots: morning slots fuller, last slots have fewer
+    const slotsLeft = Math.floor((endLimit - startMin) / 60);
+    const spots = slotsLeft > 4 ? 12 : slotsLeft > 2 ? 8 : 3;
+    slots.push({
+      label,
+      startHour: Math.floor(startMin / 60),
+      startMin:  startMin % 60,
+      endHour:   Math.floor(endMin / 60),
+      endMin:    endMin % 60,
+      spots,
+    });
+  }
+  return slots;
+})();
 
 let calYear, calMonth;
 let selectedDate = null;   // { year, month, day }
@@ -422,8 +434,11 @@ function updateSummary() {
   const dayName = DAYS_SHORT[(dateObj.getDay() + 6) % 7];
   const monName = MONTHS_NL[selectedDate.month].slice(0, 3);
   const slot    = TIME_SLOTS[selectedSlot];
+  const durationLabel = _durationMin >= 60
+    ? `${Math.floor(_durationMin / 60)}u${_durationMin % 60 > 0 ? ' ' + (_durationMin % 60) + ' min' : ''}`
+    : `${_durationMin} min`;
   document.getElementById('sticky-summary').textContent =
-    `${dayName} ${selectedDate.day} ${monName} • ${slot.label} — 8 uur`;
+    `${dayName} ${selectedDate.day} ${monName} • ${slot.label} — ${durationLabel}`;
 }
 
 // ── Nav buttons ───────────────────────────────────────────────────────────────
@@ -459,6 +474,8 @@ function saveDateAndContinue() {
   const booking = JSON.parse(sessionStorage.getItem('intelBooking') || '{}');
   booking.startDateTime = startISO;
   booking.endDateTime   = endISO;
+  booking.selectedDate  = dateStr;
+  booking.selectedTime  = `${slot.label} – ${pad(slot.endHour)}:${pad(slot.endMin)}`;
   sessionStorage.setItem('intelBooking', JSON.stringify(booking));
   window.location.href = 'details.html';
 }
@@ -467,5 +484,12 @@ function saveDateAndContinue() {
 
 initCalendar();
 renderSlots();
+
+function showToast(msg) {
+  let t = document.getElementById('toast');
+  if (!t) { t = document.createElement('div'); t.id = 'toast'; t.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#1E293B;color:#F8F8FF;padding:.75rem 1.5rem;border-radius:12px;font-size:.875rem;font-weight:600;z-index:9999;opacity:0;transition:opacity .3s;border:1px solid rgba(255,255,255,.1);'; document.body.appendChild(t); }
+  t.textContent = msg; t.style.opacity = '1';
+  clearTimeout(t._tid); t._tid = setTimeout(() => t.style.opacity = '0', 2500);
+}
 </script>
 </body></html>

@@ -64,8 +64,17 @@
 | Token | Hex | Role |
 |-------|-----|------|
 | Intel Blue | `#0071C5` | Primary CTA, active states, progress indicators |
+| Intel Cyan | `#00AEEF` | Copilot+ / 48+ TOPs NPU tier — premium exclusive features |
 | Intel Amber | `#F0A500` | Section header labels, callout text, category accents |
-| Intel Dark | `#0A0A0F` | Page background |
+| Intel Navy | `#050A1E` | Page background (updated from `#0A0A0F` per PDF branding guide) |
+
+**Chip tier color system** (from *Generational Advancement of AI on the PC* PDF, Feb 2026):
+
+| Tier | Badge class | Color | Chips |
+|------|-------------|-------|-------|
+| CPU + GPU (base) | `.tier-badge-base` | `#60A5FA` on `rgba(0,113,197,0.12)` | 13th Gen Core (RPL), Core S1&2 (RPL-R) |
+| CPU + GPU + NPU | `.tier-badge-npu` | `#93C5FD` on `rgba(0,113,197,0.18)` | Core Ultra S1&2H (MTL/ARL), Core Ultra S2V (LNL) |
+| CPU + GPU + 48+ TOPs NPU | `.tier-badge-tops` | `#00AEEF` on `rgba(0,174,239,0.12)` | Core Ultra S3 (PTL) |
 
 **Usage rule:** Intel Blue owns all interactive/action elements. Intel Amber is for **labeling and categorization** — section headers (`KLANTEN KRIJGEN:`, `TIJDSCHEMA`), feature category names, and callout highlights. Never use amber on a CTA button.
 
@@ -75,7 +84,7 @@
 /* CSS Custom Properties */
 :root {
   /* Backgrounds & Surfaces */
-  --bg:               #0A0A0F;   /* Page background — near-black, never pure black */
+  --bg:               #050A1E;   /* Page background — Intel deep navy (per Feb 2026 PDF branding guide) */
   --bg-subtle:        #0E0E14;   /* Slightly lighter background for section breaks */
   --surface:          rgba(15, 23, 42, 0.84);  /* Cards, panels */
   --surface-high:     rgba(30, 41, 59, 0.92);  /* Elevated cards, dropdowns */
@@ -94,6 +103,10 @@
   --amber-brand:      #F0A500;   /* Section headers, callout labels — Intel's orange/gold brand accent */
   --amber-brand-muted: rgba(240,165,0,0.14); /* Tinted backgrounds for amber elements */
   --amber-brand-text: #FCD34D;   /* Amber text on dark surfaces */
+
+  /* Intel Cyan — Copilot+ / 48+ TOPs NPU premium tier */
+  --cyan-brand:       #00AEEF;
+  --cyan-brand-muted: rgba(0,174,239,0.12);
 
   /* Accent colors */
   --purple:           #7C3AED;   /* AI/smart features, secondary accent */
@@ -117,11 +130,12 @@
 ### Surface Tier System
 
 ```
-Page:    #0A0A0F
-Section: rgba(10,10,15,0.92)
-Card:    rgba(15,23,42,0.84)    + border: 1px solid rgba(255,255,255,0.07)
-Inset:   rgba(30,41,59,0.92)    + border: 1px solid rgba(255,255,255,0.05)
+Page:    #050A1E
+Section: rgba(5,10,30,0.92)
+Card:    rgba(8,16,42,0.88)     + border: 1px solid rgba(0,80,200,0.12)
+Inset:   rgba(15,25,55,0.92)    + border: 1px solid rgba(0,80,200,0.08)
 Highlight: rgba(0,113,197,0.12) + border: 1px solid rgba(0,113,197,0.22)
+Copilot+:  rgba(0,174,239,0.08) + border: 1px solid rgba(0,174,239,0.25)
 ```
 
 ### Dark Mode Strategy
@@ -310,7 +324,7 @@ transition: all 180ms cubic-bezier(0.0, 0.0, 0.2, 1);
 Every booking flow page must have:
 1. Glassmorphism nav (fixed top)
 2. 5-step progress indicator (steps 1–5, current step active)
-3. Content area (dark card on `#0A0A0F` background)
+3. Content area (dark card on `#050A1E` background)
 4. Sticky CTA footer (Back + Next/Confirm)
 
 ---
@@ -327,8 +341,8 @@ Every booking flow page must have:
 - Use `text-transform: uppercase` + `letter-spacing: +0.08em` on all labels/badges
 
 ### Don't
-- Don't use white or light backgrounds — always `#0A0A0F`
-- Don't use pure black (`#000000`) — use `#0A0A0F`
+- Don't use white or light backgrounds — always `#050A1E`
+- Don't use pure black (`#000000`) — use `#050A1E`
 - Don't use heavy drop shadows — use tonal layering instead
 - Don't use Inter, Roboto, or system fonts for headings — always Space Grotesk
 - Don't show more than one primary CTA per screen
@@ -350,3 +364,11 @@ Every booking flow page must have:
 | 2026-03-31 | 5-step linear booking flow | Standard for B2B booking. Progress indicator reduces anxiety about how long the form will take. |
 | 2026-03-31 | Stitch (Google) as design tool | All 7 screens designed and iterated in Stitch MCP. Project ID: 10082113111138965187. |
 | 2026-03-31 | Intel Amber #F0A500 added as label accent | Sourced from Intel Retail Edge Program print materials (Ultra X Bundle flyer). Used on section headers and category labels — never on CTAs. Complements Intel Blue without competing with it. |
+| 2026-04-07 | Background updated #0A0A0F → #050A1E (Intel Navy) | Per Intel "Generational Advancement of AI on the PC" PDF (Feb 2026). Slide background is deep navy, not near-black. Dots grid shifted to blue-tinted. |
+| 2026-04-07 | Intel Cyan #00AEEF added as Copilot+ tier accent | Sourced from same PDF — rightmost column (48+ TOPs NPU, Copilot+) uses a distinct bright cyan. Used on Copilot+ training card borders, badges, and bullet accents. Never on base-tier elements. |
+| 2026-04-07 | Training cards replaced with 4 real Intel modules | Content from "Generational Advancement of AI on the PC" PDF: Cloud AI, Local Compute, AI Playground, Copilot+. Each card shows chip tier compatibility badges. |
+| 2026-04-07 | Nav redesigned to Intel Retail Edge style (#1535A0) | Solid royal blue replaces dark glass nav. "intel." wordmark with cyan dot. Matches Intel Retail Edge Program branding materials shared by user. |
+| 2026-04-07 | Training grid expanded to 8 cards in 4 sections | Retail-training-portal style: Pc gebruik / Processors / Technologieën / De basis. Product category focus tags (⚡ amber = high priority, plain = regular). |
+| 2026-04-07 | Multi-select training cards with dynamic total time | Cards toggle on/off with blue glow ring. Footer shows live count + total duration ("2 trainingen geselecteerd · 1u 45 min totaal"). |
+| 2026-04-07 | Location removed from training step, moved to details step | Store search (54 NL stores) lives in step 3. Location propagates to calendar invite, ICS download, review page, and confirmed page from store selection — no hardcoded fallback. |
+| 2026-04-07 | Time slots generated dynamically from training duration | Hourly slots 09:00 → last slot that ends by 18:00. Slot count and end times adjust automatically when user selects more/fewer trainings. |

@@ -23,7 +23,7 @@
               "on-secondary": "#000000",
               "secondary-fixed": "#e1e2e5",
               "secondary": "#bfc7d2",
-              "background": "#0A0A0F",
+              "background": "#050A1E",
               "on-surface-variant": "#c4c7cc",
               "surface-bright": "#37393b",
               "surface-variant": "#44474b",
@@ -79,7 +79,7 @@
       }
       .glass-effect {
         backdrop-filter: blur(20px);
-        background: rgba(15, 23, 42, 0.84);
+        background: rgba(8, 16, 42, 0.88);
       }
       body {
         letter-spacing: -0.01em;
@@ -114,24 +114,24 @@
 <div class="space-y-8">
 <!-- Event Identifier -->
 <div class="space-y-2">
-<span class="text-primary font-label text-[10px] font-extrabold tracking-[0.25em] uppercase">Session Protocol</span>
-<h2 class="text-3xl font-headline font-extrabold text-on-surface tracking-tight">Technical Architecture Review</h2>
+<span class="text-primary font-label text-[10px] font-extrabold tracking-[0.25em] uppercase">Boeking details</span>
+<h2 id="confirmed-training-title" class="text-3xl font-headline font-extrabold text-on-surface tracking-tight">Intel Core Ultra Architecture Deep Dive</h2>
 </div>
 <!-- Details Bento Grid -->
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 <div class="bg-surface-container p-5 rounded-lg border border-outline-variant/10 transition-all hover:border-primary/50">
 <div class="flex items-center gap-3 text-primary mb-2">
 <span class="material-symbols-outlined text-xl">calendar_today</span>
-<span class="font-label text-[10px] font-bold uppercase tracking-widest">Date</span>
+<span class="font-label text-[10px] font-bold uppercase tracking-widest">Datum</span>
 </div>
-<p class="text-on-surface font-headline font-bold text-lg">October 24, 2024</p>
+<p id="confirmed-date" class="text-on-surface font-headline font-bold text-lg">—</p>
 </div>
 <div class="bg-surface-container p-5 rounded-lg border border-outline-variant/10 transition-all hover:border-primary/50">
 <div class="flex items-center gap-3 text-primary mb-2">
 <span class="material-symbols-outlined text-xl">schedule</span>
-<span class="font-label text-[10px] font-bold uppercase tracking-widest">Time</span>
+<span class="font-label text-[10px] font-bold uppercase tracking-widest">Tijd</span>
 </div>
-<p class="text-on-surface font-headline font-bold text-lg">09:00 AM — 10:30 AM</p>
+<p id="confirmed-time" class="text-on-surface font-headline font-bold text-lg">09:00 – 17:00</p>
 </div>
 </div>
 <!-- Instructional Message -->
@@ -169,11 +169,11 @@
 <div class="space-y-2">
 <div class="flex items-center gap-2 text-sm">
 <span class="material-symbols-outlined text-intel-blue text-lg">schedule</span>
-<span class="text-on-surface-variant">Woensdag 18 Maart 2026 • 09:00 – 17:00</span>
+<span id="cal-preview-datetime" class="text-on-surface-variant">Woensdag 18 Maart 2026 • 09:00 – 17:00</span>
 </div>
 <div class="flex items-center gap-2 text-sm">
 <span class="material-symbols-outlined text-intel-blue text-lg">location_on</span>
-<span class="text-on-surface-variant">Intel Experience Center Amsterdam</span>
+<span id="confirmed-location" class="text-on-surface-variant">Intel Experience Center Amsterdam</span>
 </div>
 <div class="flex items-center gap-3 pt-1">
 <div class="flex -space-x-2">
@@ -205,7 +205,7 @@
 <span class="material-symbols-outlined text-lg">edit_calendar</span>
                             Reschedule
                         </button>
-<button onclick="if(confirm('Weet je zeker dat je deze boeking wilt annuleren?')) window.location.href='dashboard.html'" class="text-on-surface-variant py-3 px-6 rounded-lg font-headline font-bold text-sm flex items-center justify-center gap-2 hover:bg-surface-container-high transition-colors">
+<button onclick="if(confirm('Weet je zeker dat je deze boeking wilt annuleren?')) { showToast('Boeking geannuleerd'); setTimeout(() => window.location.href='index.html', 1500); }" class="text-on-surface-variant py-3 px-6 rounded-lg font-headline font-bold text-sm flex items-center justify-center gap-2 hover:bg-surface-container-high transition-colors">
 <span class="material-symbols-outlined text-lg">close</span>
                             Cancel
                         </button>
@@ -219,7 +219,7 @@
 <div class="h-1 w-1 rounded-full bg-primary"></div>
 <span class="text-[9px] font-label font-bold text-outline uppercase tracking-[0.3em]">Precision Engine</span>
 </div>
-<a class="text-[10px] text-primary font-bold tracking-widest uppercase hover:underline underline-offset-4" href="#">Support Center</a>
+<a class="text-[10px] text-primary font-bold tracking-widest uppercase hover:underline underline-offset-4" href="javascript:void(0)" onclick="showToast('Support: training@intelpartner.nl')">Support Center</a>
 </div>
 </div>
 </div>
@@ -243,6 +243,10 @@ function toICSDate(iso) {
   return iso.replace(/[-:]/g, '').replace(/\.\d{3}/, '');
 }
 
+function escapeICS(str) {
+  return String(str ?? '').replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
+}
+
 function downloadICS(booking) {
   const start = toICSDate(booking.startDateTime);
   const end   = toICSDate(booking.endDateTime);
@@ -253,9 +257,9 @@ function downloadICS(booking) {
     'BEGIN:VEVENT',
     `DTSTART:${start}`,
     `DTEND:${end}`,
-    `SUMMARY:${booking.trainingTitle} — ${booking.companyName}`,
-    `DESCRIPTION:Referentie: ${booking.bookingReference}\\nKlant: ${booking.customerName}`,
-    `LOCATION:${booking.location}`,
+    `SUMMARY:${escapeICS(booking.trainingTitle)} — ${escapeICS(booking.companyName)}`,
+    `DESCRIPTION:Referentie: ${escapeICS(booking.bookingReference)}\\nKlant: ${escapeICS(booking.customerName)}`,
+    `LOCATION:${escapeICS(booking.location)}`,
     `UID:${booking.bookingReference}@intel-booking`,
     'END:VEVENT',
     'END:VCALENDAR',
@@ -269,6 +273,13 @@ function downloadICS(booking) {
   URL.revokeObjectURL(url);
 }
 
+const NL_MONTHS_SHORT = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+function formatNLDateShort(iso) {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  return `${d.getDate()} ${NL_MONTHS_SHORT[d.getMonth()]} ${d.getFullYear()}`;
+}
+
 // ── Main sync ─────────────────────────────────────────────────────────────────
 async function syncCalendar() {
   const booking = JSON.parse(sessionStorage.getItem('intelBooking') || '{}');
@@ -279,8 +290,22 @@ async function syncCalendar() {
   booking.companyName      = booking.companyName      || 'Onbekend';
   booking.startDateTime    = booking.startDateTime    || '2026-04-10T09:00:00';
   booking.endDateTime      = booking.endDateTime      || '2026-04-10T17:00:00';
-  booking.location         = booking.location         || 'Intel Experience Center Amsterdam';
+  // Build location from store selection (set in details.html step 3)
+  if (!booking.location) {
+    const parts = [booking.storeName, booking.storeLocation, booking.city].filter(Boolean);
+    booking.location = parts.length ? parts.join(', ') : 'Locatie wordt bevestigd';
+  }
   booking.bookingReference = booking.bookingReference || generateRef();
+
+  // Populate bento cards
+  const titleEl = document.getElementById('confirmed-training-title');
+  const dateEl  = document.getElementById('confirmed-date');
+  const timeEl  = document.getElementById('confirmed-time');
+  if (titleEl) titleEl.textContent = booking.trainingTitle;
+  if (dateEl)  dateEl.textContent  = booking.selectedDate ? formatNLDateShort(booking.selectedDate) : formatNLDateShort(booking.startDateTime);
+  if (timeEl)  timeEl.textContent  = booking.selectedTime || '09:00 – 17:00';
+  const locEl = document.getElementById('confirmed-location');
+  if (locEl && booking.location) locEl.textContent = booking.location;
 
   // Visible ref
   document.querySelectorAll('.font-mono').forEach(el => {
@@ -292,6 +317,18 @@ async function syncCalendar() {
   document.querySelectorAll('.font-headline.font-bold.text-white.text-\\[15px\\]').forEach(el => {
     el.textContent = booking.trainingTitle;
   });
+
+  // Datetime in agenda sync preview box
+  const calPreviewDt = document.getElementById('cal-preview-datetime');
+  if (calPreviewDt) {
+    const DAYS_NL   = ['Zondag','Maandag','Dinsdag','Woensdag','Donderdag','Vrijdag','Zaterdag'];
+    const MONTHS_NL = ['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'];
+    const d = new Date(booking.selectedDate || booking.startDateTime);
+    const dayName = DAYS_NL[d.getDay()];
+    const dateLabel = `${d.getDate()} ${MONTHS_NL[d.getMonth()]} ${d.getFullYear()}`;
+    const timeLabel = booking.selectedTime || `${booking.startDateTime?.slice(11,16) || '09:00'} – ${booking.endDateTime?.slice(11,16) || '17:00'}`;
+    calPreviewDt.textContent = `${dayName} ${dateLabel} • ${timeLabel}`;
+  }
 
   // Outlook + Apple → ICS download
   const outlookEl = document.getElementById('cal-outlook');
@@ -327,5 +364,12 @@ async function syncCalendar() {
 }
 
 window.addEventListener('DOMContentLoaded', syncCalendar);
+
+function showToast(msg) {
+  let t = document.getElementById('toast');
+  if (!t) { t = document.createElement('div'); t.id = 'toast'; t.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#1E293B;color:#F8F8FF;padding:.75rem 1.5rem;border-radius:12px;font-size:.875rem;font-weight:600;z-index:9999;opacity:0;transition:opacity .3s;border:1px solid rgba(255,255,255,.1);'; document.body.appendChild(t); }
+  t.textContent = msg; t.style.opacity = '1';
+  clearTimeout(t._tid); t._tid = setTimeout(() => t.style.opacity = '0', 2500);
+}
 </script>
 </body></html>
